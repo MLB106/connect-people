@@ -2,8 +2,8 @@
 
 import { Router } from 'express';
 import crypto from 'crypto';
-import { Report } from '../models/report.model'; // à créer
-import { authenticate } from '../middlewares/auth'; // à créer
+import { Report } from '../../models/report.model'; // à créer
+import { authenticate } from '../../middlewares/auth'; // à créer
 
 const router = Router();
 

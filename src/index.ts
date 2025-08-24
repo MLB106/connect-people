@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import { engine } from 'express-handlebars';
 import path from 'path';
-import reportRoutes from './routes/report.routes';
+import reportRoutes from './routes/api/report.routes';
 
 const app = express();
 
