@@ -1,31 +1,29 @@
 import dotenv from 'dotenv';
-dotenv.config();               // 1. charger d’abord les variables d’env
+dotenv.config();
 
-import { fileURLToPath } from 'url';
 import express from 'express';
-import { engine } from 'express-handlebars';
+import cors from 'cors';
 import path from 'path';
-import reportRoutes from './routes/api/report.routes';
+import { fileURLToPath } from 'url';
+
+import apiRoutes from './routes/api/report.routes';
+import webRoutes from './routes/web/index';
 
 const app = express();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-/* ---------- Handlebars ---------- */
-app.engine('hbs', engine({ extname: '.hbs', layoutsDir: path.join(__dirname, 'views/layouts') }));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
-
 /* ---------- Middlewares ---------- */
+app.use(cors({ origin: process.env.FRONT_URL || 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ---------- Routes ---------- */
-app.use('/api', reportRoutes);
+app.use('/api/v1', apiRoutes);
+app.use('/', webRoutes);
 
 /* ---------- Lancement ---------- */
 const PORT = Number(process.env.PORT) || 4000;
 app.listen(PORT, () => {
-  console.log(`🚀 Serveur TypeScript + ES2022 sur http://localhost:${PORT}`);
+  console.log(`🚀 Serveur API v1 sur http://localhost:${PORT}`);
 });
