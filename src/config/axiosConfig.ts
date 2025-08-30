@@ -9,7 +9,7 @@ import axios, {
   AxiosResponse,
   AxiosError,
 } from 'axios';
-import { getItem } from '../../utils/storage';
+import { getAuthToken } from '../client/storage';   // plus getItem
 
 // ----------------------------------------------------------
 // Configuration de l’instance Axios
@@ -29,7 +29,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = getItem('token');
+    const token = getAuthToken();
     if (token) {
       // Axios 1.x garantit que headers est défini
       config.headers.set('Authorization', `Bearer ${token}`);

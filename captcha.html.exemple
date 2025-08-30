@@ -1,0 +1,23 @@
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<form id="loginForm" method="post" action="/auth/login">
+  <input type="email"    name="email"    required />
+  <input type="password" name="password" required />
+  <!-- Turnstile invisible -->
+  <div class="cf-turnstile"
+       data-sitekey="   0x4AAAA...   "  <!-- Site Key -->
+       data-size="invisible"
+       data-callback="onTurnstileSuccess">
+  </div>
+  <button type="submit">Connexion</button>
+</form>
+
+<script>
+  // Injection automatique du token dans le form
+  function onTurnstileSuccess(token) {
+    const input = document.createElement('input');
+    input.type  = 'hidden';
+    input.name  = 'turnstileToken';
+    input.value = token;
+    document.getElementById('loginForm').appendChild(input);
+  }
+</script>

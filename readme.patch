@@ -1,0 +1,42 @@
+diff --git a/README.md b/README.md
+index 0000000..1111111 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,34 @@
+-# connect-people
++Connect-People
++================
++
++Backend Express / TypeScript pour la plateforme Connect-People.
++
++## Prérequis
++- Node.js ≥ 18
++- npm
++
++## Installation
++```bash
++npm install
++```
++
++## Variables d’environnement
++Copier `.env.example` en `.env` et remplir :
++```
++PORT=3000
++DATABASE_URL=your-db-uri
++JWT_SECRET=your-secret
++```
++
++## Scripts
++- `npm run dev` : lancement en développement avec reload  
++- `npm run build` : compilation TypeScript  
++- `npm start`     : lancement en production  
++- `npm test`      : tests Jest
++
++## Sécurité
++Le middleware `helmet` et `cors` sont actifs ; pensez à ajuster la configuration en production.
++
++## Tests
++`npm test` ou `npm run test:watch`
++
++## Licence
++MIT

@@ -1,0 +1,59 @@
+src/
+ ├─ config/
+ │   └─ adminRoles.ts            # rôles + matrice + durées
+ ├─ middlewares/
+ │   ├─ validate.ts              # validateur Zod générique
+ │   └─ admin/
+ │       ├─ adminIP.middleware.ts     # whitelist IP
+ │       ├─ authenticateAdmin.ts      # JWT admin
+ │       └─ authorizeAdmin.ts         # permissions
+ ├─ services/
+ │   ├─ redis.service.ts         # client Redis (unique)
+ │   ├─ security.service.ts      # IP + tentatives login
+ │   └─ rateLimit.ts             # rate-limit générique
+ ├─ schemas/
+ │   └─ adminUser.schema.ts      # login + 2FA
+ └─ routes/
+     └─ admin/
+         └─ auth.routes.ts       # POST /admin/login
+
+
+         # Redis
+REDIS_URL=redis://localhost:6379
+
+# JWT (admin)
+JWT_ADMIN_ACCESS_SECRET=superSecretAdminAccess
+JWT_ADMIN_REFRESH_SECRET=superSecretAdminRefresh
+
+# IP Whitelist (admin uniquement)
+ADMIN_IP_WHITELIST=203.0.113.42,10.8.0.0/24
+
+
+
+POST /admin/login
+Content-Type: application/json
+X-Forwarded-For: <ip autorisée>
+
+{
+  "email": "admin@site.com",
+  "password": "*****",
+  "totp": "123456"
+}
+
+import { authenticateAdmin } from '../middlewares/admin/authenticateAdmin';
+import { authorizeAdmin } from '../middlewares/admin/authorizeAdmin';
+
+router.get(
+  '/dashboard',
+  authenticateAdmin,
+  authorizeAdmin('dashboard', 2),
+  getDashboard
+);
+
+
+import { recordAttempt, isLocked } from '../services/security.service';
+
+if (await isLocked('admin', email)) {
+  return res.status(429).json({ error: 'Compte bloqué' });
+}
+await recordAttempt('admin', email);

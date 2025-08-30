@@ -1,0 +1,19 @@
+Sécurité renforcée réservée aux routes /admin/…
+
+    sensitiveAction.middleware.ts
+    rateLimitAdmin.middleware.ts
+
+Types centralisés
+
+    src/types/index.ts → User, AppRequest
+    intersection Request & { … } plutôt que .d.ts.
+
+Fichiers inutilisés commentés ou supprimés
+
+    notification.middleware.ts mis en sommeil.
+
+    ______________________________________________________________________
+
+    REGARDRE LE README POUR CREER UN COMPTE ET CONNECTER TURSTILE
+
+    _______________________________________________________________________

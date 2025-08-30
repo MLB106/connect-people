@@ -1,0 +1,22 @@
+[33m5571238[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: fix: nettoie csrfConfig (supprime doublon)
+[33m86b9c20[m HEAD@{1}: commit: fix: types pour @dr.pogodin/csurf
+[33mc7ec6a6[m HEAD@{2}: commit: chore: ajoute déclaration types pour i18n
+[33m62e2953[m HEAD@{3}: reset: moving to origin/main
+[33m62e2953[m HEAD@{4}: reset: moving to 62e2953
+[33m4449ada[m HEAD@{5}: pull --rebase origin main (finish): returning to refs/heads/main
+[33m4449ada[m HEAD@{6}: pull --rebase origin main (pick): WIP: sauvegarde locale
+[33m62e2953[m HEAD@{7}: pull --rebase origin main (start): checkout 62e295342372cc8b8af963cf08412ba90dc9f856
+[33mfbede9c[m HEAD@{8}: commit: WIP: sauvegarde locale
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{9}: reset: moving to HEAD
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{10}: checkout: moving from main to main
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{11}: reset: moving to chore/prepare-structure
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{12}: checkout: moving from main to main
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{13}: merge chore/prepare-structure: Fast-forward
+[33mada6150[m HEAD@{14}: checkout: moving from chore/prepare-structure to main
+[33m6c96a10[m[33m ([m[1;31morigin/chore/prepare-structure[m[33m, [m[1;32mchore/prepare-structure[m[33m)[m HEAD@{15}: commit: fix: jest config + premier test
+[33m2523d08[m HEAD@{16}: commit: feat: configure i18n for web routes
+[33mbcb28cb[m HEAD@{17}: commit: feat: configure CSRF middleware & clean structure
+[33mada6150[m HEAD@{18}: checkout: moving from main to chore/prepare-structure
+[33mada6150[m HEAD@{19}: commit: chore: prépare arborescence api/web
+[33m6d5f8c5[m HEAD@{20}: Branch: renamed refs/heads/main to refs/heads/main
+[33m6d5f8c5[m HEAD@{22}: commit (initial): Initial commit : Node + Express + TS + ES2022
