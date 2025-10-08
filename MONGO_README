@@ -1,0 +1,393 @@
+README – MongoDB Local Sécurisé
+
+    Objectif : repartir proprement après un reboot ou une nouvelle session WSL.
+
+1. Lancer MongoDB avec authentification
+
+mongod --port 48247 --dbpath /tmp/mongo_dummy --auth
+
+    Garde ce terminal ouvert (MongoDB tourne dedans).
+
+2. Ouvrir un second terminal (WSL)
+a) Se connecter en super-admin
+
+mongosh --port 48247 -u mongoConnectPMaintenance93 -p --authenticationDatabase admin
+
+    Mot de passe : Mp93xz159357
+
+b) Se connecter en utilisateur blog
+
+mongosh --port 48247 -u blogUser -p --authenticationDatabase blog
+
+    Mot de passe : blogPass123
+
+3. Commandes utiles dans mongosh
+
+| Action                        | Commande                                              |
+| ----------------------------- | ----------------------------------------------------- |
+| Lister les bases (admin only) | `show dbs`                                            |
+| Utiliser la base blog         | `use blog`                                            |
+| Voir collections              | `show collections`                                    |
+| Créer un document             | `db.posts.insertOne({title: "Hello", body: "World"})` |
+| Lire documents                | `db.posts.find()`                                     |
+
+4. Arrêter MongoDB proprement
+Dans le terminal MongoDB, appuyer sur :
+Ctrl+C
+5. Sauvegarde des mots de passe
+
+| User                         | Mot de passe   | Rôle                  |
+| ---------------------------- | -------------- | --------------------- |
+| `mongoConnectPMaintenance93` | `Mp93xz159357` | super-admin           |
+| `blogUser`                   | `blogPass123`  | read/write sur `blog` |
+
+
+🔧 Gestion des utilisateurs – commandes dans mongosh
+
+    Pré-requis : être connecté avec le super-admin
+    mongosh --port 48247 -u mongoConnectPMaintenance93 -p --authenticationDatabase admin
+
+✅ Créer un nouvel admin (global)
+
+use admin
+db.createUser({
+  user: "nouvelAdmin",
+  pwd: "NouveauPass123",
+  roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+})
+
+✅ Créer un utilisateur blog (base blog uniquement)
+
+use blog
+db.createUser({
+  user: "nouveauBlogUser",
+  pwd: "blogPass123",
+  roles: [ { role: "readWrite", db: "blog" } ]
+})
+
+✅ Supprimer un utilisateur admin
+
+use admin
+db.dropUser("nomAdminASupprimer")
+
+✅ Supprimer un utilisateur blog
+
+use blog
+db.dropUser("nomBlogUserASupprimer")
+
+✅ Lister tous les utilisateurs (admin only)
+
+use admin
+db.system.users.find().forEach(printjson)
+<!-- ___________________________EXPLICATIONS __________________________________ -->
+
+✅ Ce qu’on peut faire vraiment dans MongoDB :
+
+| Compte MongoDB    | Base   | Collection                           | Droits                |
+| ----------------- | ------ | ------------------------------------ | --------------------- |
+| `blogUser`        | `blog` | **toutes** (posts, users, comments…) | `readWrite`           |
+| `blogUserLimited` | `blog` | **seulement `users`**                | `read` ou `readWrite` |
+
+❌ Ce qu’on ne peut pas faire :
+
+    Limiter un compte MongoDB à une seule ligne (un seul document) d’une collection.
+    Limiter à une "table" au sens SQL – on limite à une collection entière, pas à un sous-ensemble.
+
+✅ Exemple concret :
+Tu crées un rôle personnalisé :
+
+use admin
+db.createRole({
+  role: "usersCollectionOnly",
+  roles: [],
+  privileges: [
+    { resource: { db: "blog", collection: "users" }, actions: ["find", "update", "insert"] }
+  ]
+})
+
+use blog
+db.createUser({
+  user: "employeUsers",
+  pwd: "empPass123",
+  roles: ["usersCollectionOnly"]
+})
+
+Résultat :
+
+    employeUsers ne peut toucher que la collection users de la base blog.
+    Il ne voit pas posts, comments, etc.
+
+Donc :
+Oui, tu peux limiter un compte MongoDB à une (ou plusieurs) collection(s) – mais pas à une ligne.
+
+
+✅ Sauvegarde avec mongodump
+
+mongodump --port 48247 -u blogUser -p --authenticationDatabase blog --db blog --out ~/backup
+
+--port 48247 → port sur lequel tourne ton instance MongoDB
+
+-u blogUser → nom de l’utilisateur
+
+-p → demande le mot de passe (si tu veux l’écrire en ligne de commande : -pTonMotDePasse)
+
+--authenticationDatabase blog → base utilisée pour l’authentification
+
+--db blog → base que tu veux sauvegarder
+
+--out ~/backup → répertoire de destination de la sauvegarde
+
+⚠️ Par sécurité, il est conseillé de laisser -p vide pour entrer le mot de passe de façon interactive.
+
+✅ Restauration avec mongorestore
+
+mongorestore --port 48247 -u blogUser -p --authenticationDatabase blog --db blog --drop ~/backup/blog
+
+--drop permet de supprimer les collections existantes avant restauration (utile pour éviter les doublons).
+
+Le chemin ~/backup/blog correspond au dossier créé par mongodump.
+
+📦 MongoDB – Sauvegarde et Restauration
+Sauvegarde (mongodump)
+
+Pour sauvegarder la base blog :
+
+mongodump --port 48247 -u blogUser -p --authenticationDatabase blog --db blog --out ~/backup
+
+--port 48247 → port de l’instance MongoDB
+
+-u blogUser → utilisateur
+
+-p → mot de passe (laisser vide pour le saisir en mode interactif)
+
+--authenticationDatabase blog → base d’authentification
+
+--db blog → base à sauvegarder
+
+--out ~/backup → répertoire de sortie
+
+📌 Exemple :
+
+mongodump --port 48247 -u blogUser -pMonMotDePasse --authenticationDatabase blog --db blog --out ~/backup
+
+Restauration (mongorestore)
+
+Pour restaurer la base blog depuis une sauvegarde :
+
+mongorestore --port 48247 -u blogUser -p --authenticationDatabase blog --db blog --drop ~/backup/blog
+
+--drop : supprime les collections existantes avant restauration (évite les doublons)
+
+~/backup/blog : chemin du dossier créé par mongodump
+
+✅ Avec ça, on a un cycle complet Backup / Restore prêt à être utilisé.
+
+⚙️ Initialisation MongoDB (base + utilisateur)
+Connexion à MongoDB en mode admin
+
+mongo --port 48247
+
+Création de la base et de l’utilisateur
+
+Dans le shell MongoDB :
+
+// Sélection de la base
+use blog
+
+// Création de l’utilisateur
+db.createUser({
+  user: "blogUser",
+  pwd: "MonMotDePasseSécurisé",
+  roles: [
+    { role: "readWrite", db: "blog" }
+  ]
+})
+
+
+user : nom de l’utilisateur
+
+pwd : mot de passe associé
+
+roles : permissions accordées (ici lecture/écriture sur la base blog)
+
+Vérification de la connexion
+
+Depuis le terminal :
+
+mongo --port 48247 -u blogUser -p --authenticationDatabase blog
+
+👉 Avec ça, ton README couvre :
+
+Création d’un utilisateur et d’une base
+
+Connexion sécurisée
+
+Sauvegarde avec mongodump
+
+Restauration avec mongorestore
+
+
+
+
+<!-- LANCEMENT DE MONGO  -->
+
+
+./start-mongo.sh
+
+ou mongodb://127.0.0.1:27018   avec le nouveau port et surtout la nouvelle installation 
+
+<!-- ___________________________________________________________________________ -->
+
+
+    
+
+
+    A FAIRE AVANT DE TRAVAILLER AVEC MONGO (BONNE PRATIQUE )
+
+    Vérification rapide en 1 commande
+
+Ouvre PowerShell (même normale, pas besoin d’admin)
+
+Tape exactement ceci :
+
+(Get-Service MongoDB).Status
+
+Résultat possible :
+
+Running → MongoDB est prêt ✅
+
+Stopped → MongoDB n’est pas démarré, il faut lancer :
+
+Start-Service MongoDB
+
+
+
+    🔹 Comment faire vite et simple
+
+Vérifier via PowerShell (rapide) (clique droit pour ouvrir en tant qu'administrateur)
+
+Get-Service | Where-Object {$_.DisplayName -like "*Mongo*"}
+
+Si tu vois Running → tu peux travailler
+
+Si tu vois Stopped → fais
+
+Start-Service "MongoDB Server"
+
+Ou via MongoDB Compass
+
+Ouvre Compass
+
+Essaie de te connecter à mongodb://localhost:27017
+
+S’il se connecte → Mongo tourne → tu peux travailler
+
+Optionnel : créer un petit raccourci ou script pour lancer Mongo automatiquement si jamais il n’est pas démarré.
+
+💡 Astuce pratique : une fois que tu as confirmé que le service MongoDB démarre automatiquement avec Windows (ce qui est le cas par défaut), tu n’auras presque jamais besoin de vérifier.
+Tu peux juste ouvrir mongosh ou Compass et commencer à coder.
+
+
+FUNCTION CREEE PAR KIMI POUR VERIFIER ET POUR LANCER MONGO ::
+
+
+function Test-MongoService {
+    <#
+    .SYNOPSIS
+        Vérifie et (éventuellement) démarre MongoDB.
+    .DESCRIPTION
+        - Si le service Windows « MongoDB » n’existe pas → propose une installation ultra-light.
+        - Si le service existe mais n’est pas running → le démarre.
+        - Renvoie un objet synthétique + messages colorés.
+    #>
+    [CmdletBinding()]
+    param(
+        [switch]$SkipInstallPrompt   # passer cette switch pour ne JAMAIS proposer l’install
+    )
+
+    $svc = Get-Service -Name "MongoDB" -ErrorAction SilentlyContinue
+
+    if (-not $svc) {
+        Write-Host "[X] Service MongoDB introuvable" -ForegroundColor Red
+
+        if (-not $SkipInstallPrompt) {
+            $rep = Read-Host "  => Le créer/démarrer automatiquement ? (o/n)"
+            if ($rep -eq "o") {
+                # Répertoires par défaut (tu peux changer ici)
+                $dataPath = "$env:ProgramData\MongoDB\data\db"
+                $logPath  = "$env:ProgramData\MongoDB\log"
+
+                # Création des dossiers
+                New-Item -ItemType Directory -Force -Path $dataPath | Out-Null
+                New-Item -ItemType Directory -Force -Path $logPath  | Out-Null
+
+                # Génération d’un fichier de config minimal
+                $cfgFile = "$env:ProgramData\MongoDB\mongod.cfg"
+                @"
+systemLog:
+  destination: file
+  path: $logPath\mongod.log
+storage:
+  dbPath: $dataPath
+"@ | Out-File -FilePath $cfgFile -Encoding ASCII -Force
+
+                # Installation du service
+                try {
+                    & mongod --install --config $cfgFile --serviceName "MongoDB" --serviceDisplayName "MongoDB"
+                    Start-Service MongoDB
+                    Write-Host "[OK] Service MongoDB installé et démarré." -ForegroundColor Green
+                    return [PSCustomObject]@{
+                        ServiceName = "MongoDB"
+                        Status      = (Get-Service MongoDB).Status
+                        Pid         = (Get-CimInstance Win32_Service -Filter "Name='MongoDB'").ProcessId
+                    }
+                }
+                catch {
+                    Write-Host "[ERREUR] Impossible d’installer le service :" $_ -ForegroundColor Red
+                    return
+                }
+            }
+        }
+        return
+    }
+
+    # Le service existe : on vérifie son statut
+    if ($svc.Status -ne 'Running') {
+        Write-Host "[~] Service MongoDB présent mais arrêté. Démarrage en cours…" -ForegroundColor Yellow
+        try {
+            Start-Service $svc -ErrorAction Stop
+            Write-Host "[OK] Service MongoDB démarré." -ForegroundColor Green
+        }
+        catch {
+            Write-Host "[ERREUR] Impossible de démarrer le service :" $_ -ForegroundColor Red
+            return
+        }
+    }
+    else {
+        Write-Host "[OK] Service MongoDB déjà en cours d'exécution." -ForegroundColor Green
+    }
+
+    # Petit résumé
+    [PSCustomObject]@{
+        ServiceName = $svc.Name
+        Status      = $svc.Status
+        Pid         = (Get-CimInstance Win32_Service -Filter "Name='$($svc.Name)'").ProcessId
+    }
+}
+
+Utilisation rapide :
+
+# Charge la fonction (ou mets-la dans ton $PROFILE)
+. .\mongo_helpers.ps1
+
+# Lance la vérif
+Test-MongoService
+
+Résultat typique :
+
+[OK] Service MongoDB déjà en cours d'exécution.
+
+ServiceName Status Pid
+----------- ------ ---
+MongoDB    Running 1234
+

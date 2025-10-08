@@ -9,6 +9,35 @@
 > Backend Node.js/Express en **ES2022 (ESM)** pour la plate-forme **Connect-People**.  
 > Cible : authentification double-rôle (user + admin), gestion de contenu (chat, vidéos, photos, voix), signalement, 2FA, CSRF, rate-limit, i18n et Redis.
 
+| Fichier                         | Statut           | Description rapide                                                                                                                |
+| ------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `src/config/cookies.ts`         | ✅ **Créé**       | Helpers Express pour poser / effacer les cookies (access, refresh, CSRF) côté user & admin. 0 dépendance externe.                 |
+| `src/types/ip-cidr.d.ts`        | ✅ **Créé**       | Déclaration TypeScript pour le module `ip-cidr` (supprime l’erreur 2307).                                                         |
+| `src/config/csrfConfig.ts`      | ✅ **Mis à jour** | Suppression des imports inutilisés + typage `Request` explicite.                                                                  |
+| `src/middlewares/csrf.ts`       | ✅ **Mis à jour** | Idem : typage et clean.                                                                                                           |
+| `src/utils/reportEvidence.ts`   | ✅ **Mis à jour** | Suppression du type `StoredItem` en double + typage paramètre `.find`.                                                            |
+| `src/index.ts`                  | ✅ **Mis à jour** | Nettoyage des imports `path` et `__filename` inutilisés.                                                                          |
+| `src/client/storage.ts`         | ✅ **Mis à jour** | Suppression de la déclaration locale en double de `loadMedia`.                                                                    |
+| `locales/fr.json`               | ✅ **Enrichi**    | Ajout des clés `error.*` et `success.*` issues des anciens `errorMessages.mjs`, `successMessages.mjs`, `successMessageToken.mjs`. |
+| `locales/en.json`               | ✅ **Enrichi**    | Même chose, version anglaise.                                                                                                     |
+| `utils/errorMessages.mjs`       | ❌ **Supprimé**   | Remplacé par `locales/*.json` via i18next.                                                                                        |
+| `utils/successMessages.mjs`     | ❌ **Supprimé**   | Idem.                                                                                                                             |
+| `utils/successMessageToken.mjs` | ❌ **Supprimé**   | Idem.                                                                                                                             |
+| `utils/serverErrorMessages.mjs` | ❌ **Supprimé**   | Idem.                                                                                                                             |
+ Utilisation rapide des nouveaux helpers
+
+ import { setAuthCookies, clearTokenCookie } from './config/cookies';
+
+// Après connexion
+setAuthCookies(res, accessToken, refreshToken, csrfToken);
+
+// Déconnexion
+clearTokenCookie(res, 'accessToken');
+
+
+
+
+
 ---
 
 ## 📦 1. Prérequis
@@ -111,7 +140,9 @@ src/
 ├── __tests__/           # Tests Jest
 └── index.ts             # Point d’entrée unique
 
-🚪 6. Endpoints disponibles
+
+
+🚪 6 . Endpoints disponibles
 
 | Verbe  | Endpoint              | Authent | Description          | Middlewares actifs  |
 | ------ | --------------------- | ------- | -------------------- | ------------------- |
@@ -121,6 +152,37 @@ src/
 | `GET`  | `/admin/reports`      | ✅ admin | Liste signalements   | `authenticateAdmin` |
 | `POST` | `/api/v1/report`      | ✅ user  | Signaler un contenu  | `authenticateUser`  |
 | `GET`  | `/`                   | ❌       | Page d’accueil SSR   | CSRF, i18n          |
+
+🆕 6 Bis. Fichiers récents (post-26/08/2025)
+Section « Fichiers nouvellement créés / mis à jour »
+
+| Fichier                          | Statut                   | Description rapide                                                                                                             |
+| -------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `src/config/tokens.ts`           | ✅ **Créé**               | Durées de vie et options de cookie centralisées pour **access**, **refresh**, **reset**, **CSRF**.                             |
+| `src/config/jwt.config.ts`       | ✅ **Créé**               | Objet **immutable** regroupant : secrets JWT admin + user, durées lues depuis `tokens.ts`, options cookie, algorithme `HS256`. |
+| `src/services/token.service.ts`  | ⏳ **Prêt à décommenter** | Fonctions pures de génération / vérification des tokens (access, refresh, CSRF) basées sur `jwt.config.ts`.                    |
+| `src/constants/timezones.ts`     | ⏳ **Prêt à décommenter** | Liste typée des fuseaux horaires + helpers de recherche (`getAllTimezones`, `getTimezoneInfo`).                                |
+| `src/constants/timezoneUtils.ts` | ⏳ **Prêt à décommenter** | Conversion / validation de date via `Intl.DateTimeFormat`, sans `moment-timezone`.                                             |
+| `src/utils/inputSecurity.ts`     | ✅ **Créé**               | Sanitisation (DOMPurify + he) et validation des entrées utilisateur (email, téléphone FR, codes postaux).                      |
+| `src/config/cookies.ts`          | ✅ **Créé**               | Helpers Express pour poser / effacer les cookies sécurisés (access, refresh, CSRF) côté user **et** admin.                     |
+| `src/client/modal.ts`            | ✅ **Créé**               | Micro-lib vanilla-JS pour ouvrir / fermer les modales côté client (zero dépendance, auto-init).                          
+
+| Fichier                    | Statut     | Description rapide                                                                                              |
+| -------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| `src/config/jwt.config.ts` | ✅ **Créé** | Centralise **secrets JWT + durées + options cookies** ; crash au démarrage si une variable d’env est manquante. |
+      |
+
+📌 Utilisation rapide
+
+// Générer un token
+import { generateAccessToken } from './services/token.service';
+const token = generateAccessToken({ id: 42, type: 'user' }, 'userAccess');
+
+// Poser les cookies
+import { setAuthCookies } from './config/cookies';
+setAuthCookies(res, accessToken, refreshToken, csrfToken);
+
+Ces fichiers restent commentés tant que la fonctionnalité associée n’est pas branchée ; décommente-les sans crainte grâce aux tests Jest à venir.
 
 
 🔒 7. Sécurité – mécanismes & fichiers
@@ -134,6 +196,111 @@ src/
 | JWT compromis          | Secrets séparés admin/user            | `.env`                                    |
 | Injection SQL          | Requêtes préparées (mysql2/Sequelize) | `utils/db.ts`                             |
 
+🔐 7-bis. Sécurité & UX – modules complémentaires 
+
+| Fichier                      | Responsabilité principale                                                     | Impact utilisateur                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `src/utils/inputSecurity.ts` | Nettoyage & validation des entrées (XSS, format email, téléphone FR, etc.)    | Empêche l’injection de code ou la saisie incorrecte sans message d’erreur technique. |
+| `src/config/cookies.ts`      | Pose / suppression sécurisée des cookies (access, refresh, CSRF) user & admin | Cookies `httpOnly`, `secure`, `sameSite: strict` par défaut ; durées centralisées.   |
+
+📥 7-b-1. inputSecurity – sanitisation & validation
+Fonctions exposées :
+
+| Nom                        | Usage côté… | Description rapide                                             |
+| -------------------------- | ----------- | -------------------------------------------------------------- |
+| `sanitizeInput`            | Serveur     | Supprime HTML/CSS/JS, échappe les entités, tronque à 1000 car. |
+| `sanitizeObject`           | Serveur     | Applique `sanitizeInput` récursivement sur un objet JSON.      |
+| `isValidEmail`             | Serveur     | Regex simple mais suffisante pour la majorité des cas.         |
+| `isValidFrenchPhoneNumber` | Serveur     | Accepte formats `+33`, `0033`, `0X XX XX XX XX`.               |
+| `isValidFrenchPostalCode`  | Serveur     | Accepte `F-` optionnel et codes DOM/TOM.                       |
+| `safeString`, `safeEmail`  | Serveur     | Schémas Zod prêts à l’emploi dans `validate.ts`.               |
+
+
+Points clés :
+
+    Zéro dépendance navigateur : jsdom, he, dompurify côté serveur uniquement.
+    Les messages d’erreur passent par i18n (req.__('invalid_email')).
+    Jamais de log des données brutes : on log le hash ou un ID.
+
+🍪 7-b-2. cookies.ts – gestion transparente des cookies
+Helpers exportés :
+
+| Nom                                               | Paramètres                    | Effet                                                     |
+| ------------------------------------------------- | ----------------------------- | --------------------------------------------------------- |
+| `setAuthCookies(res, access, refresh, csrf)`      | Express `Response` + 3 tokens | Pose 3 cookies utilisateur (15 min, 7 j, 1 h).            |
+| `setAdminAuthCookies(res, access, refresh, csrf)` | Idem                          | Pose 3 cookies administrateur.                            |
+| `clearTokenCookie(res, name)`                     | Nom du cookie                 | Supprime un seul cookie.                                  |
+| `logout(res)`                                     | Express `Response`            | Efface **tous** les cookies liés à l’auth (user + admin). |
+
+Options par défaut :
+
+    httpOnly: true (inaccessible en JS client).
+    secure: true en production (HTTPS obligatoire).
+    sameSite: strict (protection CSRF par navigateur).
+    Durées lues depuis src/config/tokens.ts (centralisé).
+
+Utilisation dans un contrôleur :
+
+import { setAuthCookies } from '../config/cookies';
+// après vérification du mot de passe
+setAuthCookies(res, accessToken, refreshToken, csrfToken);
+
+🧪 Tests recommandés (sans code)
+
+    inputSecurity
+    – string <script>alert(1)</script> → &lt;script&gt;alert(1)&lt;/script&gt;
+    – objet imbriqué avec clés HTML → tous les champs nettoyés
+    – email a@b → false, jean.dupont@exemple.fr → true
+    cookies
+    – setAuthCookies pose bien 3 cookies avec max-age exact
+    – logout supprime bien les 6 cookies user + admin
+    – options secure et sameSite changent selon NODE_ENV
+
+🪟 7-b-4. modal.ts – micro-lib vanilla-JS pour la gestion des modales
+Fichier : src/client/modal.ts
+Portée : exclusivement navigateur (aucun import côté serveur).
+Taille : ~40 lignes, zéro dépendance.
+API publique (toutes void)
+
+| Export                 | Paramètre attendu              | Comportement                                                                                     |
+| ---------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `showModal(selector)`  | `string` (id) ou `HTMLElement` | Affiche la modale, l’enregistre dans `activeModals`, ajoute l’écouteur `click` extérieur.        |
+| `closeModal(selector)` | id ou élément                  | Masque la modale, la retire de `activeModals`, nettoie l’écouteur si plus aucune modale ouverte. |
+| `closeAllModals()`     | aucun                          | Ferme toutes les modales actives en cascade.                                                     |
+
+
+Cycle de vie interne
+
+    Auto-initialisation :
+    Dès que le DOM est prêt, initModals() attache automatiquement un click sur chaque bouton possédant la classe .close dans une .modal.
+    Empilement :
+    Un Set nommé activeModals conserve l’ordre d’ouverture.
+    → Plusieurs modales superposées sont possibles ; closeAllModals() les fermera toutes.
+    Fermeture « clic extérieur » :
+    Un seul écouteur document détecte si le clic a lieu sur le backdrop (la modale elle-même) ; si oui, la modale est fermée.
+
+Utilisation côté front (HTML/Handlebars)
+
+<button id="openBtn">Connexion</button>
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Formulaire de connexion…</p>
+  </div>
+</div>
+
+<script type="module">
+  import { showModal } from '/js/modal.js';
+  document.getElementById('openBtn')?.addEventListener(
+    'click', () => showModal('loginModal')
+  );
+</script>
+
+Points forts
+
+    Aucun framework : compatible toutes les pages SSR.
+    Suppression aisée : quand tu migreras vers React/Vue/Svelte, il suffira de supprimer ce fichier sans impact sur le reste du front.
 
 🧪 8. Tests
 

@@ -1,0 +1,260 @@
+let currentUser = null;
+let currentPage = 'landing';
+let isLogin = true;
+let walletBalance = 0;
+let messages = [];
+let services = [];
+
+const pages = {
+  landing: document.getElementById('landing'),
+  auth: document.getElementById('auth'),
+  dashboard: document.getElementById('dashboard'),
+  chat: document.getElementById('chat')
+};
+
+function showPage(pageId) {
+  Object.values(pages).forEach(p => p?.classList.remove('active'));
+  if (pages[pageId]) { pages[pageId].classList.add('active'); currentPage = pageId; }
+}
+
+function showLanguageModal(code, name) {
+  const container = document.getElementById('modal-container');
+  if (!container) return;
+  const flags = { fr: '🇫🇷', it: '🇮🇹', en: '🇬🇧', es: '🇪🇸', ar: '🇸🇦' };
+  const flag = flags[code] || '🌐';
+  const cleanName = name.replace(/🇫🇷|🇮🇹|🇬🇧|🇪🇸|🇸🇦/g, '').trim();
+  container.innerHTML = `
+    <div class="language-modal-overlay">
+      <div class="language-modal">
+        <span id="language-modal-flag">${flag}</span>
+        <p id="language-modal-name">${cleanName}</p>
+        <button id="language-modal-btn">OK</button>
+      </div>
+    </div>`;
+  container.classList.add('has-modal');
+  container.style.display = 'flex';
+  container.style.opacity = '1';
+  container.style.visibility = 'visible';
+  container.querySelector('.language-modal-overlay').addEventListener('click', closeLanguageModal);
+  document.getElementById('language-modal-btn').addEventListener('click', closeLanguageModal);
+  setTimeout(closeLanguageModal, 4000);
+}
+function closeLanguageModal() {
+  const c = document.getElementById('modal-container');
+  if (c) { c.classList.remove('has-modal'); c.style.display = 'none'; }
+}
+function changeLanguage(code) {
+  const names = { fr: 'Français', it: 'Italien', en: 'Anglais', es: 'Espagnol', ar: 'Arabe' };
+  showLanguageModal(code, names[code] || code);
+  localStorage.setItem('selectedLanguage', code);
+}
+function setSelectedLanguage(code) {
+  const sel = document.getElementById('language-select');
+  if (sel) sel.value = code;
+}
+function setupLanguageSelector() {
+  const sel = document.getElementById('language-select');
+  if (!sel) return;
+  sel.removeEventListener('change', handleLanguageChange);
+  sel.addEventListener('change', handleLanguageChange);
+  setSelectedLanguage(localStorage.getItem('selectedLanguage') || 'fr');
+}
+function handleLanguageChange(e) {
+  const txt = e.target.options[e.target.selectedIndex].text;
+  showLanguageModal(e.target.value, txt);
+  changeLanguage(e.target.value);
+}
+
+function setupSearchSelector() {
+  const sel = document.getElementById('search-category-select');
+  if (sel) {
+    sel.removeEventListener('change', handleSearchCategoryChange);
+    sel.addEventListener('change', handleSearchCategoryChange);
+  }
+}
+function handleSearchCategoryChange(e) {
+  const txt = e.target.options[e.target.selectedIndex].text;
+  showNotification(`Catégorie « ${txt} » sélectionnée`, 'info');
+}
+
+function setupDropdowns() {
+  if (window.innerWidth > 768) setupDesktopDropdowns(); else setupMobileDropdownClicks();
+  let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(setupDropdowns, 100); });
+}
+function setupDesktopDropdowns() {
+  document.querySelectorAll('.immobilier-dropdown-banner, .entreprendre-dropdown-banner, .traduction-dropdown-banner').forEach(b => b.classList.remove('show'));
+  const list = [
+    { el: 'immobilier-dropdown', banner: '.immobilier-dropdown-banner' },
+    { el: 'entreprendre-dropdown', banner: '.entreprendre-dropdown-banner' },
+    { el: 'traduction-dropdown', banner: '.traduction-dropdown-banner' }
+  ];
+  list.forEach(({ el, banner }) => {
+    const drop = document.getElementById(el);
+    const ban = document.querySelector(banner);
+    if (!drop || !ban) return;
+    const newDrop = drop.cloneNode(true);
+    drop.parentNode.replaceChild(newDrop, drop);
+    const show = () => ban.classList.add('show');
+    const hide = () => setTimeout(() => { if (!ban.matches(':hover') && !newDrop.matches(':hover')) ban.classList.remove('show'); }, 100);
+    newDrop.addEventListener('mouseenter', show);
+    newDrop.addEventListener('mouseleave', hide);
+    ban.addEventListener('mouseenter', () => ban.classList.add('show'));
+    ban.addEventListener('mouseleave', () => ban.classList.remove('show'));
+  });
+  setupDropdownOptions();
+}
+function setupMobileDropdownClicks() {
+  ['immobilier', 'entreprendre', 'traduction'].forEach(type => {
+    const tr = document.getElementById(`${type}-trigger`);
+    if (tr) tr.addEventListener('click', e => { e.preventDefault(); toggleMobileDropdown(type); });
+  });
+  setupDropdownOptions();
+}
+function toggleMobileDropdown(type) {
+  const ban = document.querySelector(`.${type}-dropdown-banner`);
+  if (!ban) return;
+  document.querySelectorAll('.immobilier-dropdown-banner, .entreprendre-dropdown-banner, .traduction-dropdown-banner').forEach(b => { if (b !== ban) b.classList.remove('show'); });
+  ban.classList.toggle('show');
+}
+function closeAllDropdowns() {
+  document.querySelectorAll('.immobilier-dropdown-banner, .entreprendre-dropdown-banner, .traduction-dropdown-banner').forEach(b => b.classList.remove('show'));
+}
+function setupDropdownOptions() {
+  document.querySelectorAll('.immobilier-option').forEach(opt => {
+    opt.addEventListener('click', e => selectImmobilierOption(e.target.dataset.option));
+  });
+  document.querySelectorAll('.sub_vente, .sub_location, .sub_terrain').forEach(opt => {
+    opt.addEventListener('click', e => selectImmobilierSubOption(e.target.dataset.option));
+  });
+  document.querySelectorAll('.entreprendre-option').forEach(opt => {
+    opt.addEventListener('click', e => selectEntreprendreOption(e.target.dataset.option));
+  });
+  document.querySelectorAll('.sub_sourcing').forEach(opt => {
+    opt.addEventListener('click', e => selectEntreprendreSubOption(e.target.dataset.option));
+  });
+  document.querySelectorAll('.traduction-option').forEach(opt => {
+    opt.addEventListener('click', e => selectTraductionOption(e.target.dataset.option));
+  });
+  document.querySelectorAll('.sub_acts_list').forEach(opt => {
+    opt.addEventListener('click', e => selectTraductionSubOption(e.target.dataset.option));
+  });
+  setupVenteHover(); setupLocationHover(); setupSourcingHover(); setupActsNotariesHover(); setupTerrainHover();
+}
+function setupVenteHover()   { /* ... */ }
+function setupLocationHover() { /* ... */ }
+function setupSourcingHover() { /* ... */ }
+function setupActsNotariesHover() { /* ... */ }
+function setupTerrainHover() { /* ... */ }
+
+function selectImmobilierOption(opt)      { closeAllDropdowns(); showNotification(`Option « ${opt} » sélectionnée`, 'info'); }
+function selectEntreprendreOption(opt)    { closeAllDropdowns(); showNotification(`Option « ${opt} » sélectionnée`, 'info'); }
+function selectTraductionOption(opt)      { closeAllDropdowns(); showNotification(`Option « ${opt} » sélectionnée`, 'info'); }
+function selectImmobilierSubOption(opt)   { closeAllDropdowns(); showNotification(`Sous-option « ${opt} » sélectionnée`, 'info'); }
+function selectEntreprendreSubOption(opt) { closeAllDropdowns(); showNotification(`Sous-option « ${opt} » sélectionnée`, 'info'); }
+function selectTraductionSubOption(opt)   { closeAllDropdowns(); showNotification(`Sous-option « ${opt} » sélectionnée`, 'info'); }
+
+function initializeNavigation() {
+  updateNavigationState();
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('global-nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+}
+function updateNavigationState() {
+  const authBtn  = document.getElementById('auth-buttons');
+  const userMenu = document.getElementById('user-menu');
+  const walletEl = document.getElementById('wallet-balance-nav');
+  const nameEl   = document.getElementById('user-name-nav');
+  if (currentUser) {
+    if (authBtn)  authBtn.style.display  = 'none';
+    if (userMenu) userMenu.style.display = 'flex';
+    if (walletEl) walletEl.textContent   = `€${walletBalance.toFixed(2)}`;
+    if (nameEl)   nameEl.textContent     = currentUser.name;
+  } else {
+    if (authBtn)  authBtn.style.display  = 'flex';
+    if (userMenu) userMenu.style.display = 'none';
+  }
+}
+function toggleMobileMenu() {
+  const nav = document.getElementById('global-nav');
+  if (nav) {
+    const open = nav.classList.toggle('mobile-open');
+    if (open) closeAllDropdowns();
+  }
+}
+
+function showNotification(message, type = 'info') {
+  console.log(`🔔 ${type}: ${message}`);
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+    <div class="notification-content">
+      <i class="fas fa-${getNotificationIcon(type)}"></i>
+      <span>${message}</span>
+      <button onclick="this.parentElement.parentElement.remove()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>`;
+  if (!document.querySelector('.notification-styles')) {
+    const styles = document.createElement('style');
+    styles.className = 'notification-styles';
+    styles.textContent = `
+      .notification{position:fixed;top:100px;right:20px;background:#fff;border-left:4px solid var(--primary);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:10000;animation:slideInRight .3s ease-out;min-width:300px}
+      .notification-success{border-left-color:#28a745}
+      .notification-danger{border-left-color:#dc3545}
+      .notification-warning{border-left-color:#ffc107}
+      .notification-info{border-left-color:#17a2b8}
+      .notification-content{display:flex;align-items:center;gap:1rem;padding:1rem}
+      .notification-content i:first-child{color:var(--primary)}
+      .notification-content span{flex:1;font-weight:500}
+      .notification-content button{background:none;border:none;color:#6c757d;cursor:pointer;padding:.25rem;border-radius:50%}
+      .notification-content button:hover{background:#e9ecef}
+      @keyframes slideInRight{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}`;
+    document.head.appendChild(styles);
+  }
+  document.body.appendChild(notification);
+  setTimeout(() => notification.remove(), 5000);
+}
+function getNotificationIcon(type) {
+  const icons = { success: 'check-circle', danger: 'exclamation-circle', warning: 'exclamation-triangle', info: 'info-circle' };
+  return icons[type] || icons.info;
+}
+
+function updateWalletDisplay() {
+  const el = document.getElementById('wallet-balance');
+  if (el) el.textContent = `€${walletBalance.toFixed(2)}`;
+}
+
+function getRandomResponse() {
+  const reps = [
+    'Merci pour votre message ! Je vais pouvoir vous aider.',
+    'C\'est parfait ! Quand souhaitez-vous commencer ?',
+    'Excellent ! Je suis disponible pour cette tâche.',
+    'Pas de problème ! J\'ai de l\'expérience dans ce domaine.',
+    'Super ! Envoyez-moi plus de détails si possible.',
+    'D\'accord ! Je peux m\'en occuper rapidement.'
+  ];
+  return reps[Math.floor(Math.random() * reps.length)];
+}
+
+function loadMockData() {
+  services = [
+    { id: 1, title: 'Traduction français-anglais', price: 25, category: 'Langues', rating: 4.9, completedTasks: 127 },
+    { id: 2, title: 'Aide aux devoirs de mathématiques', price: 15, category: 'Éducation', rating: 4.7, completedTasks: 89 }
+  ];
+  console.log(`✅ ${services.length} services chargés`);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 Initialisation Connect People...');
+  loadMockData();
+  showPage('landing');
+  setupCustomDropdowns();
+  initializeNavigation();
+  setupGlobalEventListeners();
+  setTimeout(() => showLanguageModal('fr', 'Français (Test auto)'), 2000);
+});
+
+function setupCustomDropdowns() {
+  setupSearchSelector(); setupLanguageSelector();
+}

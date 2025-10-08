@@ -1,0 +1,31 @@
+{{!-- src/views/pages/home.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="home">
+{{/section}}
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">
+                Prêt à vous entraider
+                <span class="gradient-text">au delà des frontières</span>
+            </h1>
+            <p class="hero-subtitle">
+                Trouvez de l'aide ou aidez d'autres personnes partout dans le monde.
+                Fixez vos tarifs, communiquez en toute sécurité, et construisez des relations authentiques.
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" data-action="register-helper">
+                    <i class="fas fa-heart"></i> Devenir Helper
+                </button>
+                <button class="btn btn-secondary" data-action="register-seeker">
+                    <i class="fas fa-search"></i> Chercher de l'aide
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{> features}}
+{{> security-assurance}}

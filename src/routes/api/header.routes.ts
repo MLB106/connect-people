@@ -1,0 +1,6 @@
+// src/routes/api/header.routes.ts
+import { Router } from 'express';
+import { getSearchCategories } from '../../controllers/header.controller.js';
+
+export const headerApiRouter = Router();
+headerApiRouter.get('/api/search/categories', getSearchCategories);

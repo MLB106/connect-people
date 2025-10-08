@@ -1,4 +1,5 @@
 // src/services/adminToken.service.ts
+// src/services/adminToken.service.ts
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { AdminRole } from '../config/adminRoles';
@@ -9,9 +10,6 @@ const REFRESH_SECRET = process.env.JWT_ADMIN_REFRESH_SECRET as string;
 if (!ACCESS_SECRET || !REFRESH_SECRET) {
   throw new Error('JWT_ADMIN_* secrets are not defined');
 }
-
-/* ---------- helpers ---------- */
-// const now = () => Math.floor(Date.now() / 1000);
 
 /* ---------- tokens ---------- */
 export const generateAdminAccessToken = (id: string, role: AdminRole): string =>
@@ -24,23 +22,40 @@ export const generateAdminRefreshToken = (id: string, role: AdminRole): string =
   });
 
 /* ---------- verify ---------- */
-export const verifyAdminAccessToken = (token: string) =>
-  jwt.verify(token, ACCESS_SECRET) as jwt.JwtPayload & {
-    id: string;
-    role: AdminRole;
-    type: 'admin';
-  };
+export const verifyAdminAccessToken = (token: string) => {
+  try {
+    return jwt.verify(token, ACCESS_SECRET) as jwt.JwtPayload & {
+      id: string;
+      role: AdminRole;
+      type: 'admin';
+    };
+  } catch (err: any) {
+    // harmonise le message pour le test
+    const reason = err.message === 'jwt malformed' ? 'jwt malformed' : err.message;
+    throw new Error(`Access token invalid: ${reason}`);
+  }
+};
 
-export const verifyAdminRefreshToken = (token: string) =>
-  jwt.verify(token, REFRESH_SECRET) as jwt.JwtPayload & {
-    id: string;
-    role: AdminRole;
-    type: 'admin';
-  };
+export const verifyAdminRefreshToken = (token: string) => {
+  try {
+    return jwt.verify(token, REFRESH_SECRET) as jwt.JwtPayload & {
+      id: string;
+      role: AdminRole;
+      type: 'admin';
+    };
+  } catch (err: any) {
+    throw new Error(`Refresh token invalid: ${err.message}`);
+  }
+};
 
 /* ---------- CSRF ---------- */
 export const generateAdminCSRFToken = (): string =>
   crypto.randomBytes(32).toString('hex');
 
-export const verifyAdminCSRFToken = (token: string, stored: string): boolean =>
-  crypto.timingSafeEqual(Buffer.from(token, 'hex'), Buffer.from(stored, 'hex'));
+export const verifyAdminCSRFToken = (token: string, stored: string): boolean => {
+  try {
+    return crypto.timingSafeEqual(Buffer.from(token, 'hex'), Buffer.from(stored, 'hex'));
+  } catch {
+    return false; // longueurs différentes ou token mal formé
+  }
+};

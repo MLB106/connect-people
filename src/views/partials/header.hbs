@@ -1,0 +1,91 @@
+{{!-- src/views/partials/header.hbs --}}
+
+{{!-- src/views/partials/header.hbs --}}
+
+<header class="site-header">
+    <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+        <div class="nav-container">
+            <div class="nav-top-row">
+                <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                    <span aria-hidden="true">Connect People</span>
+                </a>
+
+                <div class="nav-search">
+                    <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                        <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                        <div class="search-category-wrapper">
+                            <select class="search-category-select" id="search-category-select" name="cat">
+                                <option value="centre-aide">Centre d'aide</option>
+                                <option value="membres">Membres</option>
+                                <option value="annonces">Annonces</option>
+                            </select>
+                        </div>
+                        <div class="search-separator" aria-hidden="true"></div>
+                        <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input id="nav-search-input" name="q" type="search"
+                               placeholder="Tapez votre recherche..."
+                               autocomplete="off" aria-required="false">
+                        <button type="submit" class="visually-hidden">Rechercher</button>
+                    </form>
+                </div>
+
+                <div class="nav-right">
+                    <div id="auth-buttons" class="auth-buttons">
+                        <button class="nav-btn" data-action="login">Se connecter</button>
+                        <button class="nav-btn" data-action="register">S'inscrire</button>
+                    </div>
+
+                    <div class="language-selector">
+                        <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                            <option value="fr">🇫🇷 FR</option>
+                            <option value="it">🇮🇹 IT</option>
+                            <option value="en">🇬🇧 EN</option>
+                            <option value="es">🇪🇸 ES</option>
+                            <option value="ar">🇸🇦 AR</option>
+                        </select>
+                    </div>
+
+                    <div id="user-menu" class="user-menu-nav" hidden>
+                        <div class="wallet-display">
+                            <i class="fas fa-wallet" aria-hidden="true"></i>
+                            <span id="wallet-balance-nav">€0.00</span>
+                        </div>
+                        <div class="user-profile">
+                            <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                            <span id="user-name-nav">John Doe</span>
+                            <div class="dropdown-nav">
+                                <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                                <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                                <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                                <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                            aria-label="Ouvrir le menu" aria-expanded="false">
+                        <div class="hamburger-container">
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                            <span class="hamburger-line"></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+                <ul class="nav-links">
+                    {{> nav-immobilier}}
+                    {{> nav-entreprendre}}
+                    {{> nav-traduction}}
+                    <li><a href="#" class="nav-link" data-page="nos-helpers">Nos Helpers</a></li>
+                    <li><a href="#" class="nav-link" data-page="nos-annonces">Nos Annonces</a></li>
+                    <li><a href="#" class="nav-link" data-page="documentation">Documentation</a></li>
+                </ul>
+            </div><!-- /nav-center -->
+        </div><!-- /nav-container -->
+    </nav>
+</header>

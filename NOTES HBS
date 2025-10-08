@@ -1,0 +1,111 @@
+
+
+✅ Règle d’or
+
+1 feature = 1 fichier (ou 1 petit dossier)
+front et back séparés, nommés pareil pour retrouver instantanément.
+
+✅ Architecture propre (exemple pour « home »)
+
+public/                          ← fichiers que le navigateur télécharge
+├─ css/
+│  ├─ home.css
+│  ├─ login.css
+│  ├─ dashboardUser.css
+│  └─ common.css               (reset, variables, utilitaires)
+├─ js/                         ← JavaScript CÔTÉ CLIENT
+│  ├─ home.js                  (hero, boutons, scroll…)
+│  ├─ login.js                 (validation formulaire, eye-password…)
+│  ├─ dashboardUser.js         (stats, chat, voice-message)
+│  └─ common.js                (dropdown langue, mobile menu, axios config)
+└─ images/
+   ├─ hero.jpg
+   └─ logo.svg
+
+
+src/                            ← JavaScript CÔTÉ SERVEUR
+├─ routes/
+│  ├─ home.routes.js           (GET /, GET /lang)
+│  ├─ auth.routes.js           (POST /login, POST /register, POST /logout)
+│  ├─ dashboard.routes.js      (GET /dashboard, GET /api/stats)
+│  └─ chat.routes.js           (GET /api/messages, POST /api/message)
+├─ controllers/
+│  ├─ home.controller.js       (logique métier home)
+│  ├─ auth.controller.js       (hash, jwt, redis tentative)
+│  ├─ chat.controller.js       (socket ou polling, voice upload)
+│  └─ ...
+├─ services/
+│  ├─ redis.service.js
+│  ├─ mail.service.js
+│  └─ ...
+├─ middlewares/
+│  ├─ csrf.middleware.js
+│  ├─ ip.middleware.js
+│  └─ ...
+└─ app.js                      (unique rôle : déclarer middlewares + routes)
+
+
+✅ Dans main.hbs on charge uniquement ce qu’il faut
+
+<!-- CSS global -->
+<link rel="stylesheet" href="/css/common.css">
+{{#if pageCss}}
+<link rel="stylesheet" href="/css/{{pageCss}}.css">
+{{/if}}
+
+<!-- JS global -->
+<script type="module" src="/js/common.js"></script>
+{{#if pageJs}}
+<script type="module" src="/js/{{pageJs}}.js"></script>
+{{/if}}
+
+✅ Coté Express on passe les clés
+
+res.render('pages/home', {
+  locale: 'fr',
+  title: 'Connect People',
+  description: 'Entraide internationale',
+  pageCss: 'home',
+  pageJs: 'home',
+});
+
+✅ Résultat
+
+    1 clic = on sait instantanément où est le code
+    1 bug = on ouvre 1 petit fichier (pas 3000 lignes)
+    1 nouveau collaborateur = il comprend en 30 s
+
+
+
+
+    src/                            
+├─ views/
+│  ├─---layouts/
+│  ├    ├─ main.hbs
+│  ├
+│  ├----pages/
+├  ├    ├─ dashbordUser.hbs
+│  ├    ├─ home.hbs       
+│  ├                  
+│  ├─ partials/
+│  ├    ├─ footer.hbs
+│  ├    ├─ header.hbs
+│  ├    ├─ nav.entreprendre.hbs
+│  ├    ├─ nav.immobilier.hbs
+│  ├    ├─ nav.traduction.hbs
+└                      
+
+public/                          ← fichiers que le navigateur télécharge
+├─ css/
+│  ├─ home.css
+│  ├─ login.css
+│  ├─ dashboardUser.css
+│  └─ common.css               (reset, variables, utilitaires)
+├─ js/                         ← JavaScript CÔTÉ CLIENT
+│  ├─ home.js                  (hero, boutons, scroll…)
+│  ├─ login.js                 (validation formulaire, eye-password…)
+│  ├─ dashboardUser.js         (stats, chat, voice-message)
+│  └─ common.js                (dropdown langue, mobile menu, axios config)
+└─ images/
+   ├─ hero.jpg
+   └─ logo.svg

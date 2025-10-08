@@ -1,0 +1,96 @@
+{{!-- src/views/pages/dashboardUser.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="dashboard">
+{{/section}}
+
+<nav class="dashboard-nav">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <i class="fas fa-hands-helping"></i>
+            <span>Connect People</span>
+        </div>
+        <div class="nav-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher des helpers ou services...">
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="wallet-display">
+                <i class="fas fa-wallet"></i>
+                <span id="wallet-balance">€0.00</span>
+            </div>
+            <div class="user-menu">
+                <img src="https://via.placeholder.com/40" alt="Avatar" class="user-avatar">
+                <div class="dropdown">
+                    <a href="#" data-action="profile">Profil</a>
+                    <a href="#" data-action="wallet">Portefeuille</a>
+                    <a href="#" data-action="logout">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="dashboard-content">
+    <aside class="sidebar">
+        <div class="sidebar-menu">
+            <a href="#" class="menu-item active" data-dashboard-section="overview">
+                <i class="fas fa-tachometer-alt"></i> Tableau de bord
+            </a>
+            <a href="#" class="menu-item" data-dashboard-section="requests">
+                <i class="fas fa-clipboard-list"></i> Mes Demandes
+            </a>
+            <a href="#" class="menu-item" data-dashboard-section="services">
+                <i class="fas fa-cogs"></i> Mes Services
+            </a>
+            <a href="#" class="menu-item" data-dashboard-section="messages">
+                <i class="fas fa-comments"></i> Messages
+            </a>
+            <a href="#" class="menu-item" data-dashboard-section="earnings">
+                <i class="fas fa-chart-line"></i> Revenus
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div id="overview-section" class="dashboard-section active">
+            <div class="section-header">
+                <h1>Tableau de bord</h1>
+                <button class="btn btn-primary" data-action="create-service">
+                    <i class="fas fa-plus"></i> Nouveau Service
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Connexions Actives</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-info">
+                        <h3>4.8</h3>
+                        <p>Note Moyenne</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-euro-sign"></i></div>
+                    <div class="stat-info">
+                        <h3>€247</h3>
+                        <p>Revenus ce mois</p>
+                    </div>
+                </div>
+            </div>
+
+            {{> recent-activity}}
+
+            <!-- Chat + voice message -->
+            {{> chat}}
+        </div>
+    </main>
+</div>

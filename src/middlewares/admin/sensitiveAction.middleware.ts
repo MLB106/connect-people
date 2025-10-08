@@ -32,6 +32,18 @@ export const sensitiveAction =
 
     // 2. Vérifications métier
     (req: AppRequest, res: Response, next: NextFunction) => {
+      // ➜ TEMPORAIRE : log de debug
+      console.log('DEBUG sensitiveAction', {
+        user: req.user,
+        confirmationCode: req.body.confirmationCode,
+        expectedCode: (req.session as any)?.confirmationCode,
+        ip: req.ip,
+        isStaticIPAllowed: isStaticIPAllowed(req.ip ?? ''),
+        isBusinessHours: isBusinessHours(),
+        userLevel: PERMISSION_MATRIX[req.user?.role as AdminRole]?.[resource] ?? 0,
+        requiredLevel: level,
+      });
+
       // 2.1 Rôle présent
       const userRole = req.user?.role as AdminRole;
       if (!userRole) {
@@ -82,6 +94,6 @@ export const sensitiveAction =
         url: req.originalUrl,
       });
       next();
-      return; // ← pour satisfaire TS strict
+      return;
     },
   ];

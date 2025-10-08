@@ -1,0 +1,37 @@
+Voici le flux concret :
+
+Ouvre ton terminal Ubuntu (WSL).
+
+Lance MongoDB avec :
+
+
+
+mongod --dbpath ~/mongodb/data --bind_ip 127.0.0.1
+
+
+Ce terminal reste ouvert tant que MongoDB tourne.
+
+Tu verras les logs défiler. Ne ferme pas ce terminal.
+
+Ouvre MongoDB Compass sur Windows.
+
+Connecte-toi :
+
+Hostname : 127.0.0.1
+
+Port : 27017
+
+Authentification : None
+
+Travaille dans Compass normalement.
+
+Quand tu as fini et que tu veux arrêter MongoDB :
+
+Retourne dans le terminal Ubuntu
+
+Appuie sur Ctrl+C → MongoDB s’arrête proprement.
+
+Là seulement tu peux fermer le terminal.
+
+
+New-NetFirewallRule -DisplayName "Block-Mongo-28485-In" -Direction Inbound -Protocol TCP -LocalPort 28485 -Action Block

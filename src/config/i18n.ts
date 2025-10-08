@@ -1,14 +1,14 @@
+// Fichier : src/config/i18n.ts
 import i18n from 'i18n';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+// dossier locales : un niveau au-dessus de /src
+const localesDir = path.resolve('src', 'locales');
 
 i18n.configure({
   locales: ['fr', 'en', 'de', 'es', 'it', 'pt', 'ar'],
   defaultLocale: 'fr',
-  directory: path.join(__dirname, '..', 'locales'),
+  directory: localesDir,
   objectNotation: true,
   updateFiles: false,
   syncFiles: false,

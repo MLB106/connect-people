@@ -1,0 +1,77 @@
+MongoDB – Mini Cheat-Sheet « Blog Users »
+(WSL2 – Ubuntu – Mongo 8.x – port 48247 – auth activé)
+1) Se connecter
+
+# super-admin (tout voir / tout faire)
+mongosh --port 48247 --authenticationDatabase admin -u mongoRelou -p
+
+# blog-user (base unique)
+mongosh --port 48247 --authenticationDatabase blog -u <blogUser> -p
+
+2) Créer un nouveau « blog user »
+
+use blog                    // base cible
+db.createUser({
+  user: "blogVoyage",
+  pwd:  "Ch4ngeM3Plz!",
+  roles: [{ role: "readWrite", db: "blog" }]
+})
+// => { ok: 1 }
+
+Conserver la chaîne de connexion :
+mongodb://blogVoyage:Ch4ngeM3Plz!@127.0.0.1:48247/blog?authSource=blog
+
+3) Modifier un blog user (nom)
+
+use blog
+db.updateUser("ancienNom", { user: "nouveauNom" })   // dispo ≥ 6.0
+
+4) Modifier un mot de passe
+
+// blog user
+use blog
+db.changeUserPassword("blogVoyage", "NouveauMdp8!")
+
+// super-admin
+use admin
+db.changeUserPassword("mongoRelou", "SuperMdp8!")
+
+5) Lister / vérifier
+
+// tous les users (nécessite admin)
+use admin
+db.system.users.find().pretty()
+
+// droits d’un user
+use blog
+db.getUser("blogVoyage")
+
+6) Supprimer un user
+
+use blog          // ou la base où il existe
+db.dropUser("blogVoyage")
+
+7) Redémarrer Mongo (après changement de port ou options)
+
+sudo pkill mongod
+mongod --bind_ip 127.0.0.1 --port 48247 --auth --dbpath ~/data/db --logpath /var/log/mongodb/mongod.log --fork
+
+8) Sécurité rapide – pare-feu Windows (PowerShell admin)
+
+# bloquer le port utilisé
+New-NetFirewallRule -DisplayName "Block-Mongo-48247-In" `
+  -Direction Inbound -Protocol TCP -LocalPort 48247 -Action Block
+
+# supprimer une règle
+Remove-NetFirewallRule -DisplayName "Block-Mongo-48247-In"
+
+9) Bonnes pratiques
+
+    Un user = un site : cloisonnement intégré, zéro code à écrire.
+    Jamais deux sites avec le même compte : facilité de révoquer ou changer le mdp.
+    Ne jamais coder les identifiants super-admin dans l’appli ; garde-les pour toi.
+    Changer les mots de passe avant la première mise en prod.
+    Ne jamais écouter sur 0.0.0.0 en dev : garde --bind_ip 127.0.0.1.
+    Sauvegarder cette feuille + la chaîne de connexion de chaque site dans un gestionnaire de secrets (KeePass, Bitwarden, variables d’env, …).
+
+    

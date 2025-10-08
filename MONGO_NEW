@@ -1,0 +1,130 @@
+IMPORTANT : Toutes lignes commandes sont à écrire dans powershell en tant qu'administarteur de préférence 
+
+📑 README – Changer le port de MongoDB en 3 minutes
+(Windows + PowerShell + Compass)
+
+1.Choisir un port libre
+
+# Test rapide (doit renvoyer False)
+Test-NetConnection 127.0.0.1 -Port 27019  <== ( 27019 est un exemple )
+
+    ✅ False = port disponible.
+    ❌ True = change de numéro (ex. 27020, 27021 …).
+
+2. Mettre à jour le fichier de config
+
+# Écrase l’ancien avec le nouveau port
+@"
+net:
+  port: 27019          # ← nouveau port d'exemple
+  bindIp: 127.0.0.1
+storage:
+  dbPath: C:\data\db
+"@ | Out-File -FilePath C:\mongo\mongod.conf -Encoding ASCII -Force
+
+3. Relancer le serveur
+
+mongod --config C:\mongo\mongod.conf
+
+Indicateurs de succès (dernières lignes) :
+initAndListenTotalMillis …
+createCollection … config.system.sessions
+Pas d’erreur « NonExistentPath ».
+
+4. Vérifier que le port est écouté
+(optionnel mais rapide)
+
+Test-NetConnection 127.0.0.1 -Port 27019
+
+6. Ouvrir MongoDB Compass
+
+    1. New Connection
+    2. Dans la barre d’adresse, remplace le port :
+        mongodb://127.0.0.1:27019
+    3. Connect
+
+    7. Fini !
+Tu travailles maintenant sur le nouveau port.
+Prochain changement : répéter uniquement les étapes 1-3-4-6.
+
+
+📑 README – « Mongo + mon IP » en 30 s
+1. Chopper mon IP locale
+
+dans powershell:
+
+ipconfig
+
+→ noter la IPv4 de la carte Wi-Fi (ex. 192.168.1.10).
+
+
+2. Mettre l’IP dans la config
+
+dans powershell:
+
+@'
+net:
+  port: 27018
+  bindIp: 127.0.0.1,192.168.1.10   # localhost + mon IP
+storage:
+  dbPath: C:\data\db
+'@ | Out-File -FilePath C:\mongo\mongod.conf -Encoding ASCII -Force
+
+3. Redémarrer Mongo
+
+mongod --config C:\mongo\mongod.conf
+
+4. Autoriser le pare-feu (pop-up Windows)
+→ cocher Réseau privé uniquement.
+5. Connecter Compass
+mongodb://192.168.1.10:27018
+(ou 127.0.0.1:27018 depuis la même machine).
+Résultat : Mongo ne répond plus que sur ta machine et ton réseau local ; plus aucun autre périphérique n’y accède depuis l’extérieur.
+
+
+
+📝 Résumé « Mongo de @utilisateur » – pour Kimi
+1. Installation
+
+    Package Windows complet (MSI) sans Docker, sans WSL, sans Ubuntu.
+    Version installée : 8.2.1 (C:\Program Files\MongoDB\Server\8.2\bin ajouté au PATH).
+    Compass réinstallé via le même installeur.
+
+2. Configuration perso
+
+    Fichier de config : C:\mongo\mongod.conf
+    Port choisi : 27018
+    IP d’écoute : 127.0.0.1 ET 192.168.1.10 (IP locale Wi-Fi)
+    Dossier données : C:\data\db
+    Pare-feu : règle « MongoDB » créée (réseau privé uniquement).
+
+3. Démarrage / arrêt
+
+    Manuel : mongod --config C:\mongo\mongod.conf (terminal laissé ouvert).
+    Service non transformé (on n’a pas fait mongod --install).
+
+4. Connexion habituelle
+Compass → URI :
+mongodb://192.168.1.10:27018
+5. Auth / sécurité
+
+    Pas encore d’authentification (authorization: enabled absent).
+    Pas de TLS.
+    IP locale seulement (pas d’ouverture box).
+
+Prochains sujets possibles : créer users/roles, transformer en service Windows, sauvegardes (mongodump), index, agrégations…
+
+
+Quand tu seras à l’aise avec :
+
+    insert / find / update / delete
+    les bases/collections
+    les index de base
+    une ou deux agrégations simples
+
+…on fera :
+
+    Users/roles (auth)
+    Service Windows (auto-démarrage)
+    Sauvegardes (mongodump/mongorestore)
+    TLS + IP restreint (si tu veux vraiment ouvrir à l’extérieur)

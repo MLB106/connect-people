@@ -1,0 +1,7 @@
+{{!-- modules ES2022 --}}
+<script type="module" src="/js/common.js"></script>
+{{#if pageScripts}}
+  {{#each pageScripts}}
+    <script type="module" src="/js/{{this}}.js"></script>
+  {{/each}}
+{{/if}}

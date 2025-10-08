@@ -1,0 +1,60 @@
+/* ==========  VARIABLES & RESET  ========== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #2E5077;
+  --primary-dark: #243F5F;
+  --secondary: #2E5077;
+  --accent: #2E5077;
+
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --dark: #111827;
+  --dark-light: #1f2937;
+  --gray: #6b7280;
+  --gray-light: #9ca3af;
+  --gray-lighter: #f3f4f6;
+  --white: #ffffff;
+  --border: #e5e7eb;
+
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  --gradient-primary: linear-gradient(135deg, #2E5077 0%, #243F5F 100%);
+  --gradient-accent: linear-gradient(135deg, #2E5077 0%, #243F5F 100%);
+  --gradient-success: linear-gradient(135deg, #2E5077 0%, #243F5F 100%);
+
+  --border-radius: 12px;
+  --border-radius-lg: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--dark);
+  background: var(--white);
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+/* =====  UTILITAIRES  ===== */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

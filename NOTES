@@ -17,3 +17,90 @@ Fichiers inutilisés commentés ou supprimés
     REGARDRE LE README POUR CREER UN COMPTE ET CONNECTER TURSTILE
 
     _______________________________________________________________________
+
+    IMPORTANT POUR SUCCESS MESSAGE ET ERROR MESSAGE POUR USER 
+
+ 1)   Avec i18next déjà dans le nouveau projet, je peux tout fusionner dans les fichiers de traduction JSON (locales/fr.json, locales/en.json, etc.) et supprimer ces trois fichiers.
+Les clés de remplacement sont fournies ci-dessous.
+
+Fusion dans locales/fr.json
+
+{
+  "error": {
+    "USER_NOT_FOUND": "Utilisateur non trouvé",
+    "INVALID_CREDENTIALS": "Identifiants invalides",
+    "EMAIL_ALREADY_EXISTS": "Cette adresse email est déjà utilisée",
+    "UNAUTHORIZED": "Accès non autorisé",
+    "INTERNAL_SERVER_ERROR": "Erreur interne du serveur",
+    "VALIDATION_ERROR": "Erreur de validation : {{details}}",
+    "NETWORK_ERROR": "Erreur de réseau, veuillez réessayer",
+    "TOO_MANY_REQUESTS": "Vous avez dépassé la limite de requêtes autorisées. Veuillez réessayer dans {{time}} minutes.",
+    "REGISTRATION_FAILED": "L'inscription a échoué : {{details}}",
+    "TOKEN_EXPIRED": "Le token a expiré",
+    "INVALID_CSRF_TOKEN": "Token CSRF invalide ou manquant"
+  },
+  "success": {
+    "USER_CREATED": "Utilisateur créé avec succès",
+    "LOGIN_SUCCESS": "Connexion réussie",
+    "LOGOUT_SUCCESS": "Déconnexion réussie",
+    "TOKEN_REFRESHED": "Token rafraîchi avec succès"
+  }
+}
+
+(idem pour en.json, es.json, etc.)
+
+2) Utilisation dans le code (plus court)
+
+import i18n from '../config/i18n';
+
+// avant
+getErrorMessage('token', 'TOKEN_EXPIRED');
+// après
+i18n.__('error.TOKEN_EXPIRED');
+
+// avec variables
+i18n.__('error.TOO_MANY_REQUESTS', { time: 15 });
+
+UTILISER i18n.__('error.XXX', {...}) (ou success.XXX) dans les contrôleurs.
+
+___________________________________________________________________________
+
+REFAIRE LE README UNE FOIS LE SITE TERMINEE
+
+___________________________________________________________________________
+
+Créer les schémas de validation après avoir fixé les vues (ou l’API) est la démarche la plus cohérente :
+
+    On saura précisément quels champs sont envoyés (formulaires, multipart, JSON).
+    On évite d’ajuster les règles plusieurs fois.
+    On peut même générer automatiquement les types TypeScript depuis les schémas Zod, ce qui garantit la synchro front ↔ back.
+
+Donc :
+
+    on laisse temporairement les anciens fichiers de côté ;
+    on crée les routes et/ou vues ;
+    puis on rédige les schémas Zod dans src/validation/ en une seule passe, adaptés à la réalité des payloads.
+
+    _____________________________________________________________________________
+
+    CONSTANTS/TIMEZONEUTILS:
+
+    AU MOMENT VOULU (CREATION DE SITE AVEC JS TE VUES )
+
+    Décommenter le fichier :
+
+    Supprimer les /* ... */
+    Supprimer le jest.isolateModules(...) dans le test
+    Mettre un import classique :
+
+    import * as utils from '../../src/constants/timezoneUtils';
+
+    ________________________________________________________________________________
+
+
+    FAIRE FICHIER Storage.TEST QUAND IL Y AURA LES VUES
+
+
+  ___________________________________________________________________________________
+
+  

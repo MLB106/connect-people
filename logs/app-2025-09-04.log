@@ -1,0 +1,6 @@
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T15:13:30.052Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T15:47:54.399Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T17:13:22.221Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T17:23:44.760Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T17:24:17.608Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-04T17:26:36.165Z","url":"/test-sensitive","userId":"u1"}

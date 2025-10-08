@@ -1,0 +1,16 @@
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-03T08:01:16.412Z","url":"/test-sensitive","userId":"u1"}
+{"level":"info","message":"Sensitive action autorisée","resource":"users","role":"super","timestamp":"2025-09-03T09:23:47.297Z","url":"/test-sensitive","userId":"u1"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T10:13:09.489Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T10:13:09.498Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T10:17:43.720Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T10:17:43.728Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T10:19:34.798Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T10:19:34.806Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T11:12:48.958Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T11:12:48.965Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T11:14:46.618Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T11:14:46.624Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T11:34:18.078Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T11:34:18.132Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"INTERNAL_SERVER_ERROR","level":"error","message":"boom","method":"POST","status":500,"timestamp":"2025-09-03T11:39:42.295Z","type":"request_error","url":"/test"}
+{"ip":"127.0.0.1","key":"VALIDATION_ERROR","level":"error","message":"VALIDATION_ERROR","method":"POST","status":400,"timestamp":"2025-09-03T11:39:42.346Z","type":"request_error","url":"/test"}
