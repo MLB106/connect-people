@@ -77,14 +77,20 @@ app.use('/img', express.static(path.join(__dirname, '..', 'public', 'images')));
 // Servir les fichiers HTML statiques directement
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-/* ---------- Routes App (Client-side rendering) ---------- */
-app.use('/app', appRouter);
+/* ---------- Route de santé (AVANT les routes génériques) ---------- */
+app.get('/health', (_req, res) => {
+  res.json({
+    success: true,
+    data: {
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime()
+    },
+    error: null
+  });
+});
 
-/* ---------- Routes Web Dual (HTML + JSON) ---------- */
-app.use('/', dualWebRouter);
-console.log('🔧 Mode DUAL activé - Routes web avec HTML et JSON selon le contexte');
-
-/* ---------- Routes API ---------- */
+/* ---------- Routes API (spécifiques AVANT génériques) ---------- */
 app.use('/api', apiRouter);
 
 /* ---------- Routes Admin ---------- */
@@ -92,6 +98,9 @@ app.use('/admin', adminAuthRouter);
 
 /* ---------- Routes User ---------- */
 app.use('/user', userAuthRouter);
+
+/* ---------- Routes App (Client-side rendering) ---------- */
+app.use('/app', appRouter);
 
 /* ---------- Route /view/:page (uniquement en développement) ---------- */
 if (process.env.NODE_ENV !== 'production') {
@@ -119,23 +128,14 @@ if (process.env.NODE_ENV !== 'production') {
 
 /* ---------- Routes Dev (uniquement en développement) ---------- */
 if (process.env.NODE_ENV !== 'production') {
-  app.use('/', devRouter);
+  app.use('/dev', devRouter);
   app.use('/dev/html', htmlViewRouter);
   console.log('🔧 Mode DEV-VIEW activé - Routes /dev/* et /dev/html/* disponibles');
 }
 
-/* ---------- Route de santé ---------- */
-app.get('/health', (_req, res) => {
-  res.json({
-    success: true,
-    data: {
-      status: 'OK',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime()
-    },
-    error: null
-  });
-});
+/* ---------- Routes Web Dual (HTML + JSON) - EN DERNIER car elles capturent / ---------- */
+app.use('/', dualWebRouter);
+console.log('🔧 Mode DUAL activé - Routes web avec HTML et JSON selon le contexte');
 
 /* ---------- Route 404 pour les endpoints non trouvés ---------- */
 app.use('*', (req, res) => {
