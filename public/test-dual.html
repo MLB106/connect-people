@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Dual Mode</title>
+</head>
+<body>
+    <h1>Test Dual Mode</h1>
+    <p>Ouvrez la console (F12) pour voir le JSON</p>
+    
+    <script>
+        // Test 1 : Appel à l'API REST pure
+        console.log('=== TEST 1: API REST pure ===');
+        fetch('/api/footer/links')
+            .then(r => r.json())
+            .then(data => {
+                console.log('✅ JSON reçu de /api/footer/links :', data);
+            });
+        
+        // Test 2 : Appel à la route dual avec header JSON
+        console.log('\n=== TEST 2: Route dual avec header JSON ===');
+        fetch('/', {
+            headers: { 'Accept': 'application/json' }
+        })
+            .then(r => r.json())
+            .then(data => {
+                console.log('✅ JSON reçu de / avec header :', data);
+            });
+    </script>
+</body>
+</html>
