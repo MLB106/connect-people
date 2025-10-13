@@ -1,0 +1,496 @@
+/* ==========  TRADUCTION PAGES - PAGES TRADUCTION  ========== */
+
+/* Styles communs pour toutes les pages traduction */
+.traduction-page {
+    /* Utilise les styles génériques de page-header, sections-generiques, etc. */
+}
+
+/* Section d'introduction traduction */
+.traduction-intro {
+    background: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.traduction-intro h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.traduction-intro p {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Section des types de documents */
+.document-types {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.document-types h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des types de documents */
+.document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte de type de document */
+.document-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.document-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.document-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône du type de document */
+.document-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre du type de document */
+.document-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description du type de document */
+.document-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Liste des caractéristiques du document */
+.document-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    text-align: left;
+}
+
+.document-features li {
+    padding: 0.5rem 0;
+    color: var(--gray);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.document-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* Section des langues */
+.traduction-languages {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+.traduction-languages h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des langues */
+.languages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Carte de langue */
+.language-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.language-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.language-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Drapeau de la langue */
+.language-flag {
+    width: 60px;
+    height: 40px;
+    border-radius: var(--border-radius);
+    margin: 0 auto 1rem;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Nom de la langue */
+.language-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+/* Code de la langue */
+.language-code {
+    color: var(--gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Section des processus */
+.traduction-process {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.traduction-process h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Timeline du processus */
+.process-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.process-timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gradient-primary);
+}
+
+/* Élément du processus */
+.process-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 80px;
+}
+
+/* Marqueur du processus */
+.process-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Contenu du processus */
+.process-content h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+.process-content p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Section des tarifs */
+.traduction-pricing {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+.traduction-pricing h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des tarifs */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte de tarif */
+.pricing-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Titre du tarif */
+.pricing-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Prix */
+.pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+/* Unité de prix */
+.pricing-unit {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-left: 0.5rem;
+}
+
+/* Description du tarif */
+.pricing-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Liste des inclusions */
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    text-align: left;
+}
+
+.pricing-features li {
+    padding: 0.5rem 0;
+    color: var(--gray);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.pricing-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .traduction-intro h1 {
+        font-size: 2.5rem;
+    }
+    
+    .document-grid,
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .languages-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .process-timeline::before {
+        left: 25px;
+    }
+    
+    .process-item {
+        padding-left: 60px;
+    }
+    
+    .process-marker {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .traduction-intro,
+    .document-types,
+    .traduction-languages,
+    .traduction-process,
+    .traduction-pricing {
+        padding: 3rem 1rem;
+    }
+    
+    .traduction-intro h1 {
+        font-size: 2rem;
+    }
+    
+    .document-grid,
+    .languages-grid,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .document-card,
+    .language-card,
+    .pricing-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .process-timeline::before {
+        left: 20px;
+    }
+    
+    .process-item {
+        padding-left: 50px;
+    }
+    
+    .process-marker {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .traduction-intro,
+    .document-types,
+    .traduction-languages,
+    .traduction-process,
+    .traduction-pricing {
+        padding: 2rem 1rem;
+    }
+    
+    .document-card,
+    .language-card,
+    .pricing-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .process-timeline::before {
+        left: 15px;
+    }
+    
+    .process-item {
+        padding-left: 40px;
+    }
+    
+    .process-marker {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+

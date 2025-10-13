@@ -1,0 +1,240 @@
+/* ==========  NAV ENTREPRENDRE - NAVIGATION ENTREPRENDRE  ========== */
+
+/* Dropdown principal entreprendre */
+.entreprendre-dropdown {
+    position: relative;
+}
+
+/* Trigger du dropdown */
+.entreprendre-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1rem;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    height: 100%;
+    white-space: nowrap;
+}
+
+/* Effet hover sur le trigger */
+.entreprendre-trigger:hover {
+    background: var(--gray-lighter);
+    color: var(--primary);
+}
+
+/* Overlay du dropdown */
+.dropdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 998;
+    display: none;
+}
+
+/* Bannière du dropdown */
+.entreprendre-dropdown-banner {
+    position: fixed;
+    top: 120px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    width: 100vw;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-out;
+    pointer-events: none;
+}
+
+/* Affichage de la bannière */
+.entreprendre-dropdown:hover .entreprendre-dropdown-banner,
+.entreprendre-dropdown-banner.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* Contenu du dropdown */
+.entreprendre-dropdown-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    list-style: none;
+    min-height: 140px;
+}
+
+/* Ligne de séparation verticale */
+.entreprendre-dropdown-content::before {
+    content: '';
+    position: absolute;
+    left: 28%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #d5d9d9;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+/* Option du dropdown */
+.entreprendre-option {
+    padding: 0.6rem 2.5rem 0.6rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--dark);
+    position: relative;
+    width: 100%;
+    background: transparent;
+    min-height: 22px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Flèche de l'option */
+.entreprendre-option::after {
+    content: '\f054';
+    font-family: 'Font Awesome 6 Free', 'FontAwesome';
+    font-weight: 900;
+    position: absolute;
+    left: 25%;
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #5a6566;
+    pointer-events: none;
+    transition: var(--transition);
+    max-width: fit-content;
+}
+
+/* Effet hover sur l'option */
+.entreprendre-option:hover {
+    background: linear-gradient(to right, var(--gray-lighter) 0%, var(--gray-lighter) 27%, transparent 27%, transparent 100%);
+    color: var(--primary);
+}
+
+/* Séparateur (masqué) */
+.entreprendre-separator {
+    display: none;
+}
+
+/* Liste de sous-sourcing */
+.sub-sourcing-list {
+    position: absolute;
+    left: 30%;
+    top: 0;
+    min-width: 220px;
+    max-width: 300px;
+    background: var(--white);
+    padding: 0.5rem 0;
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    z-index: 1001;
+    list-style: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border);
+    display: block;
+}
+
+/* Affichage de la liste de sous-sourcing */
+.sub-sourcing-list.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    display: block !important;
+}
+
+/* Affichage au hover */
+.entreprendre-option:hover .sub-sourcing-list {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+    display: block !important;
+}
+
+/* Élément de sous-sourcing */
+.sub_sourcing {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    color: var(--dark);
+    margin: 0;
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: block;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+/* Dernier élément de sous-sourcing */
+.sub_sourcing:last-child {
+    border-bottom: none;
+}
+
+/* Effet hover sur le sous-sourcing */
+.sub_sourcing:hover {
+    background: var(--gray-lighter);
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .entreprendre-dropdown-banner {
+        position: relative;
+        top: 0;
+        box-shadow: none;
+        border: none;
+        border-top: 1px solid var(--border);
+        display: none;
+        background: #f8fafc;
+    }
+    
+    .entreprendre-dropdown-banner.show {
+        display: block;
+    }
+    
+    .entreprendre-dropdown-content {
+        max-width: none;
+        padding: 0.5rem 2rem;
+        list-style: none;
+    }
+    
+    .entreprendre-option {
+        padding: 1rem;
+        height: 48px;
+        font-size: 1rem;
+    }
+}
+
+
+
+
+
+

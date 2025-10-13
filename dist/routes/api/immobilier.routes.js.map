@@ -1,0 +1,1 @@
+{"version":3,"file":"immobilier.routes.js","sourceRoot":"","sources":["../../../src/routes/api/immobilier.routes.ts"],"names":[],"mappings":"AAAA,sCAAsC;AACtC,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AACjC,OAAO,EAAE,oBAAoB,EAAE,MAAM,gDAAgD,CAAC;AAEtF,MAAM,CAAC,MAAM,mBAAmB,GAAG,MAAM,EAAE,CAAC;AAC5C,mBAAmB,CAAC,GAAG,CAAC,qBAAqB,EAAE,oBAAoB,CAAC,CAAC"}

@@ -1,0 +1,36 @@
+{{!-- src/views/pages/404.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="404">
+{{/section}}
+
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h1 class="error-title">404</h1>
+            <h2 class="error-subtitle">Page non trouvée</h2>
+            <p class="error-message">
+                Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+            </p>
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    Retour à l'accueil
+                </a>
+                <button class="btn btn-secondary" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i>
+                    Page précédente
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+

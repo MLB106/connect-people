@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev:dual": "node start-dual-mode.js",
+    "test:dual": "node test-dual-routing.js",
+    "dev:html": "FORCE_VIEW_MODE=html npm start",
+    "dev:json": "FORCE_VIEW_MODE=json npm start",
+    "start:dual": "NODE_ENV=development npm start"
+  }
+}
+
+
+
+

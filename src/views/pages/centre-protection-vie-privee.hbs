@@ -1,0 +1,274 @@
+{{!-- src/views/pages/centre-protection-vie-privee.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="privacy-center">
+<title>Centre de protection de la vie privée - Connect People</title>
+<meta name="description" content="Centre de protection de la vie privée Connect People - Gérez vos données personnelles et vos paramètres de confidentialité">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Centre de protection de la vie privée</h1>
+        <p class="page-subtitle">Gérez vos données personnelles et vos paramètres de confidentialité</p>
+    </div>
+</section>
+
+<section class="privacy-center-section">
+    <div class="container">
+        <div class="privacy-center-content">
+            <div class="intro-section">
+                <h2>Votre vie privée, notre priorité</h2>
+                <p>Chez Connect People, nous respectons votre vie privée et vous donnons le contrôle total sur vos données personnelles. Ce centre vous permet de comprendre et gérer la façon dont nous utilisons vos informations.</p>
+            </div>
+
+            <div class="privacy-controls">
+                <h2>Contrôles de confidentialité</h2>
+                <div class="controls-grid">
+                    <div class="control-card">
+                        <h3>Données personnelles</h3>
+                        <p>Gérez les informations que vous partagez avec nous</p>
+                        <div class="control-actions">
+                            <a href="/profile/edit" class="btn btn-outline">Modifier mon profil</a>
+                            <a href="/data-export" class="btn btn-outline">Télécharger mes données</a>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <h3>Paramètres de visibilité</h3>
+                        <p>Contrôlez qui peut voir vos informations</p>
+                        <div class="control-actions">
+                            <a href="/privacy-settings" class="btn btn-outline">Gérer la visibilité</a>
+                            <a href="/profile/public" class="btn btn-outline">Voir mon profil public</a>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <h3>Communications</h3>
+                        <p>Gérez les emails et notifications que vous recevez</p>
+                        <div class="control-actions">
+                            <a href="/notification-settings" class="btn btn-outline">Paramètres de notification</a>
+                            <a href="/unsubscribe" class="btn btn-outline">Se désabonner</a>
+                        </div>
+                    </div>
+
+                    <div class="control-card">
+                        <h3>Compte et sécurité</h3>
+                        <p>Protégez votre compte et vos informations</p>
+                        <div class="control-actions">
+                            <a href="/security-settings" class="btn btn-outline">Paramètres de sécurité</a>
+                            <a href="/two-factor" class="btn btn-outline">Authentification à deux facteurs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-usage">
+                <h2>Utilisation de vos données</h2>
+                <div class="usage-categories">
+                    <div class="usage-category">
+                        <h3>Données essentielles</h3>
+                        <p>Ces données sont nécessaires au fonctionnement de la plateforme</p>
+                        <ul>
+                            <li>Nom et prénom (pour l'identification)</li>
+                            <li>Adresse email (pour la communication)</li>
+                            <li>Numéro de téléphone (pour les urgences)</li>
+                            <li>Adresse (pour les services locaux)</li>
+                        </ul>
+                    </div>
+
+                    <div class="usage-category">
+                        <h3>Données de profil</h3>
+                        <p>Ces données améliorent votre expérience utilisateur</p>
+                        <ul>
+                            <li>Photo de profil (pour la reconnaissance)</li>
+                            <li>Description professionnelle (pour les helpers)</li>
+                            <li>Compétences et expérience (pour les mises en relation)</li>
+                            <li>Préférences de service (pour les recommandations)</li>
+                        </ul>
+                    </div>
+
+                    <div class="usage-category">
+                        <h3>Données d'activité</h3>
+                        <p>Ces données nous aident à améliorer nos services</p>
+                        <ul>
+                            <li>Historique des recherches (pour les suggestions)</li>
+                            <li>Messages échangés (pour le support client)</li>
+                            <li>Évaluations et avis (pour la qualité des services)</li>
+                            <li>Données d'utilisation (pour l'optimisation)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-rights">
+                <h2>Vos droits</h2>
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <h3>Droit d'accès</h3>
+                        <p>Vous pouvez demander une copie de toutes les données que nous avons sur vous</p>
+                        <a href="/data-request" class="btn btn-outline">Demander mes données</a>
+                    </div>
+
+                    <div class="right-card">
+                        <h3>Droit de rectification</h3>
+                        <p>Vous pouvez corriger ou mettre à jour vos informations à tout moment</p>
+                        <a href="/profile/edit" class="btn btn-outline">Modifier mes données</a>
+                    </div>
+
+                    <div class="right-card">
+                        <h3>Droit à l'effacement</h3>
+                        <p>Vous pouvez demander la suppression de vos données personnelles</p>
+                        <a href="/data-deletion" class="btn btn-outline">Demander la suppression</a>
+                    </div>
+
+                    <div class="right-card">
+                        <h3>Droit à la portabilité</h3>
+                        <p>Vous pouvez récupérer vos données dans un format lisible par machine</p>
+                        <a href="/data-export" class="btn btn-outline">Exporter mes données</a>
+                    </div>
+
+                    <div class="right-card">
+                        <h3>Droit d'opposition</h3>
+                        <p>Vous pouvez vous opposer au traitement de vos données pour certains usages</p>
+                        <a href="/data-opt-out" class="btn btn-outline">Modifier mes préférences</a>
+                    </div>
+
+                    <div class="right-card">
+                        <h3>Droit de limitation</h3>
+                        <p>Vous pouvez demander la limitation du traitement de vos données</p>
+                        <a href="/data-limitation" class="btn btn-outline">Demander la limitation</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-retention">
+                <h2>Conservation des données</h2>
+                <div class="retention-info">
+                    <p>Nous conservons vos données personnelles uniquement le temps nécessaire aux finalités pour lesquelles elles ont été collectées :</p>
+                    
+                    <div class="retention-categories">
+                        <div class="retention-category">
+                            <h4>Données de compte</h4>
+                            <p>Conservées tant que votre compte est actif + 3 ans après la fermeture</p>
+                        </div>
+                        
+                        <div class="retention-category">
+                            <h4>Données de transaction</h4>
+                            <p>Conservées 10 ans pour des raisons comptables et fiscales</p>
+                        </div>
+                        
+                        <div class="retention-category">
+                            <h4>Données de communication</h4>
+                            <p>Conservées 3 ans après la dernière interaction</p>
+                        </div>
+                        
+                        <div class="retention-category">
+                            <h4>Données de marketing</h4>
+                            <p>Supprimées immédiatement si vous vous désabonnez</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-sharing">
+                <h2>Partage de données</h2>
+                <div class="sharing-info">
+                    <p>Nous ne vendons jamais vos données personnelles. Nous les partageons uniquement dans les cas suivants :</p>
+                    
+                    <div class="sharing-categories">
+                        <div class="sharing-category">
+                            <h4>Avec votre consentement</h4>
+                            <p>Lorsque vous nous donnez explicitement votre accord</p>
+                        </div>
+                        
+                        <div class="sharing-category">
+                            <h4>Prestataires de services</h4>
+                            <p>Avec des partenaires de confiance qui nous aident à fournir nos services</p>
+                        </div>
+                        
+                        <div class="sharing-category">
+                            <h4>Obligations légales</h4>
+                            <p>Lorsque la loi l'exige ou pour protéger nos droits</p>
+                        </div>
+                        
+                        <div class="sharing-category">
+                            <h4>Protection de la sécurité</h4>
+                            <p>Pour prévenir la fraude ou protéger la sécurité de nos utilisateurs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cookies-section">
+                <h2>Cookies et technologies similaires</h2>
+                <div class="cookies-info">
+                    <p>Nous utilisons des cookies et des technologies similaires pour améliorer votre expérience :</p>
+                    
+                    <div class="cookie-categories">
+                        <div class="cookie-category">
+                            <h4>Cookies essentiels</h4>
+                            <p>Nécessaires au fonctionnement de la plateforme</p>
+                            <span class="cookie-status required">Obligatoires</span>
+                        </div>
+                        
+                        <div class="cookie-category">
+                            <h4>Cookies de performance</h4>
+                            <p>Nous aident à comprendre comment vous utilisez notre site</p>
+                            <span class="cookie-status optional">Optionnels</span>
+                        </div>
+                        
+                        <div class="cookie-category">
+                            <h4>Cookies de fonctionnalité</h4>
+                            <p>Améliorent votre expérience utilisateur</p>
+                            <span class="cookie-status optional">Optionnels</span>
+                        </div>
+                        
+                        <div class="cookie-category">
+                            <h4>Cookies de marketing</h4>
+                            <p>Utilisés pour vous montrer des publicités pertinentes</p>
+                            <span class="cookie-status optional">Optionnels</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cookie-controls">
+                        <a href="/cookie-settings" class="btn btn-primary">Gérer mes préférences de cookies</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-privacy">
+                <h2>Contact et questions</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>Délégué à la Protection des Données (DPO)</h4>
+                        <p>Pour toute question sur la protection de vos données :</p>
+                        <p>Email: <a href="mailto:dpo@connectpeople.fr">dpo@connectpeople.fr</a></p>
+                        <p>Téléphone: +33 1 23 45 67 90</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>Autorité de contrôle</h4>
+                        <p>Si vous n'êtes pas satisfait de notre réponse, vous pouvez contacter :</p>
+                        <p>CNIL - Commission Nationale de l'Informatique et des Libertés</p>
+                        <p>Site web: <a href="https://www.cnil.fr" target="_blank">www.cnil.fr</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="updates-section">
+                <h2>Mises à jour de cette politique</h2>
+                <div class="updates-info">
+                    <p>Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Nous vous informerons de tout changement important par email ou via une notification sur la plateforme.</p>
+                    <p><strong>Dernière mise à jour :</strong> 1er janvier 2025</p>
+                    <p><strong>Version :</strong> 2.1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+

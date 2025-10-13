@@ -1,10 +1,21 @@
 // src/controllers/nav-immobilier.controller.ts
 import { Request, Response } from 'express';
-import { execute } from '../utils/db.js';
+import { NavOption } from '../models/navOption.model.js';
 
 export const getImmobilierOptions = async (_req: Request, res: Response) => {
-  const opts = await execute(
-    `SELECT id, code, name, parent_code FROM nav_options WHERE menu = 'immobilier' ORDER BY parent_code NULLS FIRST, id`
-  );
-  res.json(opts);
+  try {
+    const options = await NavOption.find({ 
+      menu: 'immobilier', 
+      isActive: true 
+    })
+      .select('code name parentCode')
+      .sort({ parentCode: 1, order: 1 });
+    
+    res.json(options);
+  } catch (error) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Erreur lors de la recuperation des options immobilier:', error instanceof Error ? error.message : 'Erreur inconnue');
+          }
+    res.status(500).json({ error: 'Erreur interne du serveur' });
+  }
 };

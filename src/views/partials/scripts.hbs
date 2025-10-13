@@ -1,7 +1,13 @@
-{{!-- modules ES2022 --}}
-<script type="module" src="/js/common.js"></script>
-{{#if pageScripts}}
-  {{#each pageScripts}}
-    <script type="module" src="/js/{{this}}.js"></script>
+{{!-- src/views/partials/scripts.hbs --}}
+
+<!-- JavaScript -->
+<script src="/js/header.js"></script>
+<script src="/js/footer.js"></script>
+<script src="/js/home.js"></script>
+
+<!-- Scripts spécifiques aux pages -->
+{{#if scripts}}
+  {{#each scripts}}
+    <script src="/js/{{this}}.js"></script>
   {{/each}}
 {{/if}}

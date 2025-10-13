@@ -1,12 +1,12 @@
 // src/routes/user/auth.routes.ts
 import { Router } from 'express';
-import { validate } from '../../middlewares/validate';
-import { turnstileGuard } from '../../middlewares/turnstile.middleware';
-import { userLoginSchema, userRegisterSchema } from '../../schemas/user.schema';
-import { userLogin, userRegister } from '../../controllers/users/auth.controller'; 
+import { validateRequest } from '../../utils/validation.js';
+import { turnstileGuard } from '../../middlewares/turnstile.middleware.js';
+import { userLoginSchema, userRegisterSchema } from '../../schemas/user.schema.js';
+import { userLogin, userRegister } from '../../controllers/users/auth.controller.js'; 
 
 const router = Router();
 
-router.post('/login', validate(userLoginSchema), turnstileGuard, userLogin);
-router.post('/register', validate(userRegisterSchema), turnstileGuard, userRegister);
+router.post('/login', validateRequest(userLoginSchema), turnstileGuard, userLogin);
+router.post('/register', validateRequest(userRegisterSchema), turnstileGuard, userRegister);
 export default router;

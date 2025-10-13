@@ -1,0 +1,540 @@
+{{!-- src/views/pages/nos-helpers.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="nos-helpers">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Nos Helpers</h1>
+        <p class="page-subtitle">Découvrez notre communauté de professionnels qualifiés prêts à vous aider</p>
+    </div>
+</section>
+
+<section class="helpers-section">
+    <div class="container">
+        <!-- Filtres et recherche -->
+        <div class="helpers-filters">
+            <div class="search-bar">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="helper-search" placeholder="Rechercher un helper par nom, compétence ou localisation...">
+                </div>
+                <button class="btn btn-primary" id="search-btn">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </div>
+            
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="category-filter">Catégorie :</label>
+                    <select id="category-filter">
+                        <option value="">Toutes les catégories</option>
+                        <option value="immobilier">Immobilier</option>
+                        <option value="entreprendre">Entreprendre</option>
+                        <option value="traduction">Traduction</option>
+                        <option value="conseil">Conseil</option>
+                        <option value="technique">Technique</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="location-filter">Localisation :</label>
+                    <select id="location-filter">
+                        <option value="">Toutes les localisations</option>
+                        <option value="france">France</option>
+                        <option value="europe">Europe</option>
+                        <option value="amerique">Amérique</option>
+                        <option value="asie">Asie</option>
+                        <option value="afrique">Afrique</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="rating-filter">Note minimum :</label>
+                    <select id="rating-filter">
+                        <option value="">Toutes les notes</option>
+                        <option value="5">5 étoiles</option>
+                        <option value="4">4+ étoiles</option>
+                        <option value="3">3+ étoiles</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price-filter">Tarif :</label>
+                    <select id="price-filter">
+                        <option value="">Tous les tarifs</option>
+                        <option value="0-25">0-25€/h</option>
+                        <option value="25-50">25-50€/h</option>
+                        <option value="50-100">50-100€/h</option>
+                        <option value="100+">100€+/h</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="helpers-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="total-helpers">1,247</div>
+                <div class="stat-label">Helpers actifs</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="avg-rating">4.8</div>
+                <div class="stat-label">Note moyenne</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="completed-projects">15,892</div>
+                <div class="stat-label">Projets réalisés</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="countries">67</div>
+                <div class="stat-label">Pays représentés</div>
+            </div>
+        </div>
+
+        <!-- Liste des helpers -->
+        <div class="helpers-grid" id="helpers-grid">
+            <!-- Helper 1 -->
+            <div class="helper-card" data-category="immobilier" data-location="france" data-rating="5" data-price="45">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="Marie Dubois">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">Marie Dubois</h3>
+                        <p class="helper-title">Conseillère Immobilière</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Paris, France
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.9 (127 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">Achat/Vente</span>
+                        <span class="skill-tag">Location</span>
+                        <span class="skill-tag">Investissement</span>
+                    </div>
+                    <p class="helper-description">
+                        Experte en immobilier avec 10 ans d'expérience. Spécialisée dans l'accompagnement des primo-accédants et des investisseurs.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>156 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible maintenant</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">45€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Helper 2 -->
+            <div class="helper-card" data-category="entreprendre" data-location="europe" data-rating="5" data-price="75">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="Ahmed Hassan">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">Ahmed Hassan</h3>
+                        <p class="helper-title">Consultant Business</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Londres, Royaume-Uni
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.8 (89 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">Business Plan</span>
+                        <span class="skill-tag">Stratégie</span>
+                        <span class="skill-tag">Financement</span>
+                    </div>
+                    <p class="helper-description">
+                        Consultant expérimenté en création d'entreprise et développement business. Accompagnement personnalisé pour vos projets.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>203 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible dans 2h</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">75€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Helper 3 -->
+            <div class="helper-card" data-category="traduction" data-location="france" data-rating="5" data-price="35">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="Sophie Chen">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">Sophie Chen</h3>
+                        <p class="helper-title">Traductrice Certifiée</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Lyon, France
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.9 (156 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">Français-Chinois</span>
+                        <span class="skill-tag">Documents officiels</span>
+                        <span class="skill-tag">Certification</span>
+                    </div>
+                    <p class="helper-description">
+                        Traductrice professionnelle certifiée avec expertise en documents officiels et commerciaux.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>312 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible maintenant</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">35€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Helper 4 -->
+            <div class="helper-card" data-category="technique" data-location="amerique" data-rating="4" data-price="60">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="John Smith">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">John Smith</h3>
+                        <p class="helper-title">Développeur Full-Stack</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            New York, USA
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.2 (78 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Mobile</span>
+                    </div>
+                    <p class="helper-description">
+                        Développeur expérimenté spécialisé dans les applications web et mobiles modernes.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>89 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible demain</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">60€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Helper 5 -->
+            <div class="helper-card" data-category="conseil" data-location="asie" data-rating="5" data-price="50">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="Yuki Tanaka">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">Yuki Tanaka</h3>
+                        <p class="helper-title">Conseillère Marketing</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Tokyo, Japon
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.9 (134 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">Digital Marketing</span>
+                        <span class="skill-tag">SEO</span>
+                        <span class="skill-tag">Social Media</span>
+                    </div>
+                    <p class="helper-description">
+                        Experte en marketing digital avec une approche créative et data-driven pour développer votre présence en ligne.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>167 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible dans 4h</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">50€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Helper 6 -->
+            <div class="helper-card" data-category="immobilier" data-location="europe" data-rating="4" data-price="40">
+                <div class="helper-header">
+                    <div class="helper-avatar">
+                        <img src="https://via.placeholder.com/80" alt="Carlos Rodriguez">
+                    </div>
+                    <div class="helper-info">
+                        <h3 class="helper-name">Carlos Rodriguez</h3>
+                        <p class="helper-title">Expert Immobilier</p>
+                        <div class="helper-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Madrid, Espagne
+                        </div>
+                    </div>
+                    <div class="helper-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.3 (92 avis)</span>
+                    </div>
+                </div>
+                
+                <div class="helper-content">
+                    <div class="helper-skills">
+                        <span class="skill-tag">Investissement</span>
+                        <span class="skill-tag">Rénovation</span>
+                        <span class="skill-tag">Fiscalité</span>
+                    </div>
+                    <p class="helper-description">
+                        Spécialiste de l'investissement immobilier et de la rénovation. Conseils personnalisés pour maximiser vos rendements.
+                    </p>
+                    <div class="helper-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i>
+                            <span>98 projets réalisés</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <span>Disponible maintenant</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="helper-footer">
+                    <div class="helper-price">
+                        <span class="price">40€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn" id="prev-page" disabled>
+                <i class="fas fa-chevron-left"></i> Précédent
+            </button>
+            <div class="pagination-numbers">
+                <button class="pagination-number active">1</button>
+                <button class="pagination-number">2</button>
+                <button class="pagination-number">3</button>
+                <span class="pagination-dots">...</span>
+                <button class="pagination-number">12</button>
+            </div>
+            <button class="pagination-btn" id="next-page">
+                Suivant <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="helpers-cta">
+            <h2>Vous ne trouvez pas le helper idéal ?</h2>
+            <p>Publiez votre demande et laissez nos helpers vous contacter directement</p>
+            <button class="btn btn-primary btn-lg">
+                <i class="fas fa-plus"></i> Publier une demande
+            </button>
+        </div>
+    </div>
+</section>
+
+{{#section 'scripts'}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filtrage des helpers
+    const searchInput = document.getElementById('helper-search');
+    const categoryFilter = document.getElementById('category-filter');
+    const locationFilter = document.getElementById('location-filter');
+    const ratingFilter = document.getElementById('rating-filter');
+    const priceFilter = document.getElementById('price-filter');
+    const helpersGrid = document.getElementById('helpers-grid');
+    const helperCards = document.querySelectorAll('.helper-card');
+
+    function filterHelpers() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+        const selectedLocation = locationFilter.value;
+        const selectedRating = ratingFilter.value;
+        const selectedPrice = priceFilter.value;
+
+        helperCards.forEach(card => {
+            const name = card.querySelector('.helper-name').textContent.toLowerCase();
+            const description = card.querySelector('.helper-description').textContent.toLowerCase();
+            const skills = Array.from(card.querySelectorAll('.skill-tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+            
+            const matchesSearch = searchTerm === '' || 
+                name.includes(searchTerm) || 
+                description.includes(searchTerm) || 
+                skills.includes(searchTerm);
+            
+            const matchesCategory = selectedCategory === '' || card.dataset.category === selectedCategory;
+            const matchesLocation = selectedLocation === '' || card.dataset.location === selectedLocation;
+            const matchesRating = selectedRating === '' || parseFloat(card.dataset.rating) >= parseFloat(selectedRating);
+            
+            let matchesPrice = true;
+            if (selectedPrice !== '') {
+                const price = parseInt(card.dataset.price);
+                switch(selectedPrice) {
+                    case '0-25':
+                        matchesPrice = price <= 25;
+                        break;
+                    case '25-50':
+                        matchesPrice = price > 25 && price <= 50;
+                        break;
+                    case '50-100':
+                        matchesPrice = price > 50 && price <= 100;
+                        break;
+                    case '100+':
+                        matchesPrice = price > 100;
+                        break;
+                }
+            }
+
+            if (matchesSearch && matchesCategory && matchesLocation && matchesRating && matchesPrice) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', filterHelpers);
+    categoryFilter.addEventListener('change', filterHelpers);
+    locationFilter.addEventListener('change', filterHelpers);
+    ratingFilter.addEventListener('change', filterHelpers);
+    priceFilter.addEventListener('change', filterHelpers);
+
+    // Bouton de recherche
+    document.getElementById('search-btn').addEventListener('click', filterHelpers);
+});
+</script>
+{{/section}}

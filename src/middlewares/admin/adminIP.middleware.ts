@@ -1,6 +1,6 @@
 // src/middlewares/admin/adminIP.middleware.ts
 import { Request, Response, NextFunction } from 'express';
-import { isIPAllowed } from '../../services/security.service';
+import { isIPAllowed } from '../../services/security.service.js';
 
 export const adminIPWhitelist = (
   req: Request,

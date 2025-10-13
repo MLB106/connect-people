@@ -1,0 +1,147 @@
+{{!-- src/views/pages/immobilier/immobilier-achat-vente.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="immobilier-achat-vente">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Immobilier - Achat & Vente</h1>
+        <p class="page-subtitle">Trouvez l'aide dont vous avez besoin pour vos projets d'achat ou de vente immobilière</p>
+    </div>
+</section>
+
+<section class="immobilier-section">
+    <div class="container">
+        <div class="subcategory-nav">
+            <h3>Types de biens</h3>
+            <div class="subcategory-links">
+                <a href="/immobilier/achat-vente/maison" class="subcategory-link active">Maison</a>
+                <a href="/immobilier/achat-vente/appartement" class="subcategory-link">Appartement</a>
+                <a href="/immobilier/achat-vente/villa" class="subcategory-link">Villa</a>
+                <a href="/immobilier/achat-vente/penthouse" class="subcategory-link">Penthouse</a>
+                <a href="/immobilier/achat-vente/bureaux" class="subcategory-link">Bureaux</a>
+                <a href="/immobilier/achat-vente/local-commercial" class="subcategory-link">Local commercial</a>
+                <a href="/immobilier/achat-vente/fond-commerce" class="subcategory-link">Fond de commerce</a>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Recherche de biens</h3>
+                <p>Nos Helpers vous aident à trouver le bien idéal selon vos critères et votre budget.</p>
+                <ul class="service-features">
+                    <li>Analyse de marché local</li>
+                    <li>Visites accompagnées</li>
+                    <li>Négociation des prix</li>
+                    <li>Vérification légale</li>
+                </ul>
+                <div class="service-price">À partir de 200€</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Vente de biens</h3>
+                <p>Accompagnement complet pour vendre votre bien au meilleur prix.</p>
+                <ul class="service-features">
+                    <li>Estimation gratuite</li>
+                    <li>Préparation à la vente</li>
+                    <li>Marketing immobilier</li>
+                    <li>Gestion des visites</li>
+                </ul>
+                <div class="service-price">À partir de 500€</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <h3>Conseil juridique</h3>
+                <p>Expertise juridique pour vos transactions immobilières.</p>
+                <ul class="service-features">
+                    <li>Rédaction de contrats</li>
+                    <li>Vérification des documents</li>
+                    <li>Conseil fiscal</li>
+                    <li>Accompagnement notarial</li>
+                </ul>
+                <div class="service-price">À partir de 150€/h</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Financement</h3>
+                <p>Conseils et accompagnement pour obtenir le meilleur financement.</p>
+                <ul class="service-features">
+                    <li>Simulation de prêt</li>
+                    <li>Comparaison d'offres</li>
+                    <li>Dossier de financement</li>
+                    <li>Négociation avec les banques</li>
+                </ul>
+                <div class="service-price">À partir de 300€</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+        </div>
+
+        <div class="featured-helpers">
+            <h3>Helpers recommandés</h3>
+            <div class="helpers-list">
+                <div class="helper-item">
+                    <img src="https://via.placeholder.com/60" alt="Helper" class="helper-avatar">
+                    <div class="helper-info">
+                        <h4>Marie Dubois</h4>
+                        <p>Agent immobilier - 10 ans d'expérience</p>
+                        <div class="helper-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (127 avis)</span>
+                        </div>
+                    </div>
+                    <div class="helper-actions">
+                        <button class="btn btn-primary" data-action="contact-helper">Contacter</button>
+                    </div>
+                </div>
+
+                <div class="helper-item">
+                    <img src="https://via.placeholder.com/60" alt="Helper" class="helper-avatar">
+                    <div class="helper-info">
+                        <h4>Pierre Martin</h4>
+                        <p>Conseiller en financement immobilier</p>
+                        <div class="helper-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (89 avis)</span>
+                        </div>
+                    </div>
+                    <div class="helper-actions">
+                        <button class="btn btn-primary" data-action="contact-helper">Contacter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Vous avez un projet immobilier ?</h3>
+            <p>Créez une annonce et trouvez l'aide dont vous avez besoin</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" data-action="create-announcement">Créer une annonce</button>
+                <button class="btn btn-secondary" data-action="become-helper">Devenir Helper</button>
+            </div>
+        </div>
+    </div>
+</section>

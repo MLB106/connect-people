@@ -1,32 +1,40 @@
 // src/models/report.model.ts
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../config/database';
+import { Schema, model, Document } from 'mongoose';
 
-export const Report = sequelize.define('Report', {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+export interface IReport extends Document {
+  userId: string;
+  kind: 'message' | 'voice' | 'photo' | 'video';
+  evidence?: string;
+  reason?: string;
+  status: 'pending' | 'reviewed';
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const reportSchema = new Schema<IReport>({
   userId: {
-    type: DataTypes.STRING,
-    allowNull: false,
+    type: String,
+    required: true,
   },
   kind: {
-    type: DataTypes.ENUM('message', 'voice', 'photo', 'video'),
-    allowNull: false,
+    type: String,
+    enum: ['message', 'voice', 'photo', 'video'],
+    required: true,
   },
   evidence: {
-    type: DataTypes.TEXT,
+    type: String,
   },
   reason: {
-    type: DataTypes.TEXT,
+    type: String,
   },
   status: {
-    type: DataTypes.ENUM('pending', 'reviewed'),
-    defaultValue: 'pending',
+    type: String,
+    enum: ['pending', 'reviewed'],
+    default: 'pending',
   },
 }, {
-  tableName: 'reports',
   timestamps: true,
+  collection: 'reports',
 });
+
+export const Report = model<IReport>('Report', reportSchema);

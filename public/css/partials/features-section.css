@@ -1,0 +1,143 @@
+/* ==========  FEATURES SECTION - SECTION DES FONCTIONNALITÉS  ========== */
+
+/* Section principale des fonctionnalités */
+.features-section {
+    padding: 6rem 2rem;
+    background: var(--white);
+}
+
+/* Titre de la section */
+.features-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--dark);
+}
+
+/* Sous-titre de la section */
+.features-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grille des fonctionnalités */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte de fonctionnalité */
+.feature-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut de la carte */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur la carte */
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône de la fonctionnalité */
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre de la fonctionnalité */
+.feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+/* Description de la fonctionnalité */
+.feature-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .features-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .features-section {
+        padding: 3rem 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .features-section {
+        padding: 2rem 1rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
+

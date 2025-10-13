@@ -45,10 +45,14 @@ function addMessageToChat(message) {
       <span class="message-time">${time}</span>
     </div>`;
   box.appendChild(div); box.scrollTop = box.scrollHeight;
-  console.log(`💬 Message ${message.sender} ajouté`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Message ${message.sender} ajoute`);
+  }
 }
 function loadChatMessages(userId) {
-  console.log(`💬 Load messages for ${userId}`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Load messages for ${userId}`);
+  }
   const mock = [
     { text: 'Bonjour ! Comment puis-je vous aider ?', sender: 'other', timestamp: new Date(Date.now() - 3600000) },
     { text: 'Salut ! J\'aurais besoin d\'aide pour une traduction.', sender: 'user', timestamp: new Date(Date.now() - 3000000) },

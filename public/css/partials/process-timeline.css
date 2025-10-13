@@ -1,0 +1,141 @@
+/* ==========  PROCESS TIMELINE - TIMELINE DU PROCESSUS  ========== */
+
+/* Section de la timeline du processus */
+.process-timeline {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Titre de la timeline */
+.process-timeline h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Container de la timeline */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Ligne verticale de la timeline */
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gradient-primary);
+}
+
+/* Élément de la timeline */
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 80px;
+}
+
+/* Marqueur de la timeline */
+.timeline-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Contenu de la timeline */
+.timeline-content h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+/* Description de la timeline */
+.timeline-content p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .timeline::before {
+        left: 25px;
+    }
+    
+    .timeline-item {
+        padding-left: 60px;
+    }
+    
+    .timeline-marker {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .process-timeline {
+        padding: 3rem 1rem;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline-marker {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .process-timeline {
+        padding: 2rem 1rem;
+    }
+    
+    .timeline::before {
+        left: 15px;
+    }
+    
+    .timeline-item {
+        padding-left: 40px;
+    }
+    
+    .timeline-marker {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+
+

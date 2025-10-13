@@ -3,4 +3,4 @@ import { Router } from 'express';
 import { getEntreprendreOptions } from '../../controllers/nav-entreprendre.controller.js';
 
 export const entreprendreApiRouter = Router();
-entreprendreApiRouter.get('/api/nav/entreprendre', getEntreprendreOptions);
+entreprendreApiRouter.get('/nav/entreprendre', getEntreprendreOptions);

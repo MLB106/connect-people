@@ -1,0 +1,162 @@
+{{!-- src/views/pages/immobilier/immobilier-location.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="immobilier-location">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Immobilier - Location</h1>
+        <p class="page-subtitle">Trouvez ou proposez des biens en location avec l'aide de nos experts</p>
+    </div>
+</section>
+
+<section class="immobilier-section">
+    <div class="container">
+        <div class="subcategory-nav">
+            <h3>Types de locations</h3>
+            <div class="subcategory-links">
+                <a href="/immobilier/location/maison" class="subcategory-link active">Maison</a>
+                <a href="/immobilier/location/appartement" class="subcategory-link">Appartement</a>
+                <a href="/immobilier/location/villa" class="subcategory-link">Villa</a>
+                <a href="/immobilier/location/penthouse" class="subcategory-link">Penthouse</a>
+                <a href="/immobilier/location/bureaux" class="subcategory-link">Bureaux</a>
+                <a href="/immobilier/location/local-commercial" class="subcategory-link">Local commercial</a>
+                <a href="/immobilier/location/fond-commerce" class="subcategory-link">Fond de commerce</a>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Recherche de location</h3>
+                <p>Trouvez le logement parfait selon vos critères et votre budget.</p>
+                <ul class="service-features">
+                    <li>Recherche personnalisée</li>
+                    <li>Visites accompagnées</li>
+                    <li>Négociation du loyer</li>
+                    <li>Vérification du bail</li>
+                </ul>
+                <div class="service-price">À partir de 100€</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h3>Mise en location</h3>
+                <p>Mettez votre bien en location avec l'aide de professionnels.</p>
+                <ul class="service-features">
+                    <li>Estimation du loyer</li>
+                    <li>Préparation du bien</li>
+                    <li>Rédaction d'annonces</li>
+                    <li>Sélection des locataires</li>
+                </ul>
+                <div class="service-price">À partir de 200€</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Gestion locative</h3>
+                <p>Gestion complète de votre bien en location.</p>
+                <ul class="service-features">
+                    <li>Gestion des loyers</li>
+                    <li>Entretien du bien</li>
+                    <li>Relations locataires</li>
+                    <li>Démarches administratives</li>
+                </ul>
+                <div class="service-price">À partir de 50€/mois</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3>Conseil juridique</h3>
+                <p>Expertise juridique pour vos baux et litiges.</p>
+                <ul class="service-features">
+                    <li>Rédaction de baux</li>
+                    <li>Conseil en droit locatif</li>
+                    <li>Résolution de litiges</li>
+                    <li>Procédures d'expulsion</li>
+                </ul>
+                <div class="service-price">À partir de 120€/h</div>
+                <button class="btn btn-primary">Trouver un Helper</button>
+            </div>
+        </div>
+
+        <div class="rental-tips">
+            <h3>Conseils pour la location</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Pour les locataires</h4>
+                    <ul>
+                        <li>Préparez votre dossier complet</li>
+                        <li>Vérifiez l'état des lieux</li>
+                        <li>Lisez attentivement le bail</li>
+                        <li>Assurez-vous de la garantie</li>
+                    </ul>
+                </div>
+                <div class="tip-card">
+                    <h4>Pour les propriétaires</h4>
+                    <ul>
+                        <li>Fixez un loyer compétitif</li>
+                        <li>Préparez bien le logement</li>
+                        <li>Sélectionnez rigoureusement</li>
+                        <li>Rédigez un bail clair</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-helpers">
+            <h3>Helpers spécialisés en location</h3>
+            <div class="helpers-list">
+                <div class="helper-item">
+                    <img src="https://via.placeholder.com/60" alt="Helper" class="helper-avatar">
+                    <div class="helper-info">
+                        <h4>Sophie Laurent</h4>
+                        <p>Gestionnaire locative - 8 ans d'expérience</p>
+                        <div class="helper-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (156 avis)</span>
+                        </div>
+                    </div>
+                    <div class="helper-actions">
+                        <button class="btn btn-primary" data-action="contact-helper">Contacter</button>
+                    </div>
+                </div>
+
+                <div class="helper-item">
+                    <img src="https://via.placeholder.com/60" alt="Helper" class="helper-avatar">
+                    <div class="helper-info">
+                        <h4>Marc Rousseau</h4>
+                        <p>Conseiller juridique immobilier</p>
+                        <div class="helper-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (98 avis)</span>
+                        </div>
+                    </div>
+                    <div class="helper-actions">
+                        <button class="btn btn-primary" data-action="contact-helper">Contacter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

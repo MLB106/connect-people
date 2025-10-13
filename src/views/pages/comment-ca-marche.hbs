@@ -1,0 +1,268 @@
+{{!-- src/views/pages/comment-ca-marche.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="how-it-works">
+<title>Comment ça marche - Connect People</title>
+<meta name="description" content="Découvrez comment utiliser Connect People - Guide complet pour proposer ou demander de l'aide sur notre plateforme">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Comment ça marche</h1>
+        <p class="page-subtitle">Découvrez comment utiliser Connect People en quelques étapes simples</p>
+    </div>
+</section>
+
+<section class="how-it-works-section">
+    <div class="container">
+        <div class="how-it-works-content">
+            <div class="intro-section">
+                <h2>Connect People, c'est simple !</h2>
+                <p>Que vous souhaitiez proposer vos services ou demander de l'aide, notre plateforme vous guide étape par étape pour créer des connexions utiles dans votre communauté.</p>
+            </div>
+
+            <div class="user-types">
+                <div class="user-type-selector">
+                    <button class="user-type-btn active" data-type="helper">Je propose de l'aide</button>
+                    <button class="user-type-btn" data-type="seeker">Je cherche de l'aide</button>
+                </div>
+            </div>
+
+            <!-- Section pour les Helpers -->
+            <div class="steps-section helper-steps active">
+                <h2>Comment proposer vos services</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Créez votre compte</h3>
+                            <p>Inscrivez-vous gratuitement en quelques minutes. Vérifiez votre email pour activer votre compte.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Complétez votre profil</h3>
+                            <p>Ajoutez vos compétences, votre expérience et vos disponibilités. Plus votre profil est détaillé, plus vous attirerez de clients.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Publiez vos annonces</h3>
+                            <p>Créez des annonces attractives pour vos services. Choisissez la catégorie, ajoutez des photos et fixez vos tarifs.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Recevez des demandes</h3>
+                            <p>Les utilisateurs intéressés vous contactent directement. Vous recevez des notifications en temps réel.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Finalisez les échanges</h3>
+                            <p>Échangez avec vos clients, planifiez les rendez-vous et effectuez les prestations. Recevez vos paiements sécurisés.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section pour les Chercheurs -->
+            <div class="steps-section seeker-steps">
+                <h2>Comment demander de l'aide</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Créez votre compte</h3>
+                            <p>Inscrivez-vous gratuitement et accédez à tous les services disponibles sur la plateforme.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Décrivez votre besoin</h3>
+                            <p>Expliquez clairement ce dont vous avez besoin, quand et où. Plus vous êtes précis, plus vous trouverez la bonne personne.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Recherchez des helpers</h3>
+                            <p>Utilisez nos filtres pour trouver les helpers qui correspondent à vos critères. Consultez leurs profils et avis.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Contactez les helpers</h3>
+                            <p>Envoyez des messages aux helpers qui vous intéressent. Discutez des détails et négociez les conditions.</p>
+                            <div class="step-visual">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Finalisez la prestation</h3>
+                            <p>Planifiez le rendez-vous, effectuez le paiement sécurisé et profitez du service. N'oubliez pas de laisser un avis !</p>
+                            <div class="step-visual">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-section">
+                <h2>Fonctionnalités clés</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Sécurité garantie</h3>
+                        <p>Paiements sécurisés, profils vérifiés et système de confiance pour des échanges en toute sécurité.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Disponible partout</h3>
+                        <p>Accédez à Connect People depuis votre ordinateur, tablette ou smartphone, où que vous soyez.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Système d'avis</h3>
+                        <p>Consultez les avis des autres utilisateurs et laissez vos propres commentaires après chaque échange.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Support client</h3>
+                        <p>Notre équipe est là pour vous aider en cas de problème. Réponse garantie sous 24h.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categories-section">
+                <h2>Catégories disponibles</h2>
+                <div class="categories-grid">
+                    <div class="category-item">
+                        <i class="fas fa-home"></i>
+                        <h4>Immobilier</h4>
+                        <p>Achat, vente, location, conseils</p>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-briefcase"></i>
+                        <h4>Entrepreneuriat</h4>
+                        <p>Conseils, formations, networking</p>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-language"></i>
+                        <h4>Traduction</h4>
+                        <p>Documents, interprétation, cours</p>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-tools"></i>
+                        <h4>Services</h4>
+                        <p>Bricolage, ménage, jardinage</p>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Formation</h4>
+                        <p>Cours particuliers, coaching</p>
+                    </div>
+                    <div class="category-item">
+                        <i class="fas fa-laptop-code"></i>
+                        <h4>Technologie</h4>
+                        <p>Développement, maintenance IT</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Prêt à commencer ?</h2>
+                <p>Rejoignez la communauté Connect People dès aujourd'hui</p>
+                <div class="cta-buttons">
+                    <a href="/auth/register" class="btn btn-primary">Créer un compte</a>
+                    <a href="/auth/login" class="btn btn-secondary">Se connecter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const userTypeBtns = document.querySelectorAll('.user-type-btn');
+    const helperSteps = document.querySelector('.helper-steps');
+    const seekerSteps = document.querySelector('.seeker-steps');
+
+    userTypeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            userTypeBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            // Show/hide appropriate steps
+            if (this.dataset.type === 'helper') {
+                helperSteps.classList.add('active');
+                seekerSteps.classList.remove('active');
+            } else {
+                seekerSteps.classList.add('active');
+                helperSteps.classList.remove('active');
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+

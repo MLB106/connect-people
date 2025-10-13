@@ -1,0 +1,67 @@
+/* ==========  SECTIONS GÉNÉRIQUES - SECTIONS COMMUNES AUX PAGES  ========== */
+
+/* Sections principales (entreprendre, about) */
+.entreprendre-section,
+.about-section {
+    padding: 6rem 2rem;
+    background: var(--white);
+}
+
+/* Introduction des services */
+.service-intro,
+.about-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Titres des introductions */
+.service-intro h2,
+.about-intro h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+/* Paragraphes des introductions */
+.service-intro p,
+.about-intro p {
+    font-size: 1.2rem;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .entreprendre-section,
+    .about-section {
+        padding: 4rem 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .entreprendre-section,
+    .about-section {
+        padding: 3rem 1rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .entreprendre-section,
+    .about-section {
+        padding: 2rem 1rem;
+    }
+}
+
+
+
+
+
+

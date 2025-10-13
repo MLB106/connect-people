@@ -1,8 +1,8 @@
 // src/middlewares/turnstile.middleware.ts
 import { Request, Response, NextFunction } from 'express';
-import { verifyTurnstile } from '../services/turnstile.service';
-import { hit }             from '../services/rateLimitService'; // ← CHANGÉ
-import { logger }          from '../services/logger.service';
+import { verifyTurnstile } from '../services/turnstile.service.js';
+import { hit }             from '../services/rateLimitService.js'; // ← CHANGÉ
+import { logger }          from '../services/logger.service.js';
 
 interface TurnstileReq extends Request {
   body: { turnstileToken?: string };

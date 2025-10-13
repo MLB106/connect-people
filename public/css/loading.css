@@ -1,0 +1,117 @@
+/* Styles pour le loading et la sécurité */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.error-container p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.error-container button {
+  background: white;
+  color: #ff6b6b;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour masquer le contenu pendant le chargement */
+#app-root {
+  min-height: 100vh;
+}
+
+#app-root.loading {
+  overflow: hidden;
+}
+
+/* Styles de sécurité - masquer le contenu dans les outils de développement */
+@media screen and (max-width: 1024px) {
+  .main-header,
+  .main-content,
+  .main-footer {
+    display: none !important;
+  }
+  
+  .loading-container {
+    display: flex !important;
+  }
+}
+
+/* Animation d'apparition du contenu */
+.content-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+

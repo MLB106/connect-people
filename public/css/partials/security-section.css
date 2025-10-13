@@ -1,0 +1,151 @@
+/* ==========  SECURITY SECTION - SECTION SÉCURITÉ ET CONFIANCE  ========== */
+
+/* Section principale de sécurité */
+.security-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Titre de la section sécurité */
+.security-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Sous-titre de la section sécurité */
+.security-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Grille des éléments de sécurité */
+.security-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Carte de sécurité */
+.security-card {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut de la carte de sécurité */
+.security-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur la carte de sécurité */
+.security-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Icône de sécurité */
+.security-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre de la carte de sécurité */
+.security-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description de la carte de sécurité */
+.security-card p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .security-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .security-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .security-section {
+        padding: 3rem 1rem;
+    }
+    
+    .security-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .security-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .security-section {
+        padding: 2rem 1rem;
+    }
+    
+    .security-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
+

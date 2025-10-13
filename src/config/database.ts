@@ -1,74 +1,73 @@
 /**
  * @file config/database.ts
- * @description Configuration des connexions MySQL :
- * - Pool natif mysql2 (SQL brut)
- * - Instance Sequelize (ORM)
+ * @description Configuration des connexions MongoDB :
+ * - Connexion MongoDB native avec mongoose
+ * - Configuration pour l'application connect-people
  */
 
-import { createPool, Pool } from 'mysql2/promise';
-import { Sequelize } from 'sequelize';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { env } from './env.js';
 
 dotenv.config();
 
-const {
-  DB_HOST,
-  DB_PORT = '3306',
-  DB_NAME,
-  DB_USER,
-  DB_PASSWORD,
-  NODE_ENV,
-} = process.env;
-
-if (!DB_HOST || !DB_NAME || !DB_USER || !DB_PASSWORD) {
-  console.error('❌ Variables d’environnement DB manquantes.');
-  process.exit(1);
-}
-
 /* -------------------------------------------------------------------------- */
-/*                                Pool MySQL natif                            */
+/*                            Configuration MongoDB                            */
 /* -------------------------------------------------------------------------- */
 
-export const pool: Pool = createPool({
-  host: DB_HOST,
-  port: Number(DB_PORT),
-  user: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
+// Configuration des options de connexion MongoDB
+const mongoOptions = {
+  maxPoolSize: 10, // Maximum de connexions dans le pool
+  serverSelectionTimeoutMS: 5000, // Timeout pour la sélection du serveur
+  socketTimeoutMS: 45000, // Timeout pour les opérations socket
+  bufferCommands: false, // Désactive le buffering mongoose
+};
 
 /* -------------------------------------------------------------------------- */
-/*                              Instance Sequelize                            */
-/* -------------------------------------------------------------------------- */
-
-export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-  host: DB_HOST,
-  port: Number(DB_PORT),
-  dialect: 'mysql',
-  logging: NODE_ENV === 'development' ? console.log : false,
-  pool: { max: 10, min: 0, acquire: 30_000, idle: 10_000 },
-  define: { charset: 'utf8mb4', collate: 'utf8mb4_unicode_ci', timestamps: true },
-});
-
-/* -------------------------------------------------------------------------- */
-/*                            Initialisation unifiée                          */
+/*                            Initialisation MongoDB                          */
 /* -------------------------------------------------------------------------- */
 
 export const initializeDatabase = async (): Promise<void> => {
   try {
-    // Vérifie le pool natif
-    const conn = await pool.getConnection();
-    conn.release();
+    // Connexion à MongoDB
+    await mongoose.connect(env.databaseUrl, mongoOptions);
 
-    // Vérifie Sequelize
-    await sequelize.authenticate();
+    // Événements de connexion
+    mongoose.connection.on('connected', () => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Connexion MongoDB etablie.');
+      }
+    });
 
-    console.log('✅ Connexions MySQL (pool natif + Sequelize) établies.');
+    mongoose.connection.on('error', (err) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Erreur de connexion MongoDB :', err);
+      }
+    });
+
+    mongoose.connection.on('disconnected', () => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Connexion MongoDB fermee.');
+      }
+    });
+
+    // Gestion de la fermeture propre
+    process.on('SIGINT', async () => {
+      await mongoose.connection.close();
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Connexion MongoDB fermee proprement.');
+      }
+      process.exit(0);
+    });
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Connexion MongoDB initialisee avec succes.');
+    }
   } catch (err) {
-    console.error('❌ Erreur lors de l’initialisation DB :', err);
+    console.error(`Erreur lors de l'initialisation MongoDB :`, err);
     process.exit(1);
   }
 };
+
+// Export de l'instance mongoose pour utilisation dans l'application
+export { mongoose };

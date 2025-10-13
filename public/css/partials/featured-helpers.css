@@ -1,0 +1,134 @@
+/* ==========  FEATURED HELPERS - HELPERS EN VEDETTE  ========== */
+
+/* Section des helpers en vedette */
+.featured-helpers {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+/* Titre de la section */
+.featured-helpers h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Liste des helpers */
+.helpers-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Élément helper */
+.helper-item {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: var(--transition);
+}
+
+/* Effet hover sur l'élément helper */
+.helper-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Avatar du helper */
+.helper-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* Informations du helper */
+.helper-info {
+    flex: 1;
+}
+
+/* Nom du helper */
+.helper-info h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+/* Description du helper */
+.helper-info p {
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+/* Note du helper */
+.helper-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Étoiles de notation */
+.helper-rating i {
+    color: #fbbf24;
+    font-size: 1rem;
+}
+
+/* Texte de notation */
+.helper-rating span {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+/* Actions du helper */
+.helper-actions {
+    flex-shrink: 0;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .featured-helpers {
+        padding: 3rem 1rem;
+    }
+    
+    .helper-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .helper-avatar {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .featured-helpers {
+        padding: 2rem 1rem;
+    }
+    
+    .helper-item {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
+

@@ -46,7 +46,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
-    console.error('❌ Erreur API :', error.message);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Erreur API :', error.message);
+    }
     // redirection, toaster, etc.
     return Promise.reject(error);
   }

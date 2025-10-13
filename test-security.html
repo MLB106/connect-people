@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de sécurité - Connect People</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔒 Test de sécurité - Connect People</h1>
+    <p>Cette page teste que le contenu HTML n'apparaît pas dans le code source de la page.</p>
+
+    <div class="test-section">
+        <h2>Test 1: Inspection du code source</h2>
+        <p>Vérifiez que le contenu de la page n'est pas visible dans le code source (Ctrl+U).</p>
+        <div class="test-result success">
+            ✅ Le code source ne doit contenir que le squelette HTML vide avec un message de chargement.
+        </div>
+        <div class="code-block">
+            &lt;div id="app-root"&gt;
+                &lt;div class="loading-container"&gt;
+                    &lt;div class="spinner"&gt;&lt;/div&gt;
+                    &lt;p&gt;Chargement de l'application...&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Désactivation des raccourcis clavier</h2>
+        <p>Testez les raccourcis clavier suivants (ils doivent être désactivés) :</p>
+        <ul>
+            <li><strong>F12</strong> - Outils de développement</li>
+            <li><strong>Ctrl+Shift+I</strong> - Inspecter l'élément</li>
+            <li><strong>Ctrl+U</strong> - Afficher le code source</li>
+            <li><strong>Ctrl+Shift+C</strong> - Sélecteur d'éléments</li>
+        </ul>
+        <div class="test-result warning">
+            ⚠️ Ces raccourcis doivent être bloqués ou afficher un message d'avertissement.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Désactivation du clic droit</h2>
+        <p>Le clic droit doit être désactivé sur la page.</p>
+        <div class="test-result success">
+            ✅ Le menu contextuel ne doit pas s'afficher lors d'un clic droit.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Détection des outils de développement</h2>
+        <p>L'application doit détecter l'ouverture des outils de développement.</p>
+        <div class="test-result warning">
+            ⚠️ Ouvrez les outils de développement (F12) et vérifiez qu'un message d'avertissement s'affiche dans la console.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 5: Génération dynamique du contenu</h2>
+        <p>Le contenu doit être généré uniquement par JavaScript après le chargement.</p>
+        <div class="test-result success">
+            ✅ Le contenu ne doit apparaître qu'après le chargement complet de la page.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 6: Chiffrement des données</h2>
+        <p>Les données sensibles doivent être chiffrées dans le sessionStorage.</p>
+        <div class="test-result success">
+            ✅ Vérifiez dans les outils de développement que les données dans sessionStorage sont chiffrées.
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Instructions de test</h2>
+        <ol>
+            <li>Ouvrez une page de l'application (ex: /app/home)</li>
+            <li>Appuyez sur <strong>Ctrl+U</strong> pour voir le code source</li>
+            <li>Vérifiez que seul le squelette HTML vide est visible</li>
+            <li>Testez les raccourcis clavier mentionnés ci-dessus</li>
+            <li>Ouvrez les outils de développement (F12)</li>
+            <li>Vérifiez que le contenu s'affiche correctement dans la page</li>
+        </ol>
+    </div>
+
+    <div class="test-section">
+        <h2>Résultats attendus</h2>
+        <div class="test-result success">
+            ✅ <strong>Succès :</strong> Le contenu HTML n'apparaît pas dans le code source et est généré dynamiquement par JavaScript.
+        </div>
+        <div class="test-result error">
+            ❌ <strong>Échec :</strong> Si du contenu HTML est visible dans le code source, les modifications n'ont pas été appliquées correctement.
+        </div>
+    </div>
+
+    <script>
+        // Script de test pour vérifier la sécurité
+        console.log('🔒 Test de sécurité Connect People');
+        console.log('Vérifiez que le contenu n\'apparaît pas dans le code source');
+        
+        // Test de désactivation des raccourcis
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.key === 'u') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+                console.warn('⚠️ Raccourci clavier bloqué:', e.key);
+            }
+        });
+        
+        // Test de désactivation du clic droit
+        document.addEventListener('contextmenu', function(e) {
+            console.warn('⚠️ Clic droit bloqué');
+        });
+    </script>
+</body>
+</html>
+
+
+

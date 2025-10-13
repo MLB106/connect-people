@@ -1,0 +1,111 @@
+/* ==========  BUSINESS PLAN - STRUCTURE DU BUSINESS PLAN  ========== */
+
+/* Section de la structure du business plan */
+.business-plan-structure {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+/* Titre de la structure */
+.business-plan-structure h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille de la structure */
+.structure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Section de la structure */
+.structure-section {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut de la section */
+.structure-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur la section */
+.structure-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Titre de la section */
+.structure-section h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+/* Description de la section */
+.structure-section p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .structure-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .business-plan-structure {
+        padding: 3rem 1rem;
+    }
+    
+    .structure-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .structure-section {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .business-plan-structure {
+        padding: 2rem 1rem;
+    }
+    
+    .structure-section {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
+

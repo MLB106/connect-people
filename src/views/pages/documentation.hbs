@@ -1,0 +1,438 @@
+{{!-- src/views/pages/documentation.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="documentation">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Documentation</h1>
+        <p class="page-subtitle">Tout ce que vous devez savoir pour utiliser Connect People efficacement</p>
+    </div>
+</section>
+
+<section class="documentation-section">
+    <div class="container">
+        <div class="documentation-layout">
+            <!-- Sidebar Navigation -->
+            <nav class="doc-sidebar">
+                <div class="sidebar-search">
+                    <div class="search-input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="doc-search" placeholder="Rechercher dans la documentation...">
+                    </div>
+                </div>
+                
+                <ul class="doc-nav">
+                    <li class="nav-section">
+                        <h3>Commencer</h3>
+                        <ul>
+                            <li><a href="#introduction" class="nav-link active">Introduction</a></li>
+                            <li><a href="#getting-started" class="nav-link">Premiers pas</a></li>
+                            <li><a href="#account-setup" class="nav-link">Configuration du compte</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-section">
+                        <h3>Utilisation</h3>
+                        <ul>
+                            <li><a href="#finding-help" class="nav-link">Trouver de l'aide</a></li>
+                            <li><a href="#offering-help" class="nav-link">Proposer de l'aide</a></li>
+                            <li><a href="#communication" class="nav-link">Communication</a></li>
+                            <li><a href="#payments" class="nav-link">Paiements</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-section">
+                        <h3>Catégories</h3>
+                        <ul>
+                            <li><a href="#immobilier" class="nav-link">Immobilier</a></li>
+                            <li><a href="#entreprendre" class="nav-link">Entreprendre</a></li>
+                            <li><a href="#traduction" class="nav-link">Traduction</a></li>
+                            <li><a href="#conseil" class="nav-link">Conseil</a></li>
+                            <li><a href="#technique" class="nav-link">Technique</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-section">
+                        <h3>Sécurité</h3>
+                        <ul>
+                            <li><a href="#safety-tips" class="nav-link">Conseils de sécurité</a></li>
+                            <li><a href="#verification" class="nav-link">Vérification des helpers</a></li>
+                            <li><a href="#reporting" class="nav-link">Signaler un problème</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-section">
+                        <h3>Support</h3>
+                        <ul>
+                            <li><a href="#faq" class="nav-link">FAQ</a></li>
+                            <li><a href="#contact" class="nav-link">Nous contacter</a></li>
+                            <li><a href="#community" class="nav-link">Communauté</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="doc-content">
+                <!-- Introduction -->
+                <section id="introduction" class="doc-section">
+                    <h2>Introduction à Connect People</h2>
+                    <p>Connect People est une plateforme d'entraide mondiale qui permet aux utilisateurs de trouver de l'aide ou d'offrir leurs compétences à d'autres personnes partout dans le monde. Notre mission est de briser les barrières géographiques et culturelles pour faciliter l'entraide.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Comment ça marche ?</h4>
+                            <p>Connect People fonctionne sur un système de demande et d'offre d'aide. Les utilisateurs peuvent soit publier une demande d'aide, soit proposer leurs services en tant que "Helper".</p>
+                        </div>
+                    </div>
+
+                    <h3>Types d'utilisateurs</h3>
+                    <div class="user-types">
+                        <div class="user-type-card">
+                            <div class="type-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <h4>Demandeur d'aide</h4>
+                            <p>Personne qui cherche de l'aide pour un projet, une tâche ou un problème spécifique.</p>
+                        </div>
+                        <div class="user-type-card">
+                            <div class="type-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4>Helper</h4>
+                            <p>Personne qui propose ses compétences et son expertise pour aider d'autres utilisateurs.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Getting Started -->
+                <section id="getting-started" class="doc-section">
+                    <h2>Premiers pas</h2>
+                    <p>Voici comment commencer à utiliser Connect People :</p>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Créer un compte</h4>
+                                <p>Inscrivez-vous en fournissant vos informations de base et en vérifiant votre email.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Compléter votre profil</h4>
+                                <p>Ajoutez vos compétences, votre localisation et une description de vos services.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Choisir votre rôle</h4>
+                                <p>Décidez si vous voulez chercher de l'aide ou en proposer, ou les deux !</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Commencer à utiliser</h4>
+                                <p>Explorez les annonces, contactez des helpers ou publiez votre première demande.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Account Setup -->
+                <section id="account-setup" class="doc-section">
+                    <h2>Configuration du compte</h2>
+                    <p>Une configuration complète de votre compte améliore votre expérience et votre visibilité sur la plateforme.</p>
+                    
+                    <h3>Informations de base</h3>
+                    <ul>
+                        <li><strong>Nom et prénom :</strong> Utilisez votre vrai nom pour établir la confiance</li>
+                        <li><strong>Photo de profil :</strong> Une photo claire et professionnelle augmente la confiance</li>
+                        <li><strong>Localisation :</strong> Indiquez votre ville et pays</li>
+                        <li><strong>Langues parlées :</strong> Spécifiez toutes les langues que vous maîtrisez</li>
+                    </ul>
+
+                    <h3>Compétences et services</h3>
+                    <p>Si vous proposez de l'aide, détaillez vos compétences :</p>
+                    <ul>
+                        <li>Listez vos domaines d'expertise</li>
+                        <li>Ajoutez des certifications ou diplômes</li>
+                        <li>Décrivez votre expérience</li>
+                        <li>Fixez vos tarifs horaires</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <div class="warning-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="warning-content">
+                            <h4>Important</h4>
+                            <p>Assurez-vous que toutes vos informations sont exactes et à jour. Les informations incorrectes peuvent affecter votre réputation sur la plateforme.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Finding Help -->
+                <section id="finding-help" class="doc-section">
+                    <h2>Trouver de l'aide</h2>
+                    <p>Voici comment trouver le helper idéal pour votre projet :</p>
+                    
+                    <h3>Recherche et filtres</h3>
+                    <p>Utilisez notre système de recherche avancée pour trouver des helpers :</p>
+                    <ul>
+                        <li><strong>Recherche par mots-clés :</strong> Tapez des termes liés à votre projet</li>
+                        <li><strong>Filtres par catégorie :</strong> Immobilier, Entreprendre, Traduction, etc.</li>
+                        <li><strong>Filtres par localisation :</strong> Trouvez des helpers près de chez vous ou à distance</li>
+                        <li><strong>Filtres par tarif :</strong> Définissez votre budget</li>
+                        <li><strong>Filtres par note :</strong> Consultez les helpers les mieux notés</li>
+                    </ul>
+
+                    <h3>Évaluation des helpers</h3>
+                    <p>Avant de contacter un helper, vérifiez :</p>
+                    <ul>
+                        <li>Sa note et ses avis clients</li>
+                        <li>Son expérience et ses compétences</li>
+                        <li>Sa disponibilité</li>
+                        <li>Son portfolio ou exemples de travaux</li>
+                        <li>Ses certifications</li>
+                    </ul>
+
+                    <h3>Contact et négociation</h3>
+                    <p>Une fois que vous avez trouvé un helper :</p>
+                    <ol>
+                        <li>Contactez-le via la messagerie intégrée</li>
+                        <li>Décrivez clairement votre projet</li>
+                        <li>Négociez les termes (tarif, délais, modalités)</li>
+                        <li>Convenez d'un contrat clair</li>
+                    </ol>
+                </section>
+
+                <!-- Offering Help -->
+                <section id="offering-help" class="doc-section">
+                    <h2>Proposer de l'aide</h2>
+                    <p>Devenez helper et partagez vos compétences avec la communauté :</p>
+                    
+                    <h3>Créer votre profil helper</h3>
+                    <p>Un profil helper attractif augmente vos chances d'être contacté :</p>
+                    <ul>
+                        <li><strong>Titre professionnel :</strong> Décrivez votre métier en quelques mots</li>
+                        <li><strong>Description détaillée :</strong> Expliquez votre expertise et votre approche</li>
+                        <li><strong>Compétences :</strong> Listez vos domaines d'expertise</li>
+                        <li><strong>Tarifs :</strong> Fixez des tarifs clairs et compétitifs</li>
+                        <li><strong>Disponibilité :</strong> Indiquez vos créneaux disponibles</li>
+                    </ul>
+
+                    <h3>Optimiser votre visibilité</h3>
+                    <p>Pour être plus visible dans les recherches :</p>
+                    <ul>
+                        <li>Utilisez des mots-clés pertinents dans votre description</li>
+                        <li>Ajoutez des exemples de projets réalisés</li>
+                        <li>Demandez des avis à vos clients</li>
+                        <li>Mettez à jour régulièrement votre profil</li>
+                        <li>Répondez rapidement aux messages</li>
+                    </ul>
+
+                    <h3>Gestion des demandes</h3>
+                    <p>Quand vous recevez une demande :</p>
+                    <ol>
+                        <li>Lisez attentivement la description du projet</li>
+                        <li>Vérifiez que c'est dans vos compétences</li>
+                        <li>Évaluez le temps nécessaire</li>
+                        <li>Proposez un devis détaillé</li>
+                        <li>Négociez les termes si nécessaire</li>
+                    </ol>
+                </section>
+
+                <!-- Communication -->
+                <section id="communication" class="doc-section">
+                    <h2>Communication</h2>
+                    <p>Une communication claire est essentielle pour la réussite de vos projets :</p>
+                    
+                    <h3>Messagerie intégrée</h3>
+                    <p>Utilisez notre système de messagerie pour :</p>
+                    <ul>
+                        <li>Échanger avec les helpers/demandeurs</li>
+                        <li>Partager des fichiers et documents</li>
+                        <li>Planifier des rendez-vous</li>
+                        <li>Suivre l'avancement du projet</li>
+                    </ul>
+
+                    <h3>Bonnes pratiques</h3>
+                    <div class="best-practices">
+                        <div class="practice-item">
+                            <i class="fas fa-comments"></i>
+                            <h4>Soyez clair et précis</h4>
+                            <p>Décrivez exactement ce que vous attendez ou ce que vous proposez.</p>
+                        </div>
+                        <div class="practice-item">
+                            <i class="fas fa-clock"></i>
+                            <h4>Répondez rapidement</h4>
+                            <p>Une réponse rapide montre votre sérieux et votre engagement.</p>
+                        </div>
+                        <div class="practice-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Soyez professionnel</h4>
+                            <p>Maintenez un ton professionnel et respectueux dans tous vos échanges.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payments -->
+                <section id="payments" class="doc-section">
+                    <h2>Paiements</h2>
+                    <p>Connect People offre un système de paiement sécurisé pour tous vos échanges :</p>
+                    
+                    <h3>Méthodes de paiement</h3>
+                    <ul>
+                        <li><strong>Carte bancaire :</strong> Visa, Mastercard, American Express</li>
+                        <li><strong>PayPal :</strong> Paiement via votre compte PayPal</li>
+                        <li><strong>Virement bancaire :</strong> Pour les montants importants</li>
+                        <li><strong>Cryptomonnaies :</strong> Bitcoin, Ethereum (bientôt disponible)</li>
+                    </ul>
+
+                    <h3>Sécurité des paiements</h3>
+                    <p>Tous les paiements sont :</p>
+                    <ul>
+                        <li>Chiffrés et sécurisés</li>
+                        <li>Protégés par notre garantie</li>
+                        <li>Traçables dans votre historique</li>
+                        <li>Remboursables en cas de problème</li>
+                    </ul>
+
+                    <h3>Frais de plateforme</h3>
+                    <p>Connect People prélève une commission de 5% sur chaque transaction pour :</p>
+                    <ul>
+                        <li>Maintenir la plateforme</li>
+                        <li>Assurer la sécurité des paiements</li>
+                        <li>Fournir le support client</li>
+                        <li>Développer de nouvelles fonctionnalités</li>
+                    </ul>
+                </section>
+
+                <!-- FAQ -->
+                <section id="faq" class="doc-section">
+                    <h2>Foire aux questions</h2>
+                    
+                    <div class="faq-item">
+                        <h3>Comment puis-je être sûr de la qualité des helpers ?</h3>
+                        <p>Tous nos helpers sont vérifiés et notés par la communauté. Vous pouvez consulter leurs avis, leurs certifications et leur historique de projets avant de les contacter.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Que se passe-t-il si je ne suis pas satisfait du travail ?</h3>
+                        <p>Nous offrons une garantie de satisfaction. Si vous n'êtes pas satisfait, vous pouvez demander un remboursement ou une modification du travail dans les 7 jours suivant la livraison.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Puis-je travailler avec des helpers à l'international ?</h3>
+                        <p>Absolument ! Connect People est une plateforme mondiale. Vous pouvez travailler avec des helpers du monde entier, en français, anglais, espagnol, et bien d'autres langues.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Comment sont calculés les tarifs ?</h3>
+                        <p>Les helpers fixent leurs propres tarifs. Vous pouvez négocier directement avec eux. Notre commission de 5% est ajoutée au tarif convenu.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Mes données personnelles sont-elles protégées ?</h3>
+                        <p>Oui, nous respectons le RGPD et protégeons toutes vos données personnelles. Nous ne partageons jamais vos informations avec des tiers sans votre consentement.</p>
+                    </div>
+                </section>
+
+                <!-- Contact -->
+                <section id="contact" class="doc-section">
+                    <h2>Nous contacter</h2>
+                    <p>Notre équipe support est là pour vous aider :</p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Email</h4>
+                            <p>support@connect-people.com</p>
+                            <span>Réponse sous 24h</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <h4>Téléphone</h4>
+                            <p>+33 1 23 45 67 89</p>
+                            <span>Lun-Ven 9h-18h</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-comments"></i>
+                            <h4>Chat en direct</h4>
+                            <p>Disponible 24/7</p>
+                            <span>Support instantané</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</section>
+
+{{#section 'scripts'}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Navigation smooth scroll
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.doc-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active link
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('doc-search');
+    const allSections = document.querySelectorAll('.doc-section');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        if (searchTerm === '') {
+            allSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            return;
+        }
+        
+        allSections.forEach(section => {
+            const content = section.textContent.toLowerCase();
+            if (content.includes(searchTerm)) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    });
+
+    // Highlight search terms
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value;
+        if (searchTerm.length > 2) {
+            // Simple highlighting - in a real implementation, you'd use a more sophisticated approach
+            console.log('Searching for:', searchTerm);
+        }
+    });
+});
+</script>
+{{/section}}

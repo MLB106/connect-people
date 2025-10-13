@@ -1,0 +1,46 @@
+/* ==========  PARTIALS CSS - FICHIER PRINCIPAL D'IMPORT  ========== */
+
+/* 
+ * Ce fichier importe tous les fichiers CSS partiels pour les vues
+ * Chaque section a son propre fichier CSS pour une meilleure maintenabilité
+ */
+
+/* ==========  IMPORTS DES FICHIERS PARTIELS  ========== */
+
+/* Styles génériques */
+@import url('./partials/page-header.css');
+@import url('./partials/sections-generiques.css');
+@import url('./partials/features-section.css');
+@import url('./partials/security-section.css');
+@import url('./partials/services-grid.css');
+@import url('./partials/cta-section.css');
+
+/* Styles spécifiques aux pages */
+@import url('./partials/business-plan.css');
+@import url('./partials/process-timeline.css');
+@import url('./partials/featured-helpers.css');
+@import url('./partials/about-page.css');
+@import url('./partials/recent-activity.css');
+@import url('./partials/nav-entreprendre.css');
+
+/* Styles par catégorie de pages */
+@import url('./partials/entreprendre-business-plan.css');
+@import url('./partials/immobilier-pages.css');
+@import url('./partials/traduction-pages.css');
+@import url('./partials/politique-cookies.css');
+
+/* ==========  NOTES DE MAINTENANCE  ========== */
+
+/*
+ * Pour ajouter un nouveau style :
+ * 1. Créer un nouveau fichier dans public/css/partials/
+ * 2. L'importer dans ce fichier
+ * 3. Ajouter les styles dans le fichier approprié
+ * 
+ * Structure recommandée :
+ * - page-[nom].css : pour les styles spécifiques à une page
+ * - [categorie]-pages.css : pour les styles communs à une catégorie
+ * - [composant].css : pour les composants réutilisables
+ * 
+ * Chaque fichier doit être commenté et organisé de manière cohérente
+ */

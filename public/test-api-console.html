@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Console Output</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #0057ff;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        button {
+            background: #0057ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0046cc;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        .warning {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test API Console Output</h1>
+    <p><strong>Instructions:</strong></p>
+    <ol>
+        <li>Ouvrez la console du navigateur (F12 → Console)</li>
+        <li>Cliquez sur les boutons ci-dessous</li>
+        <li>Vérifiez que SEUL du JSON brut est affiché dans la console</li>
+        <li>Aucune balise HTML ne doit apparaître dans la console</li>
+    </ol>
+
+    <div class="test-section">
+        <h2>Test 1: /api/pages/page/t</h2>
+        <button onclick="testApiPageT()">Tester /api/pages/page/t</button>
+        <div id="result-t"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: /api/pages/page/home</h2>
+        <button onclick="testApiPageHome()">Tester /api/pages/page/home</button>
+        <div id="result-home"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: /api/pages/page/documentation</h2>
+        <button onclick="testApiPageDoc()">Tester /api/pages/page/documentation</button>
+        <div id="result-doc"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Résultat du test</h2>
+        <div id="test-summary"></div>
+    </div>
+
+    <script>
+        let testResults = [];
+
+        async function testApiPageT() {
+            await testApi('/api/pages/page/t', 'result-t', 't');
+        }
+
+        async function testApiPageHome() {
+            await testApi('/api/pages/page/home', 'result-home', 'home');
+        }
+
+        async function testApiPageDoc() {
+            await testApi('/api/pages/page/documentation', 'result-doc', 'documentation');
+        }
+
+        async function testApi(url, resultId, testName) {
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.innerHTML = '<p>Test en cours...</p>';
+
+            try {
+                console.log(`========== TEST: ${testName} ==========`);
+                console.log(`Fetching: ${url}`);
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // Afficher UNIQUEMENT le JSON brut dans la console
+                console.log('Response JSON:', data);
+                console.log(`========== FIN TEST: ${testName} ==========\n`);
+                
+                // Vérifier que c'est bien du JSON
+                const isValidJSON = typeof data === 'object' && data !== null;
+                const hasHTMLTags = JSON.stringify(data).match(/<[^>]+>/g);
+                
+                let status = 'success';
+                let message = '✓ Test réussi: JSON brut reçu';
+                
+                if (hasHTMLTags) {
+                    status = 'error';
+                    message = '✗ Erreur: Des balises HTML ont été détectées dans la réponse JSON';
+                }
+                
+                if (!isValidJSON) {
+                    status = 'error';
+                    message = '✗ Erreur: La réponse n\'est pas du JSON valide';
+                }
+                
+                testResults.push({ testName, status, message });
+                updateTestSummary();
+                
+                resultDiv.innerHTML = `
+                    <p class="${status}">${message}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error(`Erreur lors du test ${testName}:`, error);
+                console.log(`========== FIN TEST: ${testName} (ERREUR) ==========\n`);
+                
+                testResults.push({ 
+                    testName, 
+                    status: 'error', 
+                    message: `✗ Erreur: ${error.message}` 
+                });
+                updateTestSummary();
+                
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Erreur: ${error.message}</p>
+                `;
+            }
+        }
+
+        function updateTestSummary() {
+            const summaryDiv = document.getElementById('test-summary');
+            const successCount = testResults.filter(r => r.status === 'success').length;
+            const errorCount = testResults.filter(r => r.status === 'error').length;
+            
+            let html = '<h3>Résumé des tests</h3>';
+            html += `<p><strong>Tests réussis:</strong> <span class="success">${successCount}</span></p>`;
+            html += `<p><strong>Tests échoués:</strong> <span class="error">${errorCount}</span></p>`;
+            html += '<ul>';
+            
+            testResults.forEach(result => {
+                html += `<li class="${result.status}">${result.testName}: ${result.message}</li>`;
+            });
+            
+            html += '</ul>';
+            
+            if (errorCount === 0 && successCount > 0) {
+                html += '<p class="success"><strong>✓ Tous les tests sont réussis! La console affiche uniquement du JSON brut.</strong></p>';
+            } else if (errorCount > 0) {
+                html += '<p class="error"><strong>✗ Certains tests ont échoué. Vérifiez la console pour plus de détails.</strong></p>';
+            }
+            
+            summaryDiv.innerHTML = html;
+        }
+
+        // Test automatique si ?view=true
+        if (window.location.search.includes('view=true')) {
+            console.log('========== TESTS AUTOMATIQUES ==========');
+            setTimeout(() => testApiPageT(), 500);
+            setTimeout(() => testApiPageHome(), 1500);
+            setTimeout(() => testApiPageDoc(), 2500);
+        }
+    </script>
+</body>
+</html>
+
+
+
+

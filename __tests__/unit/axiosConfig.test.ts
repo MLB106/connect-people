@@ -43,9 +43,16 @@ describe('axiosConfig', () => {
   });
 
   test('intercepteur réponse log et rejette', async () => {
+    // Forcer le mode développement pour que le console.error soit appelé
+    const originalNodeEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+    
     const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     await expect(axiosInstance.get('/not-found')).rejects.toThrow();
-    expect(consoleSpy).toHaveBeenCalledWith('❌ Erreur API :', expect.stringContaining('404'));
+    expect(consoleSpy).toHaveBeenCalledWith('Erreur API :', expect.stringContaining('404'));
+    
+    // Restaurer l'environnement original
+    process.env.NODE_ENV = originalNodeEnv;
     consoleSpy.mockRestore();
   });
 });

@@ -33,16 +33,30 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   );
 
-  /* ----------- nav-links (pages en dev) ----------- */
-  const devPages = ['nos-helpers', 'nos-annonces', 'documentation'];
-  devPages.forEach(p =>
-    document.querySelectorAll(`[data-page="${p}"]`).forEach(l =>
-      l.addEventListener('click', e => {
-        e.preventDefault();
-        showNotification(`Page ${p} en développement`, 'info');
-      })
-    )
+  /* ----------- nav-links ----------- */
+  document.querySelectorAll('[data-page="nos-helpers"]').forEach(l =>
+    l.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = '/nos-helpers';
+    })
   );
+  
+  document.querySelectorAll('[data-page="nos-annonces"]').forEach(l =>
+    l.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = '/nos-annonces';
+    })
+  );
+  
+  document.querySelectorAll('[data-page="documentation"]').forEach(l =>
+    l.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = '/documentation';
+    })
+  );
+
+  /* ----------- dropdowns ----------- */
+  setupDropdowns();
 
   /* ----------- navbar scroll ----------- */
   window.addEventListener('scroll', () => {
@@ -50,4 +64,70 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
   });
 });
+
+/* ===========================  DROPDOWNS  =========================== */
+function setupDropdowns() {
+  // Entreprendre dropdown
+  const entreprendreTrigger = document.getElementById('entreprendre-trigger');
+  const entreprendreDropdown = document.getElementById('entreprendre-dropdown');
+  
+  if (entreprendreTrigger && entreprendreDropdown) {
+    entreprendreTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDropdown('entreprendre');
+    });
+  }
+
+  // Immobilier dropdown
+  const immobilierTrigger = document.getElementById('immobilier-trigger');
+  const immobilierDropdown = document.getElementById('immobilier-dropdown');
+  
+  if (immobilierTrigger && immobilierDropdown) {
+    immobilierTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDropdown('immobilier');
+    });
+  }
+
+  // Traduction dropdown
+  const traductionTrigger = document.getElementById('traduction-trigger');
+  const traductionDropdown = document.getElementById('traduction-dropdown');
+  
+  if (traductionTrigger && traductionDropdown) {
+    traductionTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDropdown('traduction');
+    });
+  }
+
+  // Fermer les dropdowns en cliquant à l'extérieur
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.entreprendre-dropdown') && 
+        !e.target.closest('.immobilier-dropdown') && 
+        !e.target.closest('.traduction-dropdown')) {
+      closeAllDropdowns();
+    }
+  });
+}
+
+function toggleDropdown(type) {
+  // Fermer tous les autres dropdowns
+  closeAllDropdowns();
+  
+  // Ouvrir le dropdown sélectionné
+  const dropdown = document.getElementById(`${type}-dropdown`);
+  if (dropdown) {
+    dropdown.classList.add('active');
+  }
+}
+
+function closeAllDropdowns() {
+  const dropdowns = ['entreprendre', 'immobilier', 'traduction'];
+  dropdowns.forEach(type => {
+    const dropdown = document.getElementById(`${type}-dropdown`);
+    if (dropdown) {
+      dropdown.classList.remove('active');
+    }
+  });
+}
 

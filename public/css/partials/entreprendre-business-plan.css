@@ -1,0 +1,248 @@
+/* ==========  ENTREPRENDRE BUSINESS PLAN - PAGE BUSINESS PLAN  ========== */
+
+/* Styles spécifiques à la page business plan */
+.entreprendre-business-plan {
+    /* Utilise les styles génériques de page-header, sections-generiques, etc. */
+}
+
+/* Section d'introduction du business plan */
+.business-plan-intro {
+    background: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.business-plan-intro h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.business-plan-intro p {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Section des étapes du business plan */
+.business-plan-steps {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.business-plan-steps h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des étapes */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte d'étape */
+.step-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Numéro de l'étape */
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre de l'étape */
+.step-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description de l'étape */
+.step-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Section des outils */
+.business-plan-tools {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+.business-plan-tools h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des outils */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Carte d'outil */
+.tool-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône de l'outil */
+.tool-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre de l'outil */
+.tool-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+/* Description de l'outil */
+.tool-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .business-plan-intro h1 {
+        font-size: 2.5rem;
+    }
+    
+    .steps-grid,
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .business-plan-intro,
+    .business-plan-steps,
+    .business-plan-tools {
+        padding: 3rem 1rem;
+    }
+    
+    .business-plan-intro h1 {
+        font-size: 2rem;
+    }
+    
+    .steps-grid,
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .step-card,
+    .tool-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .business-plan-intro,
+    .business-plan-steps,
+    .business-plan-tools {
+        padding: 2rem 1rem;
+    }
+    
+    .step-card,
+    .tool-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+

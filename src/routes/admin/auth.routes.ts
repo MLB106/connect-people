@@ -1,11 +1,11 @@
 // fichier: src/routes/admin/auth.routes.ts
 
 import { Router } from 'express'; // majuscule
-import { validate } from '../../middlewares/validate';
-import { adminIPWhitelist } from '../../middlewares/admin/adminIP.middleware';
-import { turnstileGuard } from '../../middlewares/turnstile.middleware'; 
-import { adminLoginSchema } from '../../schemas/adminUser.schema';
-import { adminLogin } from '../../controllers/admin/auth.controller';
+import { validate } from '../../middlewares/validate.js';
+import { adminIPWhitelist } from '../../middlewares/admin/adminIP.middleware.js';
+import { turnstileGuard } from '../../middlewares/turnstile.middleware.js'; 
+import { adminLoginSchema } from '../../schemas/adminUser.schema.js';
+import { adminLogin } from '../../controllers/admin/auth.controller.js';
 
 const router = Router();  
 

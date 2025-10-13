@@ -1,0 +1,363 @@
+/* ==========  IMMOBILIER PAGES - PAGES IMMOBILIER  ========== */
+
+/* Styles communs pour toutes les pages immobilier */
+.immobilier-page {
+    /* Utilise les styles génériques de page-header, sections-generiques, etc. */
+}
+
+/* Section d'introduction immobilier */
+.immobilier-intro {
+    background: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.immobilier-intro h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+}
+
+.immobilier-intro p {
+    font-size: 1.25rem;
+    color: var(--gray);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Section des types de biens */
+.property-types {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.property-types h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des types de biens */
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte de type de bien */
+.property-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.property-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.property-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône du type de bien */
+.property-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre du type de bien */
+.property-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description du type de bien */
+.property-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Liste des caractéristiques */
+.property-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    text-align: left;
+}
+
+.property-features li {
+    padding: 0.5rem 0;
+    color: var(--gray);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.property-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* Section des services */
+.immobilier-services {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+.immobilier-services h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des services */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Carte de service */
+.service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône du service */
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre du service */
+.service-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.75rem;
+}
+
+/* Description du service */
+.service-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Section des avantages */
+.immobilier-advantages {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.immobilier-advantages h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des avantages */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Carte d'avantage */
+.advantage-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.advantage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône de l'avantage */
+.advantage-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre de l'avantage */
+.advantage-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description de l'avantage */
+.advantage-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .immobilier-intro h1 {
+        font-size: 2.5rem;
+    }
+    
+    .property-grid,
+    .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .immobilier-intro,
+    .property-types,
+    .immobilier-services,
+    .immobilier-advantages {
+        padding: 3rem 1rem;
+    }
+    
+    .immobilier-intro h1 {
+        font-size: 2rem;
+    }
+    
+    .property-grid,
+    .services-grid,
+    .advantages-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .property-card,
+    .service-card,
+    .advantage-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .immobilier-intro,
+    .property-types,
+    .immobilier-services,
+    .immobilier-advantages {
+        padding: 2rem 1rem;
+    }
+    
+    .property-card,
+    .service-card,
+    .advantage-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+

@@ -78,7 +78,7 @@
 }
 .search-category-wrapper::after {
   content: '\f078';
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 6 Free', 'FontAwesome';
   font-weight: 900;
   position: absolute;
   right: 8px;
@@ -103,7 +103,7 @@
   appearance: none;
 }
 .search-category-select:focus {
-  background: rgba(46, 80, 119, 0.05);
+  background: rgba(210, 193, 182, 0.05);
 }
 .search-separator {
   width: 1px;
@@ -225,7 +225,7 @@
 }
 .language-selector::after {
   content: '\f078';
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 6 Free', 'FontAwesome';
   font-weight: 900;
   position: absolute;
   right: 8px;
@@ -257,7 +257,7 @@
 }
 .language-select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(46, 80, 119, 0.1);
+  box-shadow: 0 0 0 3px rgba(210, 193, 182, 0.1);
 }
 
 /* ----------  MENU USER / DROPDOWN  ---------- */
@@ -335,12 +335,12 @@
   height: 44px;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(46, 80, 119, 0.2);
+  box-shadow: 0 2px 8px rgba(210, 193, 182, 0.2);
 }
 .mobile-menu-toggle:hover {
   background: var(--primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(46, 80, 119, 0.3);
+  box-shadow: 0 4px 12px rgba(210, 193, 182, 0.3);
 }
 .hamburger-container {
   display: flex;
@@ -368,7 +368,7 @@
 }
 .global-navbar.mobile-open .mobile-menu-toggle {
   background: var(--primary-dark);
-  box-shadow: 0 4px 12px rgba(46, 80, 119, 0.3);
+  box-shadow: 0 4px 12px rgba(210, 193, 182, 0.3);
 }
 
 /* ----------  DROPDOWNS MEGAMENU  ---------- */
@@ -452,7 +452,7 @@
 .entreprendre-option::after,
 .traduction-option::after {
   content: '\f054';
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'Font Awesome 6 Free', 'FontAwesome';
   font-weight: 900;
   position: absolute;
   left: 25%;

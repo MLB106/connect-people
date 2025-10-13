@@ -1,0 +1,297 @@
+/* ==========  POLITIQUE COOKIES - PAGE POLITIQUE DES COOKIES  ========== */
+
+/* Styles spécifiques à la page politique des cookies */
+.politique-cookies-page {
+    /* Utilise les styles génériques de page-header, sections-generiques, etc. */
+}
+
+/* Section principale de la politique */
+.cookies-policy {
+    padding: 4rem 2rem;
+    background: var(--white);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Titre principal */
+.cookies-policy h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Introduction */
+.cookies-intro {
+    background: var(--gray-lighter);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 3rem;
+    border-left: 4px solid var(--primary);
+}
+
+.cookies-intro p {
+    color: var(--gray);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section de contenu */
+.cookies-section {
+    margin-bottom: 3rem;
+}
+
+.cookies-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary);
+}
+
+.cookies-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.cookies-section p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* Liste des cookies */
+.cookies-list {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+.cookies-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cookies-list th {
+    background: var(--primary);
+    color: var(--white);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.cookies-list td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+.cookies-list tr:last-child td {
+    border-bottom: none;
+}
+
+.cookies-list tr:nth-child(even) {
+    background: var(--gray-lighter);
+}
+
+/* Liste à puces */
+.cookies-section ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.cookies-section li {
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Code de cookies */
+.cookie-code {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--dark);
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+/* Alerte importante */
+.cookies-alert {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-left: 4px solid #f39c12;
+}
+
+.cookies-alert h4 {
+    color: #856404;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.cookies-alert p {
+    color: #856404;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Section de contact */
+.cookies-contact {
+    background: var(--gray-lighter);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.cookies-contact h3 {
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.cookies-contact p {
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.cookies-contact a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.cookies-contact a:hover {
+    text-decoration: underline;
+}
+
+/* Bouton de retour */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: 2rem;
+}
+
+.back-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .cookies-policy {
+        padding: 3rem 1.5rem;
+    }
+    
+    .cookies-policy h1 {
+        font-size: 2rem;
+    }
+    
+    .cookies-list {
+        overflow-x: auto;
+    }
+    
+    .cookies-list table {
+        min-width: 600px;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .cookies-policy {
+        padding: 2rem 1rem;
+    }
+    
+    .cookies-policy h1 {
+        font-size: 1.75rem;
+    }
+    
+    .cookies-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .cookies-section h3 {
+        font-size: 1.25rem;
+    }
+    
+    .cookies-intro,
+    .cookies-contact {
+        padding: 1.5rem;
+    }
+    
+    .cookies-list th,
+    .cookies-list td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .cookies-policy {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .cookies-policy h1 {
+        font-size: 1.5rem;
+    }
+    
+    .cookies-section h2 {
+        font-size: 1.25rem;
+    }
+    
+    .cookies-section h3 {
+        font-size: 1.1rem;
+    }
+    
+    .cookies-intro,
+    .cookies-contact {
+        padding: 1rem;
+    }
+    
+    .cookies-list th,
+    .cookies-list td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
+    
+    .back-button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+

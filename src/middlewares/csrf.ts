@@ -3,12 +3,7 @@ import csrf from 'csurf';
 import type { Request, Response, NextFunction } from 'express';
 
 export const csrfProtection = csrf({
-  cookie: {
-    key: '_csrf',
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-  },
+  cookie: true,
   ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
 });
 

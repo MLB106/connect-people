@@ -1,0 +1,478 @@
+{{!-- src/views/pages/nos-annonces.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="nos-annonces">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Nos Annonces</h1>
+        <p class="page-subtitle">Parcourez toutes les annonces d'aide disponibles sur notre plateforme</p>
+    </div>
+</section>
+
+<section class="annonces-section">
+    <div class="container">
+        <!-- Filtres et recherche -->
+        <div class="annonces-filters">
+            <div class="search-bar">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="annonce-search" placeholder="Rechercher une annonce par titre, description ou localisation...">
+                </div>
+                <button class="btn btn-primary" id="search-btn">
+                    <i class="fas fa-search"></i> Rechercher
+                </button>
+            </div>
+            
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="type-filter">Type d'annonce :</label>
+                    <select id="type-filter">
+                        <option value="">Tous les types</option>
+                        <option value="demande">Demande d'aide</option>
+                        <option value="offre">Offre d'aide</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="category-filter">Catégorie :</label>
+                    <select id="category-filter">
+                        <option value="">Toutes les catégories</option>
+                        <option value="immobilier">Immobilier</option>
+                        <option value="entreprendre">Entreprendre</option>
+                        <option value="traduction">Traduction</option>
+                        <option value="conseil">Conseil</option>
+                        <option value="technique">Technique</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="location-filter">Localisation :</label>
+                    <select id="location-filter">
+                        <option value="">Toutes les localisations</option>
+                        <option value="france">France</option>
+                        <option value="europe">Europe</option>
+                        <option value="amerique">Amérique</option>
+                        <option value="asie">Asie</option>
+                        <option value="afrique">Afrique</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="budget-filter">Budget :</label>
+                    <select id="budget-filter">
+                        <option value="">Tous les budgets</option>
+                        <option value="0-50">0-50€</option>
+                        <option value="50-100">50-100€</option>
+                        <option value="100-500">100-500€</option>
+                        <option value="500+">500€+</option>
+                        <option value="gratuit">Gratuit</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="urgency-filter">Urgence :</label>
+                    <select id="urgency-filter">
+                        <option value="">Toutes les urgences</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="normal">Normal</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="annonces-stats">
+            <div class="stat-item">
+                <div class="stat-number" id="total-annonces">2,847</div>
+                <div class="stat-label">Annonces actives</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="demandes">1,523</div>
+                <div class="stat-label">Demandes d'aide</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="offres">1,324</div>
+                <div class="stat-label">Offres d'aide</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="completed">8,456</div>
+                <div class="stat-label">Projets terminés</div>
+            </div>
+        </div>
+
+        <!-- Liste des annonces -->
+        <div class="annonces-grid" id="annonces-grid">
+            <!-- Annonce 1 - Demande -->
+            <div class="annonce-card demande" data-type="demande" data-category="immobilier" data-location="france" data-budget="100-500" data-urgency="normal">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Demande d'aide</span>
+                    </div>
+                    <div class="annonce-urgency normal">
+                        <i class="fas fa-clock"></i>
+                        <span>Normal</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Besoin d'aide pour achat immobilier à Paris</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Paris, France</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 2 jours</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        Je cherche un conseiller immobilier pour m'accompagner dans l'achat de mon premier appartement. Budget : 300k€, 2-3 pièces dans le 15ème arrondissement.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Achat immobilier</span>
+                        <span class="tag">Premier achat</span>
+                        <span class="tag">Conseil</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Budget :</span>
+                        <span class="budget-amount">200-400€</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-reply"></i> Répondre
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annonce 2 - Offre -->
+            <div class="annonce-card offre" data-type="offre" data-category="traduction" data-location="europe" data-budget="50-100" data-urgency="flexible">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-heart"></i>
+                        <span>Offre d'aide</span>
+                    </div>
+                    <div class="annonce-urgency flexible">
+                        <i class="fas fa-clock"></i>
+                        <span>Flexible</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Traduction professionnelle FR/EN/ES</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Barcelone, Espagne</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 1 jour</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        Traductrice certifiée propose ses services pour tous types de documents. Spécialisée en documents officiels, commerciaux et techniques.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Traduction</span>
+                        <span class="tag">Certifiée</span>
+                        <span class="tag">Documents officiels</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Tarif :</span>
+                        <span class="budget-amount">30-60€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annonce 3 - Demande -->
+            <div class="annonce-card demande" data-type="demande" data-category="entreprendre" data-location="france" data-budget="500+" data-urgency="urgent">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Demande d'aide</span>
+                    </div>
+                    <div class="annonce-urgency urgent">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Urgent</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Création business plan pour startup tech</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Lyon, France</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 3 heures</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        Startup en phase de levée de fonds cherche consultant expérimenté pour finaliser business plan et pitch deck. Deadline : 2 semaines.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Business Plan</span>
+                        <span class="tag">Startup</span>
+                        <span class="tag">Levée de fonds</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Budget :</span>
+                        <span class="budget-amount">1000-2000€</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-reply"></i> Répondre
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annonce 4 - Offre -->
+            <div class="annonce-card offre" data-type="offre" data-category="technique" data-location="amerique" data-budget="100-500" data-urgency="flexible">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-heart"></i>
+                        <span>Offre d'aide</span>
+                    </div>
+                    <div class="annonce-urgency flexible">
+                        <i class="fas fa-clock"></i>
+                        <span>Flexible</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Développement d'application mobile</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>San Francisco, USA</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 4 jours</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        Développeur full-stack propose ses services pour création d'applications iOS/Android. Technologies : React Native, Node.js, MongoDB.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Développement</span>
+                        <span class="tag">Mobile</span>
+                        <span class="tag">React Native</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Tarif :</span>
+                        <span class="budget-amount">80-120€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annonce 5 - Demande -->
+            <div class="annonce-card demande" data-type="demande" data-category="conseil" data-location="europe" data-budget="50-100" data-urgency="normal">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Demande d'aide</span>
+                    </div>
+                    <div class="annonce-urgency normal">
+                        <i class="fas fa-clock"></i>
+                        <span>Normal</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Conseil en marketing digital pour PME</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Berlin, Allemagne</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 1 jour</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        PME familiale cherche expert marketing digital pour développer sa présence en ligne et augmenter ses ventes.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Marketing digital</span>
+                        <span class="tag">PME</span>
+                        <span class="tag">Conseil</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Budget :</span>
+                        <span class="budget-amount">80-150€</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-reply"></i> Répondre
+                    </button>
+                </div>
+            </div>
+
+            <!-- Annonce 6 - Offre -->
+            <div class="annonce-card offre" data-type="offre" data-category="immobilier" data-location="france" data-budget="100-500" data-urgency="flexible">
+                <div class="annonce-header">
+                    <div class="annonce-type">
+                        <i class="fas fa-heart"></i>
+                        <span>Offre d'aide</span>
+                    </div>
+                    <div class="annonce-urgency flexible">
+                        <i class="fas fa-clock"></i>
+                        <span>Flexible</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-content">
+                    <h3 class="annonce-title">Expertise immobilière et investissement</h3>
+                    <div class="annonce-meta">
+                        <div class="annonce-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nice, France</span>
+                        </div>
+                        <div class="annonce-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>Publié il y a 2 jours</span>
+                        </div>
+                    </div>
+                    <p class="annonce-description">
+                        Agent immobilier expérimenté propose accompagnement personnalisé pour vos projets d'achat, vente ou investissement.
+                    </p>
+                    <div class="annonce-tags">
+                        <span class="tag">Immobilier</span>
+                        <span class="tag">Investissement</span>
+                        <span class="tag">Conseil</span>
+                    </div>
+                </div>
+                
+                <div class="annonce-footer">
+                    <div class="annonce-budget">
+                        <span class="budget-label">Tarif :</span>
+                        <span class="budget-amount">50-100€/h</span>
+                    </div>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-comments"></i> Contacter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn" id="prev-page" disabled>
+                <i class="fas fa-chevron-left"></i> Précédent
+            </button>
+            <div class="pagination-numbers">
+                <button class="pagination-number active">1</button>
+                <button class="pagination-number">2</button>
+                <button class="pagination-number">3</button>
+                <span class="pagination-dots">...</span>
+                <button class="pagination-number">28</button>
+            </div>
+            <button class="pagination-btn" id="next-page">
+                Suivant <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="annonces-cta">
+            <div class="cta-content">
+                <h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
+                <p>Publiez votre propre annonce et trouvez l'aide dont vous avez besoin</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus"></i> Publier une demande
+                    </button>
+                    <button class="btn btn-secondary btn-lg">
+                        <i class="fas fa-heart"></i> Proposer de l'aide
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{#section 'scripts'}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filtrage des annonces
+    const searchInput = document.getElementById('annonce-search');
+    const typeFilter = document.getElementById('type-filter');
+    const categoryFilter = document.getElementById('category-filter');
+    const locationFilter = document.getElementById('location-filter');
+    const budgetFilter = document.getElementById('budget-filter');
+    const urgencyFilter = document.getElementById('urgency-filter');
+    const annoncesGrid = document.getElementById('annonces-grid');
+    const annonceCards = document.querySelectorAll('.annonce-card');
+
+    function filterAnnonces() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedType = typeFilter.value;
+        const selectedCategory = categoryFilter.value;
+        const selectedLocation = locationFilter.value;
+        const selectedBudget = budgetFilter.value;
+        const selectedUrgency = urgencyFilter.value;
+
+        annonceCards.forEach(card => {
+            const title = card.querySelector('.annonce-title').textContent.toLowerCase();
+            const description = card.querySelector('.annonce-description').textContent.toLowerCase();
+            const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+            
+            const matchesSearch = searchTerm === '' || 
+                title.includes(searchTerm) || 
+                description.includes(searchTerm) || 
+                tags.includes(searchTerm);
+            
+            const matchesType = selectedType === '' || card.dataset.type === selectedType;
+            const matchesCategory = selectedCategory === '' || card.dataset.category === selectedCategory;
+            const matchesLocation = selectedLocation === '' || card.dataset.location === selectedLocation;
+            const matchesBudget = selectedBudget === '' || card.dataset.budget === selectedBudget;
+            const matchesUrgency = selectedUrgency === '' || card.dataset.urgency === selectedUrgency;
+
+            if (matchesSearch && matchesType && matchesCategory && matchesLocation && matchesBudget && matchesUrgency) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', filterAnnonces);
+    typeFilter.addEventListener('change', filterAnnonces);
+    categoryFilter.addEventListener('change', filterAnnonces);
+    locationFilter.addEventListener('change', filterAnnonces);
+    budgetFilter.addEventListener('change', filterAnnonces);
+    urgencyFilter.addEventListener('change', filterAnnonces);
+
+    // Bouton de recherche
+    document.getElementById('search-btn').addEventListener('click', filterAnnonces);
+});
+</script>
+{{/section}}

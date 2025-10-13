@@ -1,0 +1,482 @@
+/* ==========  ABOUT PAGE - PAGE À PROPOS  ========== */
+
+/* Section mission et vision */
+.mission-vision {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+/* Carte mission */
+.mission-card,
+.vision-card {
+    background: var(--white);
+    padding: 3rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut des cartes */
+.mission-card::before,
+.vision-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur les cartes */
+.mission-card:hover,
+.vision-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône des cartes */
+.card-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 0 auto 2rem;
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.3);
+}
+
+/* Titre des cartes */
+.mission-card h3,
+.vision-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description des cartes */
+.mission-card p,
+.vision-card p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* ==========  VALUES SECTION - SECTION VALEURS  ========== */
+
+/* Section des valeurs */
+.values {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Titre de la section valeurs */
+.values h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des valeurs */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Élément de valeur */
+.value-item {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut de l'élément */
+.value-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur l'élément */
+.value-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Icône de la valeur */
+.value-item i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* Titre de la valeur */
+.value-item h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+/* Description de la valeur */
+.value-item p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* ==========  TEAM SECTION - SECTION ÉQUIPE  ========== */
+
+/* Section de l'équipe */
+.team {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+/* Titre de la section équipe */
+.team h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille de l'équipe */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Membre de l'équipe */
+.team-member {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut du membre */
+.team-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur le membre */
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Photo du membre */
+.member-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--white);
+    box-shadow: 0 10px 30px rgba(58, 95, 135, 0.2);
+}
+
+/* Nom du membre */
+.team-member h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+/* Rôle du membre */
+.member-role {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Bio du membre */
+.member-bio {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* ==========  STATS SECTION - SECTION STATISTIQUES  ========== */
+
+/* Section des statistiques */
+.stats {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Titre de la section stats */
+.stats h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Grille des statistiques */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Élément de statistique */
+.stat-item {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barre colorée en haut de l'élément */
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+/* Effet hover sur l'élément */
+.stat-item:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Nombre de la statistique */
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Label de la statistique */
+.stat-label {
+    color: var(--gray);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ==========  IMPACT SECTION - SECTION IMPACT  ========== */
+
+/* Section de l'impact */
+.impact {
+    padding: 4rem 2rem;
+    background: var(--white);
+}
+
+/* Titre de la section impact */
+.impact h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+/* Contenu de l'impact */
+.impact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Texte de l'impact */
+.impact-text p {
+    color: var(--gray);
+    line-height: 1.6;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Image de l'impact */
+.impact-image {
+    text-align: center;
+}
+
+/* Image de l'impact */
+.impact-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow);
+}
+
+/* ==========  CONTACT CTA - CTA DE CONTACT  ========== */
+
+/* CTA de contact */
+.contact-cta {
+    padding: 4rem 2rem;
+    background: var(--gradient-primary);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay décoratif pour la CTA de contact */
+.contact-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(58, 95, 135, 0.1) 0%, rgba(46, 80, 119, 0.1) 100%);
+    z-index: 1;
+}
+
+/* Container de la CTA de contact */
+.contact-cta .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Titre de la CTA de contact */
+.contact-cta h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+/* Description de la CTA de contact */
+.contact-cta p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==========  RESPONSIVE DESIGN  ========== */
+
+/* Tablettes */
+@media (max-width: 1024px) {
+    .mission-vision {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .impact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Mobiles */
+@media (max-width: 768px) {
+    .values,
+    .team,
+    .stats,
+    .impact,
+    .contact-cta {
+        padding: 3rem 1rem;
+    }
+    
+    .values-grid,
+    .team-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .value-item,
+    .team-member,
+    .stat-item {
+        padding: 2rem 1.5rem;
+    }
+    
+    .mission-card,
+    .vision-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Petits mobiles */
+@media (max-width: 480px) {
+    .values,
+    .team,
+    .stats,
+    .impact,
+    .contact-cta {
+        padding: 2rem 1rem;
+    }
+    
+    .value-item,
+    .team-member,
+    .stat-item {
+        padding: 1.5rem 1rem;
+    }
+    
+    .mission-card,
+    .vision-card {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
+

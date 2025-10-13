@@ -1,44 +1,33 @@
 // __tests__/setup/database.health.test.ts
 /**
- * Vérifie que la connexion MySQL et Sequelize fonctionnent
- * dans l’environnement de TEST uniquement.
+ * Vérifie que la connexion MongoDB et Mongoose fonctionnent
+ * dans l'environnement de TEST uniquement.
  */
 
-import { Sequelize } from 'sequelize';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.test') });
 
 // Connexion locale (sans importer le fichier src/config/database)
-const sequelize = new Sequelize(
-  process.env.DB_NAME!,
-  process.env.DB_USER!,
-  '', // mot de passe vide pour MySQL sans mot de passe
-  {
-    host: process.env.DB_HOST || 'localhost',
-    port: Number(process.env.DB_PORT || 3306),
-    dialect: 'mysql',
-    logging: false,
-  }
-);
+const mongoUrl = process.env.DATABASE_URL || 'mongodb://localhost:27017/connect-people-test';
 
 describe('🧪 Database health check (TEST ENV ONLY)', () => {
   beforeAll(async () => {
-    await sequelize.authenticate();
-    await sequelize.sync({ force: true });
+    await mongoose.connect(mongoUrl);
   });
 
   afterAll(async () => {
-    await sequelize.close();
+    await mongoose.connection.close();
   });
 
-  it('✅ doit se connecter à MySQL sans erreur', () => {
-    expect(sequelize).toBeDefined();
+  it('✅ doit se connecter à MongoDB sans erreur', () => {
+    expect(mongoose.connection.readyState).toBe(1); // 1 = connected
   });
 
-  it('✅ doit synchroniser au moins une table', async () => {
-    const tables = await sequelize.getQueryInterface().showAllTables();
-    expect(tables.length).toBeGreaterThanOrEqual(0);
+  it('✅ doit avoir accès aux collections', async () => {
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    expect(Array.isArray(collections)).toBe(true);
   });
 });

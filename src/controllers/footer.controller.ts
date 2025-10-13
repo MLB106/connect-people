@@ -1,9 +1,25 @@
 // src/controllers/footer.controller.ts
 import { Request, Response } from 'express';
-import { execute } from '../utils/db.js';
+import { SocialLink } from '../models/socialLink.model.js';
+import { AppStoreLink } from '../models/appStoreLink.model.js';
+import { ApiResponseUtil, asyncHandler } from '../utils/apiResponse.js';
+import { Logger } from '../utils/logger.js';
 
-export const getFooterLinks = async (_req: Request, res: Response) => {
-  const socials = await execute(`SELECT platform, url, icon FROM social_links ORDER BY id`);
-  const stores  = await execute(`SELECT store, url FROM app_store_links ORDER BY id`);
-  res.json({ socials, stores });
-};
+export const getFooterLinks = asyncHandler(async (_req: Request, res: Response) => {
+  const socials = await SocialLink.find({ isActive: true })
+    .select('platform url icon')
+    .sort({ order: 1 });
+  
+  const stores = await AppStoreLink.find({ isActive: true })
+    .select('store url')
+    .sort({ order: 1 });
+  
+  const data = { socials, stores };
+  
+  Logger.info('Liens du footer récupérés avec succès', { 
+    socialsCount: socials.length, 
+    storesCount: stores.length 
+  });
+  
+  ApiResponseUtil.success(res, 200, data);
+});

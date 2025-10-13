@@ -1,0 +1,205 @@
+{{!-- src/views/pages/centre-aide.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="centre-aide">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Centre d'aide</h1>
+        <p class="page-subtitle">Trouvez rapidement les réponses à vos questions</p>
+    </div>
+</section>
+
+<section class="help-center-section">
+    <div class="container">
+        <div class="search-help">
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher dans l'aide..." class="help-search-input">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="help-categories">
+            <h2>Catégories d'aide</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>Compte et profil</h3>
+                    <p>Création, modification et gestion de votre compte</p>
+                    <ul class="category-topics">
+                        <li><a href="#creation-compte">Créer un compte</a></li>
+                        <li><a href="#modifier-profil">Modifier mon profil</a></li>
+                        <li><a href="#verification">Vérification Helper</a></li>
+                        <li><a href="#securite">Sécurité du compte</a></li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Recherche et navigation</h3>
+                    <p>Trouver de l'aide et naviguer sur la plateforme</p>
+                    <ul class="category-topics">
+                        <li><a href="#rechercher-aide">Rechercher de l'aide</a></li>
+                        <li><a href="#filtres">Utiliser les filtres</a></li>
+                        <li><a href="#sauvegardes">Sauvegarder des recherches</a></li>
+                        <li><a href="#notifications">Gérer les notifications</a></li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Projets et échanges</h3>
+                    <p>Créer des projets et gérer vos échanges</p>
+                    <ul class="category-topics">
+                        <li><a href="#creer-projet">Créer un projet</a></li>
+                        <li><a href="#repondre-projet">Répondre à un projet</a></li>
+                        <li><a href="#gestion-projet">Gérer mon projet</a></li>
+                        <li><a href="#finaliser-projet">Finaliser un projet</a></li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <h3>Paiements et facturation</h3>
+                    <p>Gérer vos paiements et vos factures</p>
+                    <ul class="category-topics">
+                        <li><a href="#paiement">Effectuer un paiement</a></li>
+                        <li><a href="#remboursement">Demander un remboursement</a></li>
+                        <li><a href="#factures">Consulter mes factures</a></li>
+                        <li><a href="#portefeuille">Gérer mon portefeuille</a></li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Communication</h3>
+                    <p>Communiquer avec les autres utilisateurs</p>
+                    <ul class="category-topics">
+                        <li><a href="#messagerie">Utiliser la messagerie</a></li>
+                        <li><a href="#appels">Appels vidéo</a></li>
+                        <li><a href="#partage-fichiers">Partager des fichiers</a></li>
+                        <li><a href="#notifications-messages">Notifications de messages</a></li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sécurité et confidentialité</h3>
+                    <p>Protéger vos données et votre sécurité</p>
+                    <ul class="category-topics">
+                        <li><a href="#confidentialite">Paramètres de confidentialité</a></li>
+                        <li><a href="#signaler-probleme">Signaler un problème</a></li>
+                        <li><a href="#bloquer-utilisateur">Bloquer un utilisateur</a></li>
+                        <li><a href="#donnees-personnelles">Mes données personnelles</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2>Questions fréquentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment créer mon compte Helper ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pour créer un compte Helper, cliquez sur "Devenir Helper" dans le menu principal, remplissez le formulaire d'inscription et suivez le processus de vérification. Vous devrez fournir des documents d'identité et des preuves de vos compétences.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment fonctionne le système de paiement ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Les paiements sont sécurisés et gérés par notre système intégré. L'argent est mis en attente jusqu'à la finalisation du projet, puis versé au Helper. Nous prenons une commission de 5% sur chaque transaction réussie.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Puis-je annuler un projet en cours ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, vous pouvez annuler un projet selon les conditions définies dans le contrat. Les remboursements sont traités selon notre politique de remboursement. Contactez notre support pour toute question spécifique.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Comment signaler un utilisateur inapproprié ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Utilisez le bouton "Signaler" sur le profil de l'utilisateur ou contactez directement notre équipe de modération. Nous prenons tous les signalements au sérieux et enquêtons rapidement sur chaque cas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4>Quels sont les délais de vérification Helper ?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le processus de vérification prend généralement 3-5 jours ouvrés. Pour les comptes complexes ou nécessitant des vérifications supplémentaires, cela peut prendre jusqu'à 10 jours. Vous recevrez une notification dès que votre compte sera vérifié.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-support">
+            <h2>Besoin d'aide supplémentaire ?</h2>
+            <div class="support-options">
+                <div class="support-option">
+                    <div class="support-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>support@connectpeople.com</p>
+                    <p class="support-time">Réponse sous 24h</p>
+                </div>
+                <div class="support-option">
+                    <div class="support-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Téléphone</h3>
+                    <p>+33 1 23 45 67 89</p>
+                    <p class="support-time">Lun-Ven 9h-18h</p>
+                </div>
+                <div class="support-option">
+                    <div class="support-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Chat en direct</h3>
+                    <p>Disponible 24h/24</p>
+                    <p class="support-time">Réponse immédiate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+

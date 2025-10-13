@@ -4,12 +4,7 @@ import type { Request, Response, NextFunction } from 'express';
 
 export const configureCsrf = () =>
   csrf({
-    cookie: {
-      key: '_csrf',
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    },
+    cookie: true,
     ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
     value: (req: Request) =>
       req.body._csrf || req.query._csrf || req.headers['x-csrf-token'],

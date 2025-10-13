@@ -1,10 +1,17 @@
-// src/controllers/entreprendre.controller.ts
+// src/controllers/nav-entreprendre.controller.ts
 import { Request, Response } from 'express';
-import { execute } from '../utils/db.js';
+import { NavOption } from '../models/navOption.model.js';
+import { ApiResponseUtil, asyncHandler } from '../utils/apiResponse.js';
+import { Logger } from '../utils/logger.js';
 
-export const getEntreprendreOptions = async (_req: Request, res: Response) => {
-  const opts = await execute(
-    `SELECT id, code, name, parent_code FROM nav_options WHERE menu = 'entreprendre' ORDER BY parent_code NULLS FIRST, id`
-  );
-  res.json(opts);
-};
+export const getEntreprendreOptions = asyncHandler(async (_req: Request, res: Response) => {
+  const options = await NavOption.find({ 
+    menu: 'entreprendre', 
+    isActive: true 
+  })
+    .select('code name parentCode')
+    .sort({ parentCode: 1, order: 1 });
+  
+  Logger.info('Options entreprendre récupérées avec succès', { count: options.length });
+  ApiResponseUtil.success(res, 200, options);
+});

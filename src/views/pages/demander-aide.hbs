@@ -1,0 +1,342 @@
+{{!-- src/views/pages/demander-aide.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="request-help">
+<title>Demander de l'aide - Connect People</title>
+<meta name="description" content="Trouvez l'aide dont vous avez besoin sur Connect People - Des milliers de helpers qualifiés à votre service">
+{{/section}}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Demander de l'aide</h1>
+        <p class="page-subtitle">Trouvez l'aide dont vous avez besoin auprès de helpers qualifiés</p>
+    </div>
+</section>
+
+<section class="request-help-section">
+    <div class="container">
+        <div class="request-help-content">
+            <div class="intro-section">
+                <h2>Besoin d'aide ? Connect People est là pour vous</h2>
+                <p>Que vous ayez besoin d'un service ponctuel ou d'un accompagnement régulier, notre communauté de helpers qualifiés est prête à vous aider. Trouvez la personne idéale en quelques clics.</p>
+            </div>
+
+            <div class="search-section">
+                <h2>Que cherchez-vous ?</h2>
+                <div class="search-form">
+                    <div class="search-input-group">
+                        <input type="text" placeholder="Décrivez ce dont vous avez besoin..." class="search-input">
+                        <select class="search-category">
+                            <option value="">Toutes les catégories</option>
+                            <option value="immobilier">Immobilier</option>
+                            <option value="entrepreneuriat">Entrepreneuriat</option>
+                            <option value="traduction">Traduction</option>
+                            <option value="services">Services à domicile</option>
+                            <option value="formation">Formation & Coaching</option>
+                            <option value="technologie">Technologie</option>
+                        </select>
+                        <input type="text" placeholder="Ville ou code postal" class="search-location">
+                        <button class="search-btn">Rechercher</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="categories-section">
+                <h2>Catégories populaires</h2>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Immobilier</h3>
+                        <p>Conseils, visites, évaluations, gestion</p>
+                        <div class="category-stats">
+                            <span class="stat">+150 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/immobilier" class="category-link">Voir les services</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Entrepreneuriat</h3>
+                        <p>Conseils business, formations, networking</p>
+                        <div class="category-stats">
+                            <span class="stat">+200 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/entreprendre" class="category-link">Voir les services</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Traduction</h3>
+                        <p>Documents, interprétation, cours</p>
+                        <div class="category-stats">
+                            <span class="stat">+100 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/traduction" class="category-link">Voir les services</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Services à domicile</h3>
+                        <p>Bricolage, ménage, jardinage</p>
+                        <div class="category-stats">
+                            <span class="stat">+300 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/services" class="category-link">Voir les services</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Formation & Coaching</h3>
+                        <p>Cours particuliers, coaching personnel</p>
+                        <div class="category-stats">
+                            <span class="stat">+180 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/formation" class="category-link">Voir les services</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Technologie</h3>
+                        <p>Développement, maintenance, formation</p>
+                        <div class="category-stats">
+                            <span class="stat">+120 helpers</span>
+                            <span class="stat">Disponible maintenant</span>
+                        </div>
+                        <a href="/technologie" class="category-link">Voir les services</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="how-it-works-section">
+                <h2>Comment ça marche ?</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Décrivez votre besoin</h3>
+                            <p>Expliquez clairement ce dont vous avez besoin, quand et où. Plus vous êtes précis, plus vous trouverez la bonne personne.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Consultez les profils</h3>
+                            <p>Parcourez les profils des helpers qui correspondent à vos critères. Lisez leurs avis et consultez leur portfolio.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Contactez les helpers</h3>
+                            <p>Envoyez des messages aux helpers qui vous intéressent. Discutez des détails et négociez les conditions.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Finalisez la prestation</h3>
+                            <p>Planifiez le rendez-vous, effectuez le paiement sécurisé et profitez du service. N'oubliez pas de laisser un avis !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="benefits-section">
+                <h2>Pourquoi choisir Connect People ?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Sécurité garantie</h3>
+                        <p>Paiements sécurisés, profils vérifiés et système de confiance pour des échanges en toute sécurité.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Helpers qualifiés</h3>
+                        <p>Des professionnels vérifiés avec des compétences reconnues et des avis authentiques.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <h3>Prix transparents</h3>
+                        <p>Des tarifs clairs et compétitifs, sans frais cachés. Vous savez exactement ce que vous payez.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Support client</h3>
+                        <p>Notre équipe est là pour vous aider en cas de problème. Réponse garantie sous 24h.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-stories-section">
+                <h2>Témoignages d'utilisateurs</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"J'ai trouvé un excellent traducteur pour mes documents officiels. Service rapide, professionnel et prix très raisonnable. Je recommande vivement !"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/images/avatars/jean-martin.jpg" alt="Jean Martin">
+                            </div>
+                            <div class="author-info">
+                                <h4>Jean Martin</h4>
+                                <p>Entrepreneur</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Grâce à Connect People, j'ai pu faire réparer ma chaudière rapidement et à moindre coût. Le bricoleur était très compétent et sympathique."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/images/avatars/marie-dubois.jpg" alt="Marie Dubois">
+                            </div>
+                            <div class="author-info">
+                                <h4>Marie Dubois</h4>
+                                <p>Particulier</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"J'ai pris des cours de mathématiques pour mon fils. Le professeur était excellent et les résultats ont été immédiats. Merci Connect People !"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/images/avatars/sophie-bernard.jpg" alt="Sophie Bernard">
+                            </div>
+                            <div class="author-info">
+                                <h4>Sophie Bernard</h4>
+                                <p>Mère de famille</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-section">
+                <h2>Tarifs transparents</h2>
+                <div class="pricing-info">
+                    <div class="pricing-card">
+                        <h3>Pas de frais cachés</h3>
+                        <p>Les tarifs affichés sont les tarifs finaux. Aucune surprise à la fin de la prestation.</p>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Paiement sécurisé</h3>
+                        <p>Votre argent est protégé jusqu'à la fin de la prestation. Vous ne payez que si vous êtes satisfait.</p>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Garantie satisfait ou remboursé</h3>
+                        <p>Si vous n'êtes pas satisfait, nous trouvons une solution ou vous remboursons.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Prêt à trouver l'aide dont vous avez besoin ?</h2>
+                <p>Rejoignez des milliers d'utilisateurs qui trouvent l'aide parfaite sur Connect People</p>
+                <div class="cta-buttons">
+                    <a href="/auth/register" class="btn btn-primary">Commencer maintenant</a>
+                    <a href="/comment-ca-marche" class="btn btn-secondary">En savoir plus</a>
+                </div>
+                <p class="cta-note">Inscription gratuite • Trouvez l'aide en quelques minutes</p>
+            </div>
+
+            <div class="faq-section">
+                <h2>Questions fréquentes</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h4>Comment puis-je être sûr de la qualité des services ?</h4>
+                        <p>Tous nos helpers sont vérifiés et notés par la communauté. Vous pouvez consulter leurs avis et leur portfolio avant de faire votre choix.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Que se passe-t-il si je ne suis pas satisfait ?</h4>
+                        <p>Nous offrons une garantie satisfait ou remboursé. Si vous n'êtes pas satisfait, contactez notre support qui trouvera une solution.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Comment fonctionne le paiement ?</h4>
+                        <p>Le paiement est sécurisé et effectué via la plateforme. Votre argent est protégé jusqu'à la fin de la prestation.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Puis-je annuler une prestation ?</h4>
+                        <p>Oui, vous pouvez annuler jusqu'à 24h avant le début de la prestation sans frais.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchBtn = document.querySelector('.search-btn');
+    const searchInput = document.querySelector('.search-input');
+    const searchCategory = document.querySelector('.search-category');
+    const searchLocation = document.querySelector('.search-location');
+
+    searchBtn.addEventListener('click', function() {
+        const query = searchInput.value.trim();
+        const category = searchCategory.value;
+        const location = searchLocation.value.trim();
+        
+        if (query) {
+            // Construire l'URL de recherche
+            let searchUrl = '/search?q=' + encodeURIComponent(query);
+            if (category) searchUrl += '&category=' + category;
+            if (location) searchUrl += '&location=' + encodeURIComponent(location);
+            
+            window.location.href = searchUrl;
+        }
+    });
+
+    // Recherche avec la touche Entrée
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchBtn.click();
+        }
+    });
+});
+</script>
+
+
+
+
+
+
