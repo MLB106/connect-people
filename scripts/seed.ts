@@ -26,33 +26,30 @@ async function seedDatabase() {
     console.log('🧹 Collections nettoyées');
     
     // 1. Créer des utilisateurs
-    const hashedPassword = await bcrypt.hash('password123', 10);
+    const userHashedPassword = await bcrypt.hash('password123', 12);
     
-    const users = await User.create([
+    const users = await User.insertMany([
       {
+        name: 'Jean Dupont',
         email: 'user1@example.com',
-        password: hashedPassword,
-        firstName: 'Jean',
-        lastName: 'Dupont',
+        passwordHash: userHashedPassword,
         role: 'user',
         isActive: true,
         emailVerified: true,
       },
       {
+        name: 'Marie Martin',
         email: 'user2@example.com',
-        password: hashedPassword,
-        firstName: 'Marie',
-        lastName: 'Martin',
-        role: 'premium',
+        passwordHash: userHashedPassword,
+        role: 'professional',
         isActive: true,
         emailVerified: true,
       },
       {
+        name: 'Pierre Durand',
         email: 'user3@example.com',
-        password: hashedPassword,
-        firstName: 'Pierre',
-        lastName: 'Durand',
-        role: 'admin',
+        passwordHash: userHashedPassword,
+        role: 'publicist',
         isActive: true,
         emailVerified: false,
       },
@@ -61,6 +58,8 @@ async function seedDatabase() {
     console.log(`✅ ${users.length} utilisateurs créés`);
     
     // 2. Créer des administrateurs
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+    
     const adminUsers = await AdminUser.create([
       {
         email: 'admin1@connect-people.com',
