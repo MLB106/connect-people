@@ -58,14 +58,53 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-/* ---------- Middlewares ---------- */
+/* ---------- Sécurité ---------- */
+// Helmet - Protection des headers HTTP
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+}));
+
+// Rate Limiting Global - Protection contre les attaques par force brute
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requêtes max par IP
+  message: 'Trop de requêtes, réessayez dans 15 minutes',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
+
+// CORS
 app.use(cors({ 
-  origin: process.env.FRONT_URL || 'http://localhost:4000', 
+  origin: env.corsOrigin,
   credentials: true 
 }));
+
+// Sessions
+app.use(session({
+  secret: env.sessionSecret,
+  name: env.sessionName,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: env.nodeEnv === 'production',
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, // 24h
+    sameSite: 'strict'
+  }
+}));
+
+// Cookies et Body Parsers
 app.use(cookieParser());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: '1mb' })); // Réduit de 10mb à 1mb
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
 // Middleware de logging pour les routes API
 app.use('/api', apiLoggerMiddleware);
