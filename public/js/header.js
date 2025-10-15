@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   /* ----------- language ----------- */
-  setupLanguageSelector(); // défini dans app.js
+  changeLanguage(); // fonction dédiée pour la gestion des langues
 
   /* ----------- user-menu ----------- */
   document.querySelectorAll('[data-action="profile"]').forEach(b =>
@@ -129,5 +129,41 @@ function closeAllDropdowns() {
       dropdown.classList.remove('active');
     }
   });
+}
+
+/* ===========================  LANGUAGE CHANGE  =========================== */
+function changeLanguage() {
+  const languageMessages = {
+    'fr': 'Vous avez choisi de poursuivre en français 🇫🇷',
+    'en': 'You have chosen to continue in English 🇬🇧', 
+    'de': 'Sie haben gewählt, auf Deutsch fortzufahren 🇩🇪',
+    'es': 'Has elegido continuar en español 🇪🇸',
+    'it': 'Hai scelto di continuare in italiano 🇮🇹',
+    'pt': 'Você escolheu continuar em português 🇵🇹',
+    'ar': 'لقد اخترت المتابعة باللغة العربية 🇸🇦'
+  };
+  
+  const langSelect = document.getElementById('language-select');
+  if (langSelect) {
+    langSelect.addEventListener('change', (e) => {
+      const message = languageMessages[e.target.value];
+      if (message) {
+        // Créer une notification simple
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed; top: 20px; right: 20px; z-index: 10000;
+          background: linear-gradient(135deg, #3A5F87, #2E5077);
+          color: white; padding: 15px 20px; border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          font-family: Arial, sans-serif;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.remove(), 3000);
+      }
+    });
+    console.log('✅ Sélecteur de langue configuré');
+  }
 }
 
