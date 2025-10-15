@@ -1,0 +1,15 @@
+3️⃣ EXTERNALISATION TOKENS - RÉSUMÉ :
+
+Option 1 - Serveur Auth séparé :
+
+    Serveur dédié sur port 5000 qui gère SEULEMENT l'auth
+    Votre app appelle ce serveur pour valider les tokens
+    Avantages : sécurité ++, scalabilité
+
+Option 2 - Service externe (Auth0, Keycloak) :
+
+    Service géré qui s'occupe de tout
+    Vous intégrez juste leur SDK
+    Avantages : pas de maintenance
+
+On en parle plus tard.

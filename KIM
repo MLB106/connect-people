@@ -1,0 +1,28 @@
+Parfait, tu as deux problèmes simples à corriger :
+✅ Problème 1 : fichier mal placé
+Ton fichier est ici :
+C:\Users\utilisateur\connect-people\public\app.js
+Mais Express attend :
+C:\Users\utilisateur\connect-people\public\js\app.js
+✅ Solution immédiate
+Déplace ton fichier :
+public\app.js   →   public\js\app.js
+✅ Problème 2 : ordre des routes
+Tu sers les fichiers statiques AVANT les routes, mais tu as aussi une route catch-all :
+
+app.use('/', dualWebRouter);
+
+
+qui intercepte /js/app.js avant le dossier statique.
+🔧 Fix rapide (sans toucher aux routes)
+Redémarre ton serveur après avoir déplacé le fichier :
+public\js\app.js
+✅ Teste
+
+    Déplace app.js → public\js\app.js.
+    Redémarre le serveur.
+    Va dans ton navigateur :
+    http://localhost:4000/js/app.js
+    → tu dois voir le code JavaScript, pas une 404.
+
+Dis-moi ce que tu obtiens à cette URL → je confirme que c’est bon.

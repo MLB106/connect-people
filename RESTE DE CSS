@@ -1,4 +1,4 @@
-/* ------------------------------------------------------------------
+/* /* ------------------------------------------------------------------
    CSS NON UTILISÉ / ORPHELINS / ANCIENNES VERSIONS MAIS PEUT ETRE UTILE 
    ------------------------------------------------------------------ */
 
@@ -644,4 +644,4 @@
 @media (max-width: 1200px) { /* contenu déplacé */ }
 @media (max-width: 1024px) { /* contenu déplacé */ }
 @media (max-width: 768px)  { /* contenu déplacé */ }
-@media (max-width: 480px)  { /* contenu déplacé */ }
+@media (max-width: 480px)  { /* contenu déplacé */ } 

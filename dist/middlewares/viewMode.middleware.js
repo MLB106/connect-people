@@ -24,14 +24,16 @@ export const viewModeMiddleware = (req, _res, next) => {
         req.viewMode = 'html';
         return next();
     }
-    // 3. Vérifier le header Accept
+    // 3. Vérifier le header Accept (HTML en PREMIER car les navigateurs envoient text/html,*/* )
     const acceptHeader = req.headers.accept || '';
-    if (acceptHeader.includes('application/json') || acceptHeader.includes('*/*')) {
-        req.viewMode = 'json';
-        return next();
-    }
+    // Si le navigateur demande text/html (priorité haute), c'est du HTML
     if (acceptHeader.includes('text/html')) {
         req.viewMode = 'html';
+        return next();
+    }
+    // Si application/json est explicitement demandé, c'est du JSON
+    if (acceptHeader.includes('application/json')) {
+        req.viewMode = 'json';
         return next();
     }
     // 4. Vérifier la variable d'environnement FORCE_VIEW_MODE

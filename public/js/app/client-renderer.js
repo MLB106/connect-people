@@ -259,19 +259,112 @@ class ClientRenderer {
   // Rendre la page d'accueil
   renderHomePage(data) {
     return `
-      <header class="main-header">
-        <nav class="navbar">
-          <div class="nav-brand">
-            <h1>Connect People</h1>
+      <header class="site-header">
+        <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+          <div class="nav-container">
+            <div class="nav-top-row">
+              <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                <span aria-hidden="true">Connect People</span>
+              </a>
+
+              <div class="nav-search">
+                <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                  <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                  <div class="search-category-wrapper">
+                    <select class="search-category-select" id="search-category-select" name="cat">
+                      <option value="centre-aide">Centre d'aide</option>
+                      <option value="membres">Membres</option>
+                      <option value="annonces">Annonces</option>
+                    </select>
           </div>
-          <div class="nav-links">
-            <a href="/app/home">Accueil</a>
-            <a href="/app/nos-helpers">Nos Helpers</a>
-            <a href="/app/nos-annonces">Annonces</a>
-            <a href="/app/documentation">Documentation</a>
+                  <div class="search-separator" aria-hidden="true"></div>
+                  <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input id="nav-search-input" name="q" type="search"
+                         placeholder="Tapez votre recherche..."
+                         autocomplete="off" aria-required="false">
+                  <button type="submit" class="visually-hidden">Rechercher</button>
+                </form>
+              </div>
+
+              <div class="nav-right">
+                <div id="auth-buttons" class="auth-buttons">
+                  <button class="nav-btn" data-action="login">Se connecter</button>
+                  <button class="nav-btn" data-action="register">S'inscrire</button>
+                </div>
+
+                <div class="language-selector">
+                  <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="pt">🇵🇹 PT</option>
+                  </select>
+                </div>
+
+                <div id="user-menu" class="user-menu-nav" hidden>
+                  <div class="wallet-display">
+                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <span id="wallet-balance-nav">€0.00</span>
+                  </div>
+                  <div class="user-profile">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                    <span id="user-name-nav">John Doe</span>
+                    <div class="dropdown-nav">
+                      <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                      <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                      <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                      <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                        aria-label="Ouvrir le menu" aria-expanded="false">
+                  <div class="hamburger-container">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+              <ul class="nav-links">
+                <li><a href="/app/nos-helpers" class="nav-link">Nos Helpers</a></li>
+                <li><a href="/app/nos-annonces" class="nav-link">Nos Annonces</a></li>
+                <li><a href="/app/documentation" class="nav-link">Documentation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
+
+      <!-- Language Confirmation Modal -->
+      <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="language-modal-title">Confirmation de langue</h3>
+            <span class="close" id="language-modal-close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="language-confirmation">
+              <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+              <p id="language-modal-message">Langue française activée</p>
+              <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="language-modal-ok">OK</button>
+          </div>
+        </div>
+      </div>
 
       <main class="main-content">
         <section class="hero-section">
@@ -346,19 +439,112 @@ class ClientRenderer {
   // Rendre la page des helpers
   renderHelpersPage(data) {
     return `
-      <header class="main-header">
-        <nav class="navbar">
-          <div class="nav-brand">
-            <h1>Connect People</h1>
+      <header class="site-header">
+        <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+          <div class="nav-container">
+            <div class="nav-top-row">
+              <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                <span aria-hidden="true">Connect People</span>
+              </a>
+
+              <div class="nav-search">
+                <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                  <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                  <div class="search-category-wrapper">
+                    <select class="search-category-select" id="search-category-select" name="cat">
+                      <option value="centre-aide">Centre d'aide</option>
+                      <option value="membres">Membres</option>
+                      <option value="annonces">Annonces</option>
+                    </select>
           </div>
-          <div class="nav-links">
-            <a href="/app/home">Accueil</a>
-            <a href="/app/nos-helpers" class="active">Nos Helpers</a>
-            <a href="/app/nos-annonces">Annonces</a>
-            <a href="/app/documentation">Documentation</a>
+                  <div class="search-separator" aria-hidden="true"></div>
+                  <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input id="nav-search-input" name="q" type="search"
+                         placeholder="Tapez votre recherche..."
+                         autocomplete="off" aria-required="false">
+                  <button type="submit" class="visually-hidden">Rechercher</button>
+                </form>
+              </div>
+
+              <div class="nav-right">
+                <div id="auth-buttons" class="auth-buttons">
+                  <button class="nav-btn" data-action="login">Se connecter</button>
+                  <button class="nav-btn" data-action="register">S'inscrire</button>
+                </div>
+
+                <div class="language-selector">
+                  <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="pt">🇵🇹 PT</option>
+                  </select>
+                </div>
+
+                <div id="user-menu" class="user-menu-nav" hidden>
+                  <div class="wallet-display">
+                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <span id="wallet-balance-nav">€0.00</span>
+                  </div>
+                  <div class="user-profile">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                    <span id="user-name-nav">John Doe</span>
+                    <div class="dropdown-nav">
+                      <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                      <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                      <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                      <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                        aria-label="Ouvrir le menu" aria-expanded="false">
+                  <div class="hamburger-container">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+              <ul class="nav-links">
+                <li><a href="/app/nos-helpers" class="nav-link active">Nos Helpers</a></li>
+                <li><a href="/app/nos-annonces" class="nav-link">Nos Annonces</a></li>
+                <li><a href="/app/documentation" class="nav-link">Documentation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
+
+      <!-- Language Confirmation Modal -->
+      <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="language-modal-title">Confirmation de langue</h3>
+            <span class="close" id="language-modal-close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="language-confirmation">
+              <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+              <p id="language-modal-message">Langue française activée</p>
+              <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="language-modal-ok">OK</button>
+          </div>
+        </div>
+      </div>
 
       <main class="main-content">
         <section class="hero-section">
@@ -414,19 +600,112 @@ class ClientRenderer {
   // Rendre la page des annonces
   renderAnnouncementsPage(data) {
     return `
-      <header class="main-header">
-        <nav class="navbar">
-          <div class="nav-brand">
-            <h1>Connect People</h1>
+      <header class="site-header">
+        <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+          <div class="nav-container">
+            <div class="nav-top-row">
+              <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                <span aria-hidden="true">Connect People</span>
+              </a>
+
+              <div class="nav-search">
+                <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                  <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                  <div class="search-category-wrapper">
+                    <select class="search-category-select" id="search-category-select" name="cat">
+                      <option value="centre-aide">Centre d'aide</option>
+                      <option value="membres">Membres</option>
+                      <option value="annonces">Annonces</option>
+                    </select>
           </div>
-          <div class="nav-links">
-            <a href="/app/home">Accueil</a>
-            <a href="/app/nos-helpers">Nos Helpers</a>
-            <a href="/app/nos-annonces" class="active">Annonces</a>
-            <a href="/app/documentation">Documentation</a>
+                  <div class="search-separator" aria-hidden="true"></div>
+                  <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input id="nav-search-input" name="q" type="search"
+                         placeholder="Tapez votre recherche..."
+                         autocomplete="off" aria-required="false">
+                  <button type="submit" class="visually-hidden">Rechercher</button>
+                </form>
+              </div>
+
+              <div class="nav-right">
+                <div id="auth-buttons" class="auth-buttons">
+                  <button class="nav-btn" data-action="login">Se connecter</button>
+                  <button class="nav-btn" data-action="register">S'inscrire</button>
+                </div>
+
+                <div class="language-selector">
+                  <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="pt">🇵🇹 PT</option>
+                  </select>
+                </div>
+
+                <div id="user-menu" class="user-menu-nav" hidden>
+                  <div class="wallet-display">
+                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <span id="wallet-balance-nav">€0.00</span>
+                  </div>
+                  <div class="user-profile">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                    <span id="user-name-nav">John Doe</span>
+                    <div class="dropdown-nav">
+                      <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                      <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                      <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                      <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                        aria-label="Ouvrir le menu" aria-expanded="false">
+                  <div class="hamburger-container">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+              <ul class="nav-links">
+                <li><a href="/app/nos-helpers" class="nav-link">Nos Helpers</a></li>
+                <li><a href="/app/nos-annonces" class="nav-link active">Nos Annonces</a></li>
+                <li><a href="/app/documentation" class="nav-link">Documentation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
+
+      <!-- Language Confirmation Modal -->
+      <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="language-modal-title">Confirmation de langue</h3>
+            <span class="close" id="language-modal-close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="language-confirmation">
+              <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+              <p id="language-modal-message">Langue française activée</p>
+              <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="language-modal-ok">OK</button>
+          </div>
+        </div>
+      </div>
 
       <main class="main-content">
         <section class="hero-section">
@@ -496,19 +775,112 @@ class ClientRenderer {
   // Rendre la page de documentation
   renderDocumentationPage(data) {
     return `
-      <header class="main-header">
-        <nav class="navbar">
-          <div class="nav-brand">
-            <h1>Connect People</h1>
+      <header class="site-header">
+        <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+          <div class="nav-container">
+            <div class="nav-top-row">
+              <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                <span aria-hidden="true">Connect People</span>
+              </a>
+
+              <div class="nav-search">
+                <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                  <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                  <div class="search-category-wrapper">
+                    <select class="search-category-select" id="search-category-select" name="cat">
+                      <option value="centre-aide">Centre d'aide</option>
+                      <option value="membres">Membres</option>
+                      <option value="annonces">Annonces</option>
+                    </select>
           </div>
-          <div class="nav-links">
-            <a href="/app/home">Accueil</a>
-            <a href="/app/nos-helpers">Nos Helpers</a>
-            <a href="/app/nos-annonces">Annonces</a>
-            <a href="/app/documentation" class="active">Documentation</a>
+                  <div class="search-separator" aria-hidden="true"></div>
+                  <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input id="nav-search-input" name="q" type="search"
+                         placeholder="Tapez votre recherche..."
+                         autocomplete="off" aria-required="false">
+                  <button type="submit" class="visually-hidden">Rechercher</button>
+                </form>
+              </div>
+
+              <div class="nav-right">
+                <div id="auth-buttons" class="auth-buttons">
+                  <button class="nav-btn" data-action="login">Se connecter</button>
+                  <button class="nav-btn" data-action="register">S'inscrire</button>
+                </div>
+
+                <div class="language-selector">
+                  <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="pt">🇵🇹 PT</option>
+                  </select>
+                </div>
+
+                <div id="user-menu" class="user-menu-nav" hidden>
+                  <div class="wallet-display">
+                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <span id="wallet-balance-nav">€0.00</span>
+                  </div>
+                  <div class="user-profile">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                    <span id="user-name-nav">John Doe</span>
+                    <div class="dropdown-nav">
+                      <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                      <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                      <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                      <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                        aria-label="Ouvrir le menu" aria-expanded="false">
+                  <div class="hamburger-container">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+              <ul class="nav-links">
+                <li><a href="/app/nos-helpers" class="nav-link">Nos Helpers</a></li>
+                <li><a href="/app/nos-annonces" class="nav-link">Nos Annonces</a></li>
+                <li><a href="/app/documentation" class="nav-link active">Documentation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
+
+      <!-- Language Confirmation Modal -->
+      <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="language-modal-title">Confirmation de langue</h3>
+            <span class="close" id="language-modal-close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="language-confirmation">
+              <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+              <p id="language-modal-message">Langue française activée</p>
+              <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="language-modal-ok">OK</button>
+          </div>
+        </div>
+      </div>
 
       <main class="main-content">
         <section class="hero-section">
@@ -566,19 +938,112 @@ class ClientRenderer {
   // Rendre une page générique
   renderGenericPage(data) {
     return `
-      <header class="main-header">
-        <nav class="navbar">
-          <div class="nav-brand">
-            <h1>Connect People</h1>
+      <header class="site-header">
+        <nav id="global-nav" class="global-navbar" aria-label="Navigation principale">
+          <div class="nav-container">
+            <div class="nav-top-row">
+              <a href="/" class="nav-brand" aria-label="Connect People - Accueil">
+                <span aria-hidden="true">Connect People</span>
+              </a>
+
+              <div class="nav-search">
+                <form class="search-bar-nav" role="search" action="/recherche" method="get" autocomplete="off">
+                  <label for="search-category-select" class="visually-hidden">Catégorie</label>
+                  <div class="search-category-wrapper">
+                    <select class="search-category-select" id="search-category-select" name="cat">
+                      <option value="centre-aide">Centre d'aide</option>
+                      <option value="membres">Membres</option>
+                      <option value="annonces">Annonces</option>
+                    </select>
           </div>
-          <div class="nav-links">
-            <a href="/app/home">Accueil</a>
-            <a href="/app/nos-helpers">Nos Helpers</a>
-            <a href="/app/nos-annonces">Annonces</a>
-            <a href="/app/documentation">Documentation</a>
+                  <div class="search-separator" aria-hidden="true"></div>
+                  <label for="nav-search-input" class="visually-hidden">Mots-clés</label>
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                  <input id="nav-search-input" name="q" type="search"
+                         placeholder="Tapez votre recherche..."
+                         autocomplete="off" aria-required="false">
+                  <button type="submit" class="visually-hidden">Rechercher</button>
+                </form>
+              </div>
+
+              <div class="nav-right">
+                <div id="auth-buttons" class="auth-buttons">
+                  <button class="nav-btn" data-action="login">Se connecter</button>
+                  <button class="nav-btn" data-action="register">S'inscrire</button>
+                </div>
+
+                <div class="language-selector">
+                  <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                    <option value="fr">🇫🇷 FR</option>
+                    <option value="it">🇮🇹 IT</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="es">🇪🇸 ES</option>
+                    <option value="ar">🇸🇦 AR</option>
+                    <option value="de">🇩🇪 DE</option>
+                    <option value="pt">🇵🇹 PT</option>
+                  </select>
+                </div>
+
+                <div id="user-menu" class="user-menu-nav" hidden>
+                  <div class="wallet-display">
+                    <i class="fas fa-wallet" aria-hidden="true"></i>
+                    <span id="wallet-balance-nav">€0.00</span>
+                  </div>
+                  <div class="user-profile">
+                    <img src="https://via.placeholder.com/32" alt="Avatar" class="user-avatar-nav">
+                    <span id="user-name-nav">John Doe</span>
+                    <div class="dropdown-nav">
+                      <a href="#" data-dashboard-section="dashboard"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                      <a href="#" data-action="profile"><i class="fas fa-user"></i> Profil</a>
+                      <a href="#" data-action="wallet"><i class="fas fa-wallet"></i> Portefeuille</a>
+                      <a href="#" data-action="open-chat"><i class="fas fa-comments"></i> Messages</a>
+                      <div class="dropdown-divider"></div>
+                      <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="mobile-menu-toggle" data-action="mobile-menu-toggle"
+                        aria-label="Ouvrir le menu" aria-expanded="false">
+                  <div class="hamburger-container">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div class="nav-center" id="nav-center">
+              <ul class="nav-links">
+                <li><a href="/app/nos-helpers" class="nav-link">Nos Helpers</a></li>
+                <li><a href="/app/nos-annonces" class="nav-link">Nos Annonces</a></li>
+                <li><a href="/app/documentation" class="nav-link">Documentation</a></li>
+              </ul>
+            </div>
           </div>
         </nav>
       </header>
+
+      <!-- Language Confirmation Modal -->
+      <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="language-modal-title">Confirmation de langue</h3>
+            <span class="close" id="language-modal-close">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="language-confirmation">
+              <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+              <p id="language-modal-message">Langue française activée</p>
+              <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="language-modal-ok">OK</button>
+          </div>
+        </div>
+      </div>
 
       <main class="main-content">
         <section class="hero-section">
@@ -618,6 +1083,9 @@ class ClientRenderer {
 
   // Initialiser les interactions JavaScript
   initializeInteractions() {
+    // Charger les scripts nécessaires pour la modal
+    this.loadHeaderScripts();
+    
     // Navigation active
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll('.nav-links a');
@@ -654,6 +1122,22 @@ class ClientRenderer {
     if (process.env.NODE_ENV === 'development') {
       console.log('Interactions initialisees');
     }
+  }
+
+  // Charger les scripts du header pour la modal
+  loadHeaderScripts() {
+    // Charger le script header.js qui contient la logique de la modal
+    const script = document.createElement('script');
+    script.src = '/js/header.js';
+    script.onload = () => {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Header script chargé avec succès');
+      }
+    };
+    script.onerror = () => {
+      console.error('Erreur lors du chargement du script header.js');
+    };
+    document.head.appendChild(script);
   }
 
   // Sécuriser la page contre l'inspection

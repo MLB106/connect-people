@@ -30,7 +30,7 @@ router.get('/footer', async (req, res) => {
     }
     
     // Mode HTML : Retourner une vue (si elle existe)
-    res.render('partials/footer', data);
+    return res.render('partials/footer', data);
     
   } catch (error) {
     res.status(500).json({ 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Modal</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            padding: 2rem;
+            background-color: #f8fafc;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .language-selector {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+        .language-select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test de la Modal de Confirmation de Langue</h1>
+        <p>Cliquez sur le sélecteur de langue ci-dessous pour tester la modal de confirmation :</p>
+        
+        <div class="language-selector">
+            <label for="language-select">Choisir la langue :</label>
+            <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                <option value="fr">🇫🇷 FR</option>
+                <option value="it">🇮🇹 IT</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="ar">🇸🇦 AR</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="pt">🇵🇹 PT</option>
+            </select>
+        </div>
+        
+        <p><strong>Instructions :</strong></p>
+        <ul>
+            <li>Sélectionnez une langue dans le menu déroulant</li>
+            <li>Une modal de confirmation devrait s'afficher</li>
+            <li>La modal devrait afficher le message dans la langue sélectionnée</li>
+            <li>Vous pouvez fermer la modal en cliquant sur "OK", sur la croix, ou en appuyant sur Échap</li>
+        </ul>
+    </div>
+
+    <!-- Language Confirmation Modal -->
+    <div id="language-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="language-modal-title">Confirmation de langue</h3>
+                <span class="close" id="language-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="language-confirmation">
+                    <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+                    <p id="language-modal-message">Langue française activée</p>
+                    <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="language-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/header.js"></script>
+    <script>
+        // Initialize the language selector when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLanguageSelector();
+        });
+    </script>
+</body>
+</html>

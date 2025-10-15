@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Modal - Connect People</title>
+    <link rel="stylesheet" href="/css/modal.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 2rem;
+        }
+        .test-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            text-align: center;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3A5F87 0%, #2E5077 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(58, 95, 135, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(58, 95, 135, 0.4);
+        }
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        .btn-secondary:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        .status {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            color: #0c4a6e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test des Modals - Connect People</h1>
+        
+        <div class="test-buttons">
+            <button class="btn btn-primary" onclick="testLanguageModal()">
+                🌍 Modal Langue
+            </button>
+            <button class="btn btn-secondary" onclick="testAlertModal()">
+                ℹ️ Modal Alert
+            </button>
+            <button class="btn btn-danger" onclick="testConfirmModal()">
+                ❓ Modal Confirmation
+            </button>
+            <button class="btn btn-success" onclick="testCustomModal()">
+                ✨ Modal Personnalisée
+            </button>
+        </div>
+
+        <div id="status" class="status" style="display: none;">
+            <strong>Statut:</strong> <span id="status-text"></span>
+        </div>
+
+        <h2>Instructions de test :</h2>
+        <ul>
+            <li><strong>Modal Langue:</strong> Affiche une modal de confirmation de changement de langue</li>
+            <li><strong>Modal Alert:</strong> Affiche une modal d'information simple</li>
+            <li><strong>Modal Confirmation:</strong> Affiche une modal de confirmation avec boutons Oui/Non</li>
+            <li><strong>Modal Personnalisée:</strong> Affiche une modal avec du contenu personnalisé</li>
+        </ul>
+
+        <h3>Fonctionnalités testées :</h3>
+        <ul>
+            <li>✅ Ouverture et fermeture des modals</li>
+            <li>✅ Fermeture avec la touche Échap</li>
+            <li>✅ Fermeture en cliquant à l'extérieur</li>
+            <li>✅ Fermeture avec le bouton X</li>
+            <li>✅ Animations fluides</li>
+            <li>✅ Responsive design</li>
+        </ul>
+    </div>
+
+    <!-- Language Modal (from header) -->
+    <div id="language-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="language-modal-title">Confirmation de langue</h3>
+                <span class="close" id="language-modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="language-confirmation">
+                    <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+                    <p id="language-modal-message">Langue française activée</p>
+                    <p class="language-sub-message" id="language-modal-sub-message">La langue a été changée avec succès</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="language-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="custom-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modal Personnalisée</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Ceci est une modal personnalisée avec du contenu spécifique.</p>
+                <p>Vous pouvez y ajouter des formulaires, des images, ou tout autre contenu.</p>
+                <div class="form-group">
+                    <label for="test-input">Champ de test :</label>
+                    <input type="text" id="test-input" placeholder="Tapez quelque chose...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+                <button class="btn btn-primary" onclick="handleCustomModal()">Valider</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/modal.js"></script>
+    <script>
+        function testLanguageModal() {
+            showLanguageConfirmationModal('fr', 'Français');
+            updateStatus('Modal de langue affichée');
+        }
+
+        function testAlertModal() {
+            showAlert(
+                'Information', 
+                'Ceci est une modal d\'information simple. Elle peut être utilisée pour afficher des messages importants à l\'utilisateur.',
+                () => updateStatus('Modal d\'alerte fermée')
+            );
+        }
+
+        function testConfirmModal() {
+            showConfirm(
+                'Confirmation',
+                'Êtes-vous sûr de vouloir effectuer cette action ? Cette action ne peut pas être annulée.',
+                () => updateStatus('Action confirmée'),
+                () => updateStatus('Action annulée')
+            );
+        }
+
+        function testCustomModal() {
+            showModal('custom-modal');
+            updateStatus('Modal personnalisée affichée');
+        }
+
+        function handleCustomModal() {
+            const input = document.getElementById('test-input');
+            const value = input.value;
+            closeModal();
+            updateStatus(`Modal personnalisée fermée. Valeur saisie: "${value}"`);
+        }
+
+        function updateStatus(message) {
+            const status = document.getElementById('status');
+            const statusText = document.getElementById('status-text');
+            statusText.textContent = message;
+            status.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 5000);
+        }
+
+        // Test automatique au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Système de modal chargé et prêt');
+            updateStatus('Page de test chargée - Prêt pour les tests');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Modal - Connect People</title>
+    <link rel="stylesheet" href="/css/modal.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .demo-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+        .demo-button {
+            background: linear-gradient(135deg, #3A5F87 0%, #2E5077 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(58, 95, 135, 0.3);
+            margin: 0.5rem;
+        }
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(58, 95, 135, 0.4);
+        }
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid #a7f3d0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🎉 Modal Fonctionnelle !</h1>
+        <p class="subtitle">Le système de modal est maintenant opérationnel</p>
+        
+        <button class="demo-button" onclick="showDemoModal()">
+            ✨ Tester la Modal
+        </button>
+        
+        <div id="success-message" class="success-message">
+            <strong>✅ Succès !</strong> La modal fonctionne parfaitement !
+        </div>
+        
+        <p style="margin-top: 2rem; color: #6b7280; font-size: 0.9rem;">
+            <strong>Fonctionnalités disponibles :</strong><br>
+            • Ouverture/fermeture fluide<br>
+            • Fermeture avec Échap ou clic extérieur<br>
+            • Animations CSS modernes<br>
+            • Design responsive<br>
+            • Système unifié pour toutes les modals
+        </p>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demo-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎊 Félicitations !</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>Votre système de modal fonctionne parfaitement !</strong></p>
+                <p>Vous pouvez maintenant utiliser ce système dans votre application Connect People pour :</p>
+                <ul style="text-align: left; margin: 1rem 0;">
+                    <li>Confirmer des actions importantes</li>
+                    <li>Afficher des informations</li>
+                    <li>Changer de langue</li>
+                    <li>Créer des formulaires</li>
+                    <li>Et bien plus encore !</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal(); showSuccess();">
+                    Parfait ! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/modal.js"></script>
+    <script>
+        function showDemoModal() {
+            showModal('demo-modal');
+        }
+        
+        function showSuccess() {
+            const successMsg = document.getElementById('success-message');
+            successMsg.style.display = 'block';
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Animation d'entrée
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.demo-container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 0.6s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

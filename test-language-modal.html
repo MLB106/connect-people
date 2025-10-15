@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Language Modal</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <style>
+        body {
+            padding: 2rem;
+            background-color: #f8fafc;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .language-selector {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+        .language-select {
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        /* Language Toast Styles */
+        .language-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 200px;
+            max-width: 280px;
+            transform: translateX(400px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            display: none;
+        }
+        
+        .language-toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .language-toast-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .language-toast .language-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .language-toast p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+        
+        /* Animation for auto-hide */
+        .language-toast.hiding {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test de la Notification de Langue</h1>
+        <p>Cliquez sur le sélecteur de langue ci-dessous pour tester la notification élégante :</p>
+        
+        <div class="language-selector">
+            <label for="language-select">Choisir la langue :</label>
+            <select class="language-select" id="language-select" aria-label="Choisir la langue">
+                <option value="fr">🇫🇷 FR</option>
+                <option value="it">🇮🇹 IT</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="ar">🇸🇦 AR</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="pt">🇵🇹 PT</option>
+            </select>
+        </div>
+        
+        <p><strong>Instructions :</strong></p>
+        <ul>
+            <li>Sélectionnez une langue dans le menu déroulant</li>
+            <li>Une notification élégante apparaîtra en haut à droite</li>
+            <li>La notification affichera le message dans la langue sélectionnée</li>
+            <li>La notification disparaîtra automatiquement après 3 secondes</li>
+        </ul>
+    </div>
+
+    <!-- Language Confirmation Modal -->
+    <div id="language-modal" class="language-toast" style="display: none;">
+        <div class="language-toast-content">
+            <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+            <p id="language-modal-message">Langue française activée</p>
+        </div>
+    </div>
+
+    <script src="public/js/header.js"></script>
+    <script>
+        // Initialize the language selector when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLanguageSelector();
+        });
+    </script>
+</body>
+</html>

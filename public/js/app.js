@@ -158,7 +158,13 @@ const styleSheet = document.createElement('style');
 styleSheet.textContent = notificationStyles;
 document.head.appendChild(styleSheet);
 
-
+// Exposition globale pour header.js
+window.showLogin    = showLogin;
+window.showRegister = showRegister;
+window.showProfile  = showProfile;
+window.showWallet   = showWallet;
+window.logout       = logout;
+window.openChat     = openChat;
 
 
 
