@@ -168,7 +168,8 @@ nav a:hover::after {
     background-size: 400% 400%;
     animation: gradientShift 8s ease infinite;
     color: white;
-    padding: 6rem 0;
+    padding: 4.8rem 0;
+    min-height: 80vh;
     text-align: center;
     position: relative;
     overflow: hidden;
