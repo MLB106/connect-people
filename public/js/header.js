@@ -10,6 +10,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ----------- language ----------- */
   setupLanguageSelector(); // déjà dans home.js (on le rappelle ici)
+  
+  // Modal de confirmation de langue
+  const langSelect = document.getElementById('language-select');
+  if (langSelect) {
+    const messages = {
+      'fr': 'Vous avez choisi de poursuivre en français 🇫🇷',
+      'en': 'You have chosen to continue in English 🇬🇧', 
+      'de': 'Sie haben gewählt, auf Deutsch fortzufahren 🇩🇪',
+      'es': 'Has elegido continuar en español 🇪🇸',
+      'it': 'Hai scelto di continuare in italiano 🇮🇹',
+      'pt': 'Você escolheu continuar em português 🇵🇹',
+      'ar': 'لقد اخترت المتابعة باللغة العربية 🇸🇦'
+    };
+    
+    langSelect.addEventListener('change', (e) => {
+      const message = messages[e.target.value];
+      if (message) {
+        alert(message);
+      }
+    });
+  }
 
   /* ----------- user-menu ----------- */
   document.querySelectorAll('[data-action="profile"]').forEach(b =>
