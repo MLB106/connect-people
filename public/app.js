@@ -2,6 +2,35 @@
 
 console.log('🚀 app.js chargé avec succès !');
 
+// Modal de langue - Version simple intégrée
+const languageMessages = {
+  'fr': 'Vous avez choisi de poursuivre en français 🇫🇷',
+  'en': 'You have chosen to continue in English 🇬🇧', 
+  'de': 'Sie haben gewählt, auf Deutsch fortzufahren 🇩🇪',
+  'es': 'Has elegido continuar en español 🇪🇸',
+  'it': 'Hai scelto di continuare in italiano 🇮🇹',
+  'pt': 'Você escolheu continuar em português 🇵🇹',
+  'ar': 'لقد اخترت المتابعة باللغة العربية 🇸🇦'
+};
+
+function showLanguageConfirmation(lang) {
+  const message = languageMessages[lang];
+  if (message) {
+    showNotification(message, 'info');
+  }
+}
+
+// Ajouter l'événement au sélecteur de langue
+setTimeout(() => {
+  const langSelect = document.getElementById('language-select');
+  if (langSelect) {
+    langSelect.addEventListener('change', (e) => {
+      showLanguageConfirmation(e.target.value);
+    });
+    console.log('✅ Sélecteur de langue configuré');
+  }
+}, 1000);
+
 /* ========== Fonctions globales ========== */
 function showNotification(message, type = 'info') {
   // Créer l'élément de notification
