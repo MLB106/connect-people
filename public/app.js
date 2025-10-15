@@ -1,5 +1,7 @@
 /* ===========================  APP GLOBAL  =========================== */
 
+console.log('🚀 app.js chargé avec succès !');
+
 /* ========== Fonctions globales ========== */
 function showNotification(message, type = 'info') {
   // Créer l'élément de notification
@@ -118,6 +120,28 @@ window.testLanguageModal = function(lang = 'fr') {
   console.log('Test de la modal avec la langue:', lang);
   showLanguageModal(lang);
 };
+
+// Approche plus agressive - vérifier toutes les 500ms
+let languageCheckInterval = setInterval(() => {
+  const languageSelect = document.getElementById('language-select');
+  if (languageSelect && !languageSelect.hasAttribute('data-listener-added')) {
+    console.log('✅ Sélecteur de langue trouvé et configuré !');
+    languageSelect.setAttribute('data-listener-added', 'true');
+    languageSelect.addEventListener('change', (e) => {
+      console.log('🌍 Changement de langue:', e.target.value);
+      showLanguageModal(e.target.value);
+    });
+    clearInterval(languageCheckInterval);
+  }
+}, 500);
+
+// Arrêter la vérification après 10 secondes
+setTimeout(() => {
+  if (languageCheckInterval) {
+    clearInterval(languageCheckInterval);
+    console.log('⏰ Arrêt de la recherche du sélecteur de langue');
+  }
+}, 10000);
 
 /* ========== Gestionnaires d'événements globaux ========== */
 function initLanguageSelector() {
