@@ -1,4 +1,7 @@
 {
   "hello": "Hola",
-  "welcome": "Bienvenido"
+  "welcome": "Bienvenido",
+  "language": {
+    "confirmation": "Has elegido continuar en español"
+  }
 }

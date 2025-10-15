@@ -1,4 +1,7 @@
 {
   "hello": "Bonjour",
-  "welcome": "Bienvenue sur Connect People"
+  "welcome": "Bienvenue sur Connect People",
+  "language": {
+    "confirmation": "Vous avez choisi de poursuivre en français"
+  }
 }
