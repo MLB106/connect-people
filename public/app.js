@@ -2,6 +2,47 @@
 
 console.log('🚀 app.js chargé avec succès !');
 
+/* ========== Fonctions manquantes pour header.js ========== */
+function showLogin() {
+  showNotification('Fonctionnalité de connexion en développement', 'info');
+}
+
+function showRegister(type = null) {
+  const message = type ? `Inscription ${type} en développement` : 'Inscription en développement';
+  showNotification(message, 'info');
+}
+
+function showProfile() {
+  showNotification('Profil en développement', 'info');
+}
+
+function showWallet() {
+  showNotification('Portefeuille en développement', 'info');
+}
+
+function logout() {
+  showNotification('Déconnexion en développement', 'info');
+}
+
+function openChat(userId) {
+  showNotification(`Chat ${userId} en développement`, 'info');
+}
+
+function toggleMobileMenu() {
+  const mobileMenu = document.querySelector('.mobile-menu');
+  if (mobileMenu) {
+    mobileMenu.classList.toggle('active');
+  }
+}
+
+function setupLanguageSelector() {
+  // Sera défini plus bas
+}
+
+function setupDropdowns() {
+  // Fonction vide pour éviter les erreurs
+}
+
 // Modal de langue - Version simple intégrée
 const languageMessages = {
   'fr': 'Vous avez choisi de poursuivre en français 🇫🇷',
@@ -20,8 +61,8 @@ function showLanguageConfirmation(lang) {
   }
 }
 
-// Ajouter l'événement au sélecteur de langue
-setTimeout(() => {
+// Configuration du sélecteur de langue
+function setupLanguageSelector() {
   const langSelect = document.getElementById('language-select');
   if (langSelect) {
     langSelect.addEventListener('change', (e) => {
@@ -29,7 +70,12 @@ setTimeout(() => {
     });
     console.log('✅ Sélecteur de langue configuré');
   }
-}, 1000);
+}
+
+// Initialisation au chargement du DOM
+document.addEventListener('DOMContentLoaded', () => {
+  setupLanguageSelector();
+});
 
 /* ========== Fonctions globales ========== */
 function showNotification(message, type = 'info') {
