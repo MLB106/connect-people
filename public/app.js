@@ -76,8 +76,13 @@ const languageMessages = {
 };
 
 function showLanguageModal(language) {
+  console.log('showLanguageModal appelée avec:', language);
   const message = languageMessages[language];
-  if (!message) return;
+  if (!message) {
+    console.log('Message non trouvé pour la langue:', language);
+    return;
+  }
+  console.log('Message trouvé:', message);
 
   // Créer l'overlay
   const overlay = document.createElement('div');
@@ -108,20 +113,43 @@ function showLanguageModal(language) {
   }, 3000);
 }
 
+// Fonction de test - vous pouvez l'appeler dans la console du navigateur
+window.testLanguageModal = function(lang = 'fr') {
+  console.log('Test de la modal avec la langue:', lang);
+  showLanguageModal(lang);
+};
+
 /* ========== Gestionnaires d'événements globaux ========== */
-document.addEventListener('DOMContentLoaded', () => {
-  // Gestionnaire pour le changement de langue
+function initLanguageSelector() {
   const languageSelect = document.getElementById('language-select');
   if (languageSelect) {
+    console.log('Sélecteur de langue trouvé !');
     languageSelect.addEventListener('change', (e) => {
       const selectedLanguage = e.target.value;
-      showLanguageModal(selectedLanguage);
-      
-      // Ici vous pouvez ajouter la logique pour changer réellement la langue
-      // Par exemple, faire une requête AJAX ou recharger la page avec la nouvelle langue
       console.log('Langue sélectionnée:', selectedLanguage);
+      showLanguageModal(selectedLanguage);
     });
+  } else {
+    console.log('Sélecteur de langue non trouvé, nouvelle tentative...');
+    // Réessayer après un délai si l'élément n'est pas encore dans le DOM
+    setTimeout(initLanguageSelector, 500);
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM chargé, initialisation...');
+  initLanguageSelector();
+  
+  // Aussi essayer après le rendu du client
+  setTimeout(initLanguageSelector, 1000);
+  
+  // Méthode alternative avec délégation d'événements
+  document.addEventListener('change', (e) => {
+    if (e.target && e.target.id === 'language-select') {
+      console.log('Changement de langue détecté via délégation:', e.target.value);
+      showLanguageModal(e.target.value);
+    }
+  });
 
   // Gestionnaires pour les nouvelles actions
   document.querySelectorAll('[data-action="find-helper"]').forEach(btn =>
