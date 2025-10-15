@@ -1,74 +1,122 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Simple JSON</title>
+    <title>Test Modal Simple</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
-        .result { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
-        .success { background: #d4edda; border-color: #c3e6cb; }
-        .error { background: #f8d7da; border-color: #f5c6cb; }
-        pre { background: #f8f9fa; padding: 10px; overflow-x: auto; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        #console { background: #f0f0f0; padding: 10px; margin: 10px 0; height: 200px; overflow-y: scroll; }
     </style>
 </head>
 <body>
-    <h1>Test JSON Pur</h1>
-    <button onclick="testAPI()">Tester l'API</button>
-    <div id="result"></div>
+    <h1>Test Modal de Langue - Version Simple</h1>
+    
+    <button onclick="testModal('fr')">Test Français</button>
+    <button onclick="testModal('en')">Test English</button>
+    <button onclick="testModal('es')">Test Español</button>
+    
+    <select id="language-select">
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+    </select>
+    
+    <div id="console"></div>
 
     <script>
-        async function testAPI() {
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = '<p>Test en cours...</p>';
+        const consoleDiv = document.getElementById('console');
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            consoleDiv.innerHTML += args.join(' ') + '<br>';
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        };
 
-            try {
-                console.log('=== TEST API ===');
-                console.log('Fetching: /api/pages/test');
-                
-                const response = await fetch('/api/pages/test');
-                const data = await response.json();
-                
-                console.log('Response JSON:', data);
-                console.log('=== FIN TEST ===');
-                
-                const hasHTMLTags = JSON.stringify(data).match(/<[^>]+>/g);
-                const isValidJSON = typeof data === 'object' && data !== null;
-                
-                let status = 'success';
-                let message = '✓ JSON pur reçu';
-                
-                if (hasHTMLTags) {
-                    status = 'error';
-                    message = '✗ HTML détecté dans la réponse';
-                }
-                
-                if (!isValidJSON) {
-                    status = 'error';
-                    message = '✗ Réponse non-JSON';
-                }
-                
-                resultDiv.innerHTML = `
-                    <div class="result ${status}">
-                        <h3>${message}</h3>
-                        <pre>${JSON.stringify(data, null, 2)}</pre>
-                    </div>
-                `;
-            } catch (error) {
-                console.log('=== ERREUR ===');
-                console.log('Erreur:', error.message);
-                console.log('=== FIN ERREUR ===');
-                
-                resultDiv.innerHTML = `
-                    <div class="result error">
-                        <h3>✗ Erreur: ${error.message}</h3>
-                    </div>
-                `;
+        console.log('🚀 Script chargé !');
+
+        // Messages
+        const messages = {
+            'fr': { text: 'Vous avez choisi de poursuivre en français', flag: '🇫🇷' },
+            'en': { text: 'You have chosen to continue in English', flag: '🇬🇧' },
+            'es': { text: 'Has elegido continuar en español', flag: '🇪🇸' }
+        };
+
+        // CSS pour la modal
+        const css = `
+            .modal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #3A5F87, #2E5077);
+                color: white;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                z-index: 1000;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+        `;
+
+        // Injecter CSS
+        const style = document.createElement('style');
+        style.textContent = css;
+        document.head.appendChild(style);
+        console.log('✅ CSS injecté');
+
+        // Fonction de test
+        function testModal(lang) {
+            console.log('🎯 Test modal pour:', lang);
+            
+            const message = messages[lang];
+            if (!message) {
+                console.log('❌ Message non trouvé');
+                return;
+            }
+
+            // Créer overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'overlay';
+
+            // Créer modal
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                <div style="font-size: 1.2rem; margin-bottom: 1rem;">${message.text}</div>
+                <div style="font-size: 2rem;">${message.flag}</div>
+            `;
+
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(modal);
+            console.log('✅ Modal ajoutée');
+
+            // Supprimer après 3 secondes
+            setTimeout(() => {
+                overlay.remove();
+                modal.remove();
+                console.log('🗑️ Modal supprimée');
+            }, 3000);
         }
+
+        // Event listener pour le select
+        document.getElementById('language-select').addEventListener('change', function(e) {
+            console.log('🔄 Langue changée:', e.target.value);
+            testModal(e.target.value);
+        });
+
+        console.log('✅ Event listener ajouté');
+        console.log('📋 Prêt à tester !');
     </script>
 </body>
 </html>
-
-
-
