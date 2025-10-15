@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     b.addEventListener('click', e => {
       e.preventDefault();
       toggleMobileMenu();
+      const nav = document.getElementById('global-nav');
+      const isOpen = nav && nav.classList.contains('mobile-open');
+      b.setAttribute('aria-expanded', String(!!isOpen));
     })
   );
 

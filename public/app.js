@@ -52,9 +52,13 @@ function openChat(userId) {
 }
 
 function toggleMobileMenu() {
-  const mobileMenu = document.querySelector('.mobile-menu');
-  if (mobileMenu) {
-    mobileMenu.classList.toggle('active');
+  const nav = document.getElementById('global-nav');
+  const toggleButton = document.querySelector('[data-action="mobile-menu-toggle"]');
+  if (nav) {
+    const isOpen = nav.classList.toggle('mobile-open');
+    if (toggleButton) {
+      toggleButton.setAttribute('aria-expanded', String(isOpen));
+    }
   }
 }
 

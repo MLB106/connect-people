@@ -1,28 +1,28 @@
 /* public/css/app.css */
 /* Styles pour l'application côté client Connect People */
 
-/* Variables CSS */
+/* Variables CSS - synchronisées avec base.css via alias et fallbacks */
 :root {
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --secondary-color: #64748b;
-  --accent-color: #f59e0b;
-  --success-color: #10b981;
-  --error-color: #ef4444;
-  --warning-color: #f59e0b;
-  --info-color: #3b82f6;
+  --primary-color: var(--primary, #3A5F87);
+  --primary-hover: var(--primary-dark, #2E5077);
+  --secondary-color: var(--secondary, #64748b);
+  --accent-color: var(--accent, #f59e0b);
+  --success-color: var(--success, #10b981);
+  --error-color: var(--danger, #ef4444);
+  --warning-color: var(--warning, #f59e0b);
+  --info-color: var(--info, #3b82f6);
   
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
+  --text-primary: var(--dark, #1f2937);
+  --text-secondary: var(--gray, #6b7280);
+  --text-muted: var(--gray-light, #9ca3af);
   
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
+  --bg-primary: var(--white, #ffffff);
+  --bg-secondary: var(--gray-lighter, #f8fafc);
   --bg-tertiary: #f1f5f9;
   
-  --border-color: #e5e7eb;
-  --border-radius: 0.5rem;
-  --border-radius-lg: 1rem;
+  --border-color: var(--border, #e5e7eb);
+  --border-radius: var(--border-radius, 0.5rem);
+  --border-radius-lg: var(--border-radius-lg, 1rem);
   
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -618,6 +618,3 @@ body {
     padding: var(--spacing-4);
   }
 }
-
-
-
