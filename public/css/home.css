@@ -1,9 +1,9 @@
 /* ==========  HERO  ========== */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 2rem 3rem;
     background: var(--gradient-primary);
     position: relative;
     overflow: hidden;

@@ -175,7 +175,8 @@ body {
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
-  padding: var(--spacing-20) 0;
+  padding: 4rem 0;
+  min-height: 80vh;
   text-align: center;
 }
 
@@ -601,7 +602,8 @@ body {
 
 @media (max-width: 480px) {
   .hero-section {
-    padding: var(--spacing-12) 0;
+    padding: 2.4rem 0;
+    min-height: 80vh;
   }
   
   .hero-title {

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   /* ----------- language ----------- */
-  setupLanguageSelector(); // déjà dans home.js (on le rappelle ici)
+  // Géré par language.js
 
   /* ----------- user-menu ----------- */
   document.querySelectorAll('[data-action="profile"]').forEach(b =>
@@ -130,4 +130,5 @@ function closeAllDropdowns() {
     }
   });
 }
+
 

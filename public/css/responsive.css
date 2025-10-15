@@ -18,9 +18,9 @@
 
     /* Hero tablette */
     .hero {
-        padding: 6rem 2rem 4rem;
+        padding: 4.8rem 2rem 3.2rem;
         text-align: center;
-        min-height: calc(100vh - 70px);
+        min-height: calc(80vh - 70px);
     }
     .hero-content {
         display: flex;
@@ -353,12 +353,12 @@
 
     /* Hero mobile */
     .hero {
-        padding: 4rem 1.5rem 3rem;
+        padding: 3.2rem 1.5rem 2.4rem;
         text-align: center;
-        min-height: calc(100vh - 70px);
+        min-height: calc(80vh - 70px);
     }
     .hero-content {
-        min-height: calc(100vh - 150px);
+        min-height: calc(80vh - 150px);
     }
     .hero-title {
         font-size: clamp(1.75rem, 8vw, 2.5rem);
@@ -553,11 +553,11 @@
 
     /* Hero petit mobile */
     .hero {
-        padding: 3rem 1rem 2rem;
-        min-height: calc(100vh - 60px);
+        padding: 2.4rem 1rem 1.6rem;
+        min-height: calc(80vh - 60px);
     }
     .hero-content {
-        min-height: calc(100vh - 120px);
+        min-height: calc(80vh - 120px);
     }
     .hero-title {
         font-size: clamp(1.5rem, 10vw, 2rem);

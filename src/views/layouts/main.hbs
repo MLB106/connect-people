@@ -14,12 +14,55 @@
     <link rel="stylesheet" href="/css/loading.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        .language-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .language-modal {
+            background: linear-gradient(135deg, #3A5F87, #2E5077);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 300px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .language-modal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .language-modal-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .language-modal-flag {
+            font-size: 2rem;
+        }
+    </style>
 </head>
 <body>
     <div id="root">
         <div class="loading-container">
             <div class="spinner"></div>
             <p>Chargement...</p>
+        </div>
+    </div>
+    
+    <!-- Modal de langue -->
+    <div id="language-modal" class="language-modal-overlay" style="display: none;">
+        <div class="language-modal">
+            <div class="language-modal-icon">🌍</div>
+            <div class="language-modal-text" id="language-modal-text"></div>
+            <div class="language-modal-flag" id="language-modal-flag"></div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
@@ -29,6 +72,29 @@
         document.addEventListener('DOMContentLoaded', function() {
             if (window.ClientRenderer) {
                 window.ClientRenderer.init('{{pageName}}');
+            }
+            
+            // Gestion langue - VRAIE modal
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) {
+                const messages = {
+                    'fr': { text: 'Vous avez choisi de poursuivre en français', flag: '🇫🇷' },
+                    'en': { text: 'You have chosen to continue in English', flag: '🇬🇧' },
+                    'es': { text: 'Has elegido continuar en español', flag: '🇪🇸' }
+                };
+                
+                langSelect.addEventListener('change', function(e) {
+                    const message = messages[e.target.value];
+                    if (message) {
+                        document.getElementById('language-modal-text').textContent = message.text;
+                        document.getElementById('language-modal-flag').textContent = message.flag;
+                        document.getElementById('language-modal').style.display = 'flex';
+                        
+                        setTimeout(() => {
+                            document.getElementById('language-modal').style.display = 'none';
+                        }, 3000);
+                    }
+                });
             }
         });
     </script>
