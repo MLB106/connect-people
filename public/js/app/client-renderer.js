@@ -116,9 +116,10 @@ class ClientRenderer {
   showLoading() {
     const root = document.getElementById('app-root') || document.getElementById('root');
     if (root) {
+      root.setAttribute('aria-busy', 'true');
       root.innerHTML = `
-        <div class="loading-container">
-          <div class="spinner"></div>
+        <div class="loading-container" role="status" aria-live="polite" aria-atomic="true">
+          <div class="spinner" aria-hidden="true"></div>
           <p>Chargement de l'application...</p>
         </div>
       `;
@@ -131,6 +132,10 @@ class ClientRenderer {
     if (loadingContainer) {
       loadingContainer.remove();
     }
+    const root = document.getElementById('app-root') || document.getElementById('root');
+    if (root) {
+      root.removeAttribute('aria-busy');
+    }
   }
 
   // Afficher une erreur
@@ -138,7 +143,7 @@ class ClientRenderer {
     const root = document.getElementById('app-root') || document.getElementById('root');
     if (root) {
       root.innerHTML = `
-        <div class="error-container">
+        <div class="error-container" role="alert" aria-live="assertive">
           <h1>Erreur</h1>
           <p>${message}</p>
           <button onclick="location.reload()">Réessayer</button>
@@ -636,15 +641,28 @@ class ClientRenderer {
       });
     });
 
-    // Interactions des filtres
+    // Interactions des filtres (accessible)
     const filterButtons = document.querySelectorAll('.filter-btn');
     filterButtons.forEach(button => {
+      // Etat ARIA pour boutons toggle de filtre
+      button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', () => {
-        // Retirer la classe active de tous les boutons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Ajouter la classe active au bouton cliqué
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-pressed', 'false');
+        });
         button.classList.add('active');
-        console.log('Filter clicked:', button.textContent);
+        button.setAttribute('aria-pressed', 'true');
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Filter clicked:', button.textContent);
+        }
+      });
+      // Support clavier (Entrée / Espace)
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
       });
     });
 
@@ -658,23 +676,14 @@ class ClientRenderer {
 
   // Sécuriser la page contre l'inspection
   securePage() {
-    // Désactiver le clic droit
-    document.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      return false;
-    });
+    // Optionnel: le clic droit reste actif pour l'accessibilité
+    // document.addEventListener('contextmenu', (e) => {
+    //   e.preventDefault();
+    //   return false;
+    // });
 
-    // Désactiver les raccourcis clavier pour l'inspection
-    document.addEventListener('keydown', (e) => {
-      // Désactiver F12, Ctrl+Shift+I, Ctrl+U, Ctrl+Shift+C
-      if (e.key === 'F12' || 
-          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-          (e.ctrlKey && e.key === 'u') ||
-          (e.ctrlKey && e.shiftKey && e.key === 'C')) {
-        e.preventDefault();
-        return false;
-      }
-    });
+    // Ne pas bloquer les raccourcis développeur pour éviter de gêner les utilisateurs
+    // document.addEventListener('keydown', (e) => { ... });
 
     // Détecter l'ouverture des outils de développement
     let devtools = false;

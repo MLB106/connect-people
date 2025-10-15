@@ -58,3 +58,45 @@ body {
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* ---- Alias tokens pour compatibilité avec app.css ---- */
+:root {
+  --primary-color: var(--primary);
+  --primary-hover: var(--primary-dark);
+  --secondary-color: var(--secondary);
+  --accent-color: var(--accent);
+  --success-color: var(--success);
+  --error-color: var(--danger);
+  --warning-color: var(--warning);
+  --text-primary: var(--dark);
+  --text-secondary: var(--gray);
+  --text-muted: var(--gray-light);
+  --bg-primary: var(--white);
+  --bg-secondary: var(--gray-lighter);
+  --bg-tertiary: #f1f5f9;
+  --border-color: var(--border);
+}
+
+/* ---- Focus visible accessible ---- */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  box-shadow: 0 0 0 3px rgba(58, 95, 135, 0.25);
+  border-radius: 8px;
+}
+
+/* ---- Respect du reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
