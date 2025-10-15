@@ -89,3 +89,36 @@
         </div><!-- /nav-container -->
     </nav>
 </header>
+
+<!-- Modal de langue -->
+<div id="language-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
+    <div style="background: linear-gradient(135deg, #3A5F87, #2E5077); color: white; padding: 2rem; border-radius: 12px; text-align: center; min-width: 300px;">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+        <div id="language-text" style="font-size: 1.1rem; margin-bottom: 1rem;"></div>
+        <div id="language-flag" style="font-size: 2rem;"></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const messages = {
+        'fr': { text: 'Vous avez choisi de poursuivre en français', flag: '🇫🇷' },
+        'en': { text: 'You have chosen to continue in English', flag: '🇬🇧' },
+        'es': { text: 'Has elegido continuar en español', flag: '🇪🇸' }
+    };
+    
+    const langSelect = document.getElementById('language-select');
+    if (langSelect) {
+        langSelect.addEventListener('change', function(e) {
+            const message = messages[e.target.value];
+            if (message) {
+                document.getElementById('language-text').textContent = message.text;
+                document.getElementById('language-flag').textContent = message.flag;
+                const modal = document.getElementById('language-modal');
+                modal.style.display = 'flex';
+                setTimeout(() => modal.style.display = 'none', 3000);
+            }
+        });
+    }
+});
+</script>
