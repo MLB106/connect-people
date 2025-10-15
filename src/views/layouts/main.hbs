@@ -31,6 +31,20 @@
             if (window.ClientRenderer) {
                 window.ClientRenderer.init('{{pageName}}');
             }
+            
+            // Gestion langue - directement dans le HTML
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) {
+                const messages = {
+                    'fr': 'Vous avez choisi de poursuivre en français 🇫🇷',
+                    'en': 'You have chosen to continue in English 🇬🇧',
+                    'es': 'Has elegido continuar en español 🇪🇸'
+                };
+                langSelect.addEventListener('change', function(e) {
+                    const message = messages[e.target.value];
+                    if (message) alert(message);
+                });
+            }
         });
     </script>
 </body>
