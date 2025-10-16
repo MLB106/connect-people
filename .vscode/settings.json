@@ -1,0 +1,20 @@
+{
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.preferredDarkColorTheme": "Default Dark+",
+  "workbench.preferredLightColorTheme": "Default Light+",
+  "editor.theme": "vs-dark",
+  "workbench.colorCustomizations": {
+    "editor.background": "#1e1e1e",
+    "workbench.colorTheme": "Default Dark+",
+    "activityBar.background": "#2d2d30",
+    "sideBar.background": "#252526",
+    "statusBar.background": "#007acc",
+    "panel.background": "#1e1e1e",
+    "terminal.background": "#1e1e1e"
+  },
+  "editor.tokenColorCustomizations": {
+    "[Default Dark+]": {
+      "comments": "#6A9955"
+    }
+  }
+}
