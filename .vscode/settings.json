@@ -1,24 +1,48 @@
 {
   "window.autoDetectColorScheme": false,
-  "workbench.colorTheme": "Dark+ (default dark)",
   "workbench.colorCustomizations": {
     "editor.background": "#0f1117",
     "editor.foreground": "#e6e6e6",
     "editorLineNumber.foreground": "#5b6078",
     "editorCursor.foreground": "#ffd700",
+
     "sideBar.background": "#0b0d12",
     "sideBar.foreground": "#d0d0d0",
+    "sideBarSectionHeader.background": "#0b0d12",
+
     "activityBar.background": "#0b0d12",
     "activityBar.foreground": "#d0d0d0",
+
     "statusBar.background": "#0b0d12",
     "statusBar.foreground": "#d0d0d0",
+
+    "titleBar.activeBackground": "#0b0d12",
+    "titleBar.activeForeground": "#d0d0d0",
+
     "tab.inactiveBackground": "#0f1117",
     "tab.activeBackground": "#141720",
     "tab.activeForeground": "#ffffff",
     "editorGroupHeader.tabsBackground": "#0f1117",
+
     "panel.background": "#0b0d12",
+    "panel.border": "#141720",
+
     "terminal.background": "#0b0d12",
-    "terminal.foreground": "#e6e6e6"
+    "terminal.foreground": "#e6e6e6",
+
+    "list.activeSelectionBackground": "#1b2332",
+    "list.inactiveSelectionBackground": "#161d29",
+    "list.hoverBackground": "#121826",
+    "list.focusBackground": "#1e2940",
+
+    "menu.background": "#0b0d12",
+    "dropdown.background": "#0b0d12",
+
+    "editorWidget.background": "#0f1117",
+    "peekViewEditor.background": "#0f1117",
+    "breadcrumb.background": "#0f1117",
+
+    "scrollbarSlider.background": "#2a2f3a88"
   },
   "editor.tokenColorCustomizations": {
     "comments": "#6A9955",
