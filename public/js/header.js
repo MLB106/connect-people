@@ -1,5 +1,7 @@
 /* ===========================  HEADER  =========================== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Initialiser le système i18n
+  await window.i18n.loadTranslations();
   /* ----------- auth ----------- */
   document.querySelectorAll('[data-action="login"]').forEach(b =>
     b.addEventListener('click', showLogin)
@@ -127,10 +129,16 @@ function setupLanguageSelector() {
   languageSelect.addEventListener('change', handleLanguageChange);
 }
 
-function handleLanguageChange(event) {
+async function handleLanguageChange(event) {
   const selectedLanguage = event.target.value;
   const selectedOption = event.target.options[event.target.selectedIndex];
   const languageText = selectedOption.textContent;
+
+  // Mettre à jour la langue dans le système i18n
+  window.i18n.setLanguage(selectedLanguage);
+  
+  // Attendre que les traductions soient chargées
+  await window.i18n.loadTranslations();
 
   showLanguageConfirmationModal(selectedLanguage, languageText);
 
@@ -155,41 +163,66 @@ function showLanguageConfirmationModal(languageCode, languageText) {
     modal.innerHTML = `
       <div class="modal-content">
         <div class="modal-header">
-          <h3 id="language-modal-title">Confirmation de langue</h3>
+          <h3 id="language-modal-title"></h3>
           <span class="close" id="language-modal-close">&times;</span>
         </div>
         <div class="modal-body">
           <div class="language-confirmation">
-            <div class="language-icon" id="language-modal-icon">🇫🇷</div>
+            <div class="language-icon" id="language-modal-icon"></div>
             <p id="language-modal-message"></p>
             <p class="language-sub-message" id="language-modal-sub-message"></p>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" id="language-modal-ok">OK</button>
         </div>
       </div>
     `;
     document.body.appendChild(modal);
   }
 
-  // 2. Remplir les données
-  const data = getLanguageData(languageCode);
-  document.getElementById('language-modal-icon').textContent = data.flag;
-  document.getElementById('language-modal-message').textContent = data.activatedMessage;
-  document.getElementById('language-modal-sub-message').textContent = data.successMessage;
+  // 2. Remplir avec les traductions i18n
+  const languageNames = window.i18n.getLanguageNames();
+  const languageName = languageNames[languageCode] || languageText;
 
-  // 3. AFFICHAGE DIRECT (showModal ne fonctionne pas ici)
+  // on lit directement le JSON local sans passer par window.__()
+  (async () => {
+    try {
+      const res  = await fetch(`/locales/${languageCode}.json`);
+      const json = await res.json();   // { modal: { languageConfirmation: {...} } }
+      const mc   = json.modal.languageConfirmation;
+      document.getElementById('language-modal-title').textContent       = mc.title;
+      document.getElementById('language-modal-icon').textContent        = getLanguageFlag(languageCode);
+      document.getElementById('language-modal-message').textContent     = mc.activated.replace('{{language}}', languageName);
+      document.getElementById('language-modal-sub-message').textContent = mc.success;
+    } catch (e) {
+      // fallback anglais si jamais le fichier manque
+      const fall = await fetch('/locales/en.json').then(r => r.json());
+      const mc   = fall.modal.languageConfirmation;
+      document.getElementById('language-modal-title').textContent       = mc.title;
+      document.getElementById('language-modal-icon').textContent        = getLanguageFlag(languageCode);
+      document.getElementById('language-modal-message').textContent     = mc.activated.replace('{{language}}', languageName);
+      document.getElementById('language-modal-sub-message').textContent = mc.success;
+    }
+  })();
+
+  // 4. AFFICHAGE
   modal.style.display = 'flex';
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 
-  // 4. Fermer auto après 3 s
+  // 5. Fermer auto après 3 s
   setTimeout(() => {
     modal.classList.remove('show');
     modal.style.display = 'none';
     document.body.style.overflow = '';
   }, 3000);
+}
+
+// Fonction helper pour les drapeaux
+function getLanguageFlag(languageCode) {
+  const flags = {
+    fr: '🇫🇷', it: '🇮🇹', en: '🇬🇧', es: '🇪🇸', 
+    ar: '🇸🇦', de: '🇩🇪', pt: '🇵🇹'
+  };
+  return flags[languageCode] || '🇬🇧';
 }
 
 function getLanguageData(languageCode) {

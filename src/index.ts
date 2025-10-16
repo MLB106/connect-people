@@ -1,52 +1,53 @@
-// src/index.ts
-import dotenv from 'dotenv';
-dotenv.config();
+/**
+ * @file src/index.ts
+ * @description Main application entry point - ES2024 Node.js server
+ * @version 1.0.0
+ * @author MLB <connect_project_dz@yahoo.com>
+ */
 
-import express from 'express';
+import dotenv from 'dotenv';
+import express, { type Request, type Response, type NextFunction, type Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { engine } from 'express-handlebars';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { createServer } from 'http';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createServer, type Server } from 'node:http';
 import './utils/hbs-helpers.js';
 
-/* ---------- import des routes API ---------- */
+// Load environment variables
+dotenv.config();
+
+/* ---------- Route Imports ---------- */
 import apiRouter from './routes/api/index.js';
-
-/* ---------- import des routes Admin ---------- */
 import adminAuthRouter from './routes/admin/auth.routes.js';
-
-/* ---------- import des routes User ---------- */
 import userAuthRouter from './routes/user/auth.routes.js';
-
-/* ---------- import des routes Web (API REST pures) ---------- */
-// import apiOnlyWebRouter from './routes/web/api-only.routes.js';
-
-/* ---------- import des routes Web Dual (HTML + JSON) ---------- */
 import dualWebRouter from './routes/web/dual.routes.js';
-
-/* ---------- import des routes App (Client-side rendering) ---------- */
 import appRouter from './routes/app.routes.js';
-
-/* ---------- import des routes Dev (uniquement en développement) ---------- */
 import { devRouter } from './routes/dev.routes.js';
 import htmlViewRouter from './routes/dev/html-view.routes.js';
 
-/* ---------- import de la configuration ---------- */
+/* ---------- Configuration Imports ---------- */
 import { initializeDatabase } from './config/database.js';
 import { env } from './config/env.js';
 
-/* ---------- import des middlewares ---------- */
+/* ---------- Middleware Imports ---------- */
 import { apiLoggerMiddleware } from './middlewares/apiLogger.middleware.js';
 
-/* ---------- Configuration pour ES modules ---------- */
+/* ---------- ES Module Configuration ---------- */
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
+/**
+ * Express application instance
+ * @type {Application}
+ */
+const app: Application = express();
 
-/* ---------- Configuration Handlebars ---------- */
+/**
+ * Handlebars view engine configuration
+ * @description Configure Handlebars for server-side rendering
+ */
 app.engine('hbs', engine({
   extname: '.hbs',
   defaultLayout: 'layout',
@@ -58,62 +59,68 @@ app.engine('hbs', engine({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-/* ---------- Middlewares ---------- */
+/**
+ * Global middleware configuration
+ * @description Configure CORS, parsing, and logging middleware
+ */
 app.use(cors({ 
-  origin: process.env.FRONT_URL || 'http://localhost:4000', 
+  origin: env.corsOrigin, 
   credentials: true 
 }));
 app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Middleware de logging pour les routes API
+// API request logging middleware
 app.use('/api', apiLoggerMiddleware);
 
-/* ---------- Fichiers statiques (AVANT les routes duales) ---------- */
+/**
+ * Static file serving configuration
+ * @description Serve static assets before route handling
+ */
 app.use('/css', express.static(path.join(__dirname, '..', 'public', 'css')));
 app.use('/js', express.static(path.join(__dirname, '..', 'public', 'js')));
 app.use('/img', express.static(path.join(__dirname, '..', 'public', 'images')));
-// Servir les fichiers HTML statiques directement
+app.use('/locales', express.static(path.join(__dirname, '..', 'src', 'locales')));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-/* ---------- Route de santé (AVANT les routes génériques) ---------- */
-app.get('/health', (_req, res) => {
-  res.json({
-    success: true,
-    data: {
-      status: 'OK',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime()
-    },
-    error: null
-  });
-});
-
-/* ---------- Routes API (spécifiques AVANT génériques) ---------- */
-app.use('/api', apiRouter);
-
-/* ---------- Routes Admin ---------- */
-app.use('/admin', adminAuthRouter);
-
-/* ---------- Routes User ---------- */
-app.use('/user', userAuthRouter);
-
-/* ---------- Routes App (Client-side rendering) ---------- */
+/**
+ * Route configuration
+ * @description Configure all application routes in order of precedence
+ */
+// Client-side rendering routes
 app.use('/app', appRouter);
 
-/* ---------- Route /view/:page (uniquement en développement) ---------- */
-if (process.env.NODE_ENV !== 'production') {
-  app.get('/view/:page', async (req, res) => {
+// Dual web routes (HTML + JSON)
+app.use('/', dualWebRouter);
+console.log('🔧 Mode DUAL activé - Routes web avec HTML et JSON selon le contexte');
+
+// API routes
+app.use('/api', apiRouter);
+
+// Admin authentication routes
+app.use('/admin', adminAuthRouter);
+
+// User authentication routes
+app.use('/user', userAuthRouter);
+
+/**
+ * Development-only routes
+ * @description Routes available only in development environment
+ */
+if (env.nodeEnv !== 'production') {
+  /**
+   * Development page viewer route
+   * @description Render any page for development testing
+   */
+  app.get('/view/:page', async (req: Request, res: Response): Promise<void> => {
     try {
-      // Récupère les données JSON pures
       const pageData = {
         title: `${req.params.page} - Connect People`,
         description: `Page ${req.params.page} - Connect People`,
         locale: 'fr'
       };
       
-      // Rend la vue Handlebars avec les données
       res.render(`pages/${req.params.page}`, pageData);
     } catch (error) {
       console.error(`Erreur lors du rendu de la page /view/${req.params.page}:`, error);
@@ -124,22 +131,35 @@ if (process.env.NODE_ENV !== 'production') {
       });
     }
   });
-}
 
-/* ---------- Routes Dev (uniquement en développement) ---------- */
-if (process.env.NODE_ENV !== 'production') {
-  app.use('/dev', devRouter);
+  // Development routes
+  app.use('/', devRouter);
   app.use('/dev/html', htmlViewRouter);
   console.log('🔧 Mode DEV-VIEW activé - Routes /dev/* et /dev/html/* disponibles');
 }
 
-/* ---------- Routes Web Dual (HTML + JSON) - EN DERNIER car elles capturent / ---------- */
-app.use('/', dualWebRouter);
-console.log('🔧 Mode DUAL activé - Routes web avec HTML et JSON selon le contexte');
+/**
+ * Health check endpoint
+ * @description Application health status endpoint
+ */
+app.get('/health', (_req: Request, res: Response): void => {
+  res.json({
+    success: true,
+    data: {
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: env.nodeEnv
+    },
+    error: null
+  });
+});
 
-/* ---------- Route 404 pour les endpoints non trouvés ---------- */
-app.use('*', (req, res) => {
-  // Si c'est une route API, renvoyer du JSON
+/**
+ * 404 handler for unmatched routes
+ * @description Handle requests to non-existent endpoints
+ */
+app.use('*', (req: Request, res: Response): void => {
   if (req.originalUrl.startsWith('/api')) {
     res.status(404).json({
       success: false,
@@ -147,18 +167,19 @@ app.use('*', (req, res) => {
       error: 'Endpoint API non trouvé'
     });
   } else {
-    // Sinon, renvoyer une page HTML 404
     res.status(404).render('pages/404', {
       title: 'Page non trouvée - Connect-People',
       description: 'La page que vous recherchez n\'existe pas.',
-      locale: 'fr',
-      csrfToken: req.csrfToken()
+      locale: 'fr'
     });
   }
 });
 
-/* ---------- Middleware de gestion d'erreur global ---------- */
-app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+/**
+ * Global error handler middleware
+ * @description Handle unhandled errors across the application
+ */
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction): void => {
   console.error('Erreur non gérée:', err);
   
   const response = {
@@ -170,13 +191,20 @@ app.use((err: Error, _req: express.Request, res: express.Response, _next: expres
   res.status(500).json(response);
 });
 
-/* ---------- Lancement ---------- */
+/**
+ * Server startup configuration
+ * @description Port management and server initialization
+ */
 const PORT = env.port;
 
-// Fonction pour vérifier si un port est disponible
+/**
+ * Check if a port is available
+ * @param {number} port - Port number to check
+ * @returns {Promise<boolean>} True if port is available
+ */
 const isPortAvailable = (port: number): Promise<boolean> => {
   return new Promise((resolve) => {
-    const server = createServer();
+    const server: Server = createServer();
     
     server.listen(port, () => {
       server.once('close', () => {
@@ -191,21 +219,25 @@ const isPortAvailable = (port: number): Promise<boolean> => {
   });
 };
 
-// Fonction pour trouver un port disponible
+/**
+ * Find an available port starting from the preferred port
+ * @param {number} startPort - Preferred port to start with
+ * @returns {Promise<number>} Available port number
+ * @throws {Error} If no port is available
+ */
 const findAvailablePort = async (startPort: number): Promise<number> => {
-  // Essayer d'abord le port configuré
   if (await isPortAvailable(startPort)) {
     return startPort;
   }
   
-  // Essayer les ports de fallback
+  // Try fallback ports
   for (const port of env.fallbackPorts) {
     if (await isPortAvailable(port)) {
       return port;
     }
   }
   
-  // Essayer les ports suivants si aucun port de fallback n'est disponible
+  // Try sequential ports
   let port = startPort + 1;
   const maxAttempts = 20;
   
@@ -219,20 +251,20 @@ const findAvailablePort = async (startPort: number): Promise<number> => {
   throw new Error(`Aucun port disponible trouvé. Ports testés: ${startPort}, ${env.fallbackPorts.join(', ')}, et ${startPort + 1} à ${startPort + maxAttempts}`);
 };
 
-// Initialisation de la base de données et démarrage du serveur
-const startServer = async () => {
+/**
+ * Start the server with database initialization and port management
+ * @returns {Promise<void>}
+ */
+const startServer = async (): Promise<void> => {
   try {
-    // Initialisation de MongoDB
     await initializeDatabase();
     
-    // Vérifier et trouver un port disponible
     const availablePort = await findAvailablePort(PORT);
     
     if (availablePort !== PORT) {
       console.log(`⚠️  Port ${PORT} occupé, utilisation du port ${availablePort}`);
     }
     
-    // Démarrage du serveur Express
     app.listen(availablePort, () => {
       console.log(`🚀 Serveur prêt sur http://localhost:${availablePort}`);
       console.log(`📊 Environnement: ${env.nodeEnv}`);
@@ -244,4 +276,5 @@ const startServer = async () => {
   }
 };
 
+// Start the server
 startServer();

@@ -1,1 +1,1 @@
-import './utils/hbs-helpers.js';
+import './utils/hbs-helpers';

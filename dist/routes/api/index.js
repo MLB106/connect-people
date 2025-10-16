@@ -9,6 +9,7 @@ import pagesApiRouter from './pages.routes.js';
 import { usersApiRouter } from './users.routes.js';
 import reportApiRouter from './report.routes.js';
 import { searchApiRouter } from './search.routes.js';
+import i18nApiRouter from './i18n.routes.js';
 const apiRouter = Router();
 // Routes API principales
 apiRouter.use('/home', homeApiRouter);
@@ -21,6 +22,7 @@ apiRouter.use('/pages', pagesApiRouter);
 apiRouter.use('/users', usersApiRouter);
 apiRouter.use('/report', reportApiRouter);
 apiRouter.use('/search', searchApiRouter);
+apiRouter.use('/i18n', i18nApiRouter);
 // Route de santé API
 apiRouter.get('/health', (_req, res) => {
     res.json({

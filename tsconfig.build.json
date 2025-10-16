@@ -1,11 +1,19 @@
-// Fichier : tsconfig.build.json
+/**
+ * @file tsconfig.build.json
+ * @description TypeScript build configuration for production
+ * @version 1.0.0
+ */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
     "outDir": "./dist",
     "rootDir": "./src",
-    "allowImportingTsExtensions": false   
+    "allowImportingTsExtensions": false,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"]
   },
-  "exclude": ["src/__tests__", "src/client"]
+  "exclude": ["src/__tests__", "src/client", "**/*.test.ts", "**/*.spec.ts"]
 }

@@ -1,11 +1,18 @@
-// src/controllers/user/auth.controller.ts
+/**
+ * @file src/controllers/users/auth.controller.ts
+ * @description User authentication controller with strict ES2023 syntax
+ * @version 1.0.0
+ * @author MLB <connect_project_dz@yahoo.com>
+ */
 
-import { Request, Response } from 'express';
-import { User } from '../../models/user.model';
-import { generateAccessToken, generateRefreshToken } from '../../services/token.service';
-import { log } from '../../services/logger.service';
+import { type Request, type Response } from 'express';
+import { User } from '../../models/user.model.js';
+import { generateAccessToken, generateRefreshToken } from '../../services/token.service.js';
+import { log } from '../../services/logger.service.js';
 
-// Interface pour les données de connexion
+/**
+ * Login request interface
+ */
 interface LoginRequest extends Request {
   body: {
     email: string;
@@ -14,7 +21,9 @@ interface LoginRequest extends Request {
   };
 }
 
-// Interface pour les données d'inscription
+/**
+ * Register request interface
+ */
 interface RegisterRequest extends Request {
   body: {
     email: string;
@@ -26,45 +35,80 @@ interface RegisterRequest extends Request {
   };
 }
 
-export const userLogin = async (req: LoginRequest, res: Response) => {
+/**
+ * API response interface
+ */
+interface ApiResponse<T = unknown> {
+  success: boolean;
+  data: T | null;
+  error: string | null;
+}
+
+/**
+ * User login controller
+ * @param {LoginRequest} req - Express request object
+ * @param {Response} res - Express response object
+ * @returns {Promise<void>}
+ */
+export const userLogin = async (req: LoginRequest, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
-    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    const ip = req.ip ?? req.socket.remoteAddress ?? 'unknown';
 
-    // Vérifier que l'utilisateur existe
+    // Validate input
+    if (!email || !password) {
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Email et mot de passe requis'
+      };
+      res.status(400).json(response);
+      return;
+    }
+
+    // Find user by email
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
       log.user('login_failed', email, { ip, reason: 'user_not_found' });
-      return res.status(401).json({ 
-        success: false, 
-        error: 'Email ou mot de passe incorrect' 
-      });
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Email ou mot de passe incorrect'
+      };
+      res.status(401).json(response);
+      return;
     }
 
-    // Vérifier que le compte est actif
+    // Check if account is active
     if (!user.isActive) {
       log.user('login_failed', email, { ip, reason: 'account_inactive' });
-      return res.status(401).json({ 
-        success: false, 
-        error: 'Compte désactivé' 
-      });
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Compte désactivé'
+      };
+      res.status(401).json(response);
+      return;
     }
 
-    // Vérifier le mot de passe
+    // Verify password
     const isPasswordValid = await (user as any).comparePassword(password);
     if (!isPasswordValid) {
       log.user('login_failed', email, { ip, reason: 'invalid_password' });
-      return res.status(401).json({ 
-        success: false, 
-        error: 'Email ou mot de passe incorrect' 
-      });
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Email ou mot de passe incorrect'
+      };
+      res.status(401).json(response);
+      return;
     }
 
-    // Mettre à jour la dernière connexion
+    // Update last login
     user.lastLogin = new Date();
     await user.save();
 
-    // Générer les tokens
+    // Generate tokens
     const accessToken = generateAccessToken(
       { id: user._id, email: user.email, role: user.role }, 
       'userAccess'
@@ -74,61 +118,89 @@ export const userLogin = async (req: LoginRequest, res: Response) => {
       'userRefresh'
     );
 
-    // Log de connexion réussie
+    // Log successful login
     log.user('login_success', email, { ip, userId: user._id });
 
-    // Retourner les tokens et les données utilisateur
-    return res.json({
+    // Return success response
+    const response: ApiResponse<{
+      user: unknown;
+      accessToken: string;
+      refreshToken: string;
+    }> = {
       success: true,
       data: {
         user: (user as any).toPublicJSON(),
         accessToken,
         refreshToken
-      }
-    });
+      },
+      error: null
+    };
+    res.json(response);
 
   } catch (error) {
-    console.error('Erreur lors de la connexion:', error);
-    log.user('login_error', req.body.email || 'unknown', { 
-      ip: req.ip || 'unknown', 
+    console.error('Login error:', error);
+    log.user('login_error', req.body.email ?? 'unknown', { 
+      ip: req.ip ?? 'unknown', 
       error: error instanceof Error ? error.message : 'Unknown error' 
     });
     
-    return res.status(500).json({ 
-      success: false, 
-      error: 'Erreur interne du serveur' 
-    });
+    const response: ApiResponse = {
+      success: false,
+      data: null,
+      error: 'Erreur interne du serveur'
+    };
+    res.status(500).json(response);
   }
 };
 
-export const userRegister = async (req: RegisterRequest, res: Response) => {
+/**
+ * User registration controller
+ * @param {RegisterRequest} req - Express request object
+ * @param {Response} res - Express response object
+ * @returns {Promise<void>}
+ */
+export const userRegister = async (req: RegisterRequest, res: Response): Promise<void> => {
   try {
     const { email, password, firstName, lastName, role } = req.body;
-    const ip = req.ip || req.socket.remoteAddress || 'unknown';
+    const ip = req.ip ?? req.socket.remoteAddress ?? 'unknown';
 
-    // Vérifier si l'utilisateur existe déjà
+    // Validate input
+    if (!email || !password || !firstName || !lastName) {
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Tous les champs sont requis'
+      };
+      res.status(400).json(response);
+      return;
+    }
+
+    // Check if user already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       log.user('register_failed', email, { ip, reason: 'user_exists' });
-      return res.status(409).json({ 
-        success: false, 
-        error: 'Un compte avec cet email existe déjà' 
-      });
+      const response: ApiResponse = {
+        success: false,
+        data: null,
+        error: 'Un compte avec cet email existe déjà'
+      };
+      res.status(409).json(response);
+      return;
     }
 
-    // Créer le nouvel utilisateur
+    // Create new user
     const newUser = new User({
       name: `${firstName} ${lastName}`,
       email: email.toLowerCase(),
-      passwordHash: password, // Le middleware pre('save') va hasher automatiquement
-      role: role || 'user',
+      passwordHash: password, // The pre('save') middleware will hash automatically
+      role: role ?? 'user',
       isActive: true,
       emailVerified: false
     });
 
     await newUser.save();
 
-    // Générer les tokens
+    // Generate tokens
     const accessToken = generateAccessToken(
       { id: newUser._id, email: newUser.email, role: newUser.role }, 
       'userAccess'
@@ -138,29 +210,37 @@ export const userRegister = async (req: RegisterRequest, res: Response) => {
       'userRefresh'
     );
 
-    // Log d'inscription réussie
+    // Log successful registration
     log.user('register_success', email, { ip, userId: newUser._id });
 
-    // Retourner les tokens et les données utilisateur
-    return res.status(201).json({
+    // Return success response
+    const response: ApiResponse<{
+      user: unknown;
+      accessToken: string;
+      refreshToken: string;
+    }> = {
       success: true,
       data: {
         user: (newUser as any).toPublicJSON(),
         accessToken,
         refreshToken
-      }
-    });
+      },
+      error: null
+    };
+    res.status(201).json(response);
 
   } catch (error) {
-    console.error('Erreur lors de l\'inscription:', error);
-    log.user('register_error', req.body.email || 'unknown', { 
-      ip: req.ip || 'unknown', 
+    console.error('Registration error:', error);
+    log.user('register_error', req.body.email ?? 'unknown', { 
+      ip: req.ip ?? 'unknown', 
       error: error instanceof Error ? error.message : 'Unknown error' 
     });
     
-    return res.status(500).json({ 
-      success: false, 
-      error: 'Erreur interne du serveur' 
-    });
+    const response: ApiResponse = {
+      success: false,
+      data: null,
+      error: 'Erreur interne du serveur'
+    };
+    res.status(500).json(response);
   }
 };

@@ -1,4 +1,11 @@
 {
   "hello": "Hola",
-  "welcome": "Bienvenido"
+  "welcome": "Bienvenido",
+  "modal": {
+    "languageConfirmation": {
+      "title": "Confirmación de idioma",
+      "activated": "Idioma {{language}} activado",
+      "success": "El idioma se ha cambiado exitosamente"
+    }
+  }
 }

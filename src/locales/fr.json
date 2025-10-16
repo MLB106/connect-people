@@ -1,4 +1,11 @@
 {
   "hello": "Bonjour",
-  "welcome": "Bienvenue sur Connect People"
+  "welcome": "Bienvenue sur Connect People",
+  "modal": {
+    "languageConfirmation": {
+      "title": "Confirmation de langue",
+      "activated": "Langue {{language}} activée",
+      "success": "La langue a été changée avec succès"
+    }
+  }
 }
