@@ -1,4 +1,32 @@
 {
+  "window.autoDetectColorScheme": false,
   "workbench.colorTheme": "Dark+ (default dark)",
-  "window.autoDetectColorScheme": false
+  "workbench.colorCustomizations": {
+    "editor.background": "#0f1117",
+    "editor.foreground": "#e6e6e6",
+    "editorLineNumber.foreground": "#5b6078",
+    "editorCursor.foreground": "#ffd700",
+    "sideBar.background": "#0b0d12",
+    "sideBar.foreground": "#d0d0d0",
+    "activityBar.background": "#0b0d12",
+    "activityBar.foreground": "#d0d0d0",
+    "statusBar.background": "#0b0d12",
+    "statusBar.foreground": "#d0d0d0",
+    "tab.inactiveBackground": "#0f1117",
+    "tab.activeBackground": "#141720",
+    "tab.activeForeground": "#ffffff",
+    "editorGroupHeader.tabsBackground": "#0f1117",
+    "panel.background": "#0b0d12",
+    "terminal.background": "#0b0d12",
+    "terminal.foreground": "#e6e6e6"
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#6A9955",
+    "functions": "#4FC1FF",
+    "keywords": "#C586C0",
+    "numbers": "#B5CEA8",
+    "strings": "#CE9178",
+    "variables": "#9CDCFE",
+    "types": "#4EC9B0"
+  }
 }
