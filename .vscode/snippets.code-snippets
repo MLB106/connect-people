@@ -1,0 +1,147 @@
+{
+  "Express Route Handler": {
+    "scope": "typescript",
+    "prefix": "route",
+    "body": [
+      "export const ${1:handlerName} = async (req: Request, res: Response): Promise<void> => {",
+      "  try {",
+      "    ${2:// Implementation}",
+      "    res.status(200).json({ success: true, data: ${3:result} });",
+      "  } catch (error) {",
+      "    console.error('Error in ${1:handlerName}:', error);",
+      "    res.status(500).json({ success: false, error: 'Internal server error' });",
+      "  }",
+      "};"
+    ],
+    "description": "Express route handler with error handling"
+  },
+  "Async Function": {
+    "scope": "typescript",
+    "prefix": "afn",
+    "body": [
+      "const ${1:functionName} = async (${2:params}): Promise<${3:ReturnType}> => {",
+      "  ${4:// Implementation}",
+      "};"
+    ],
+    "description": "Async function declaration"
+  },
+  "Try-Catch Block": {
+    "scope": "typescript",
+    "prefix": "tryc",
+    "body": [
+      "try {",
+      "  ${1:// Code that might throw}",
+      "} catch (error) {",
+      "  console.error('${2:Error description}:', error);",
+      "  ${3:// Error handling}",
+      "}"
+    ],
+    "description": "Try-catch block with error logging"
+  },
+  "MongoDB Model": {
+    "scope": "typescript",
+    "prefix": "model",
+    "body": [
+      "import { Schema, model, Document } from 'mongoose';",
+      "",
+      "export interface I${1:ModelName} extends Document {",
+      "  ${2:field}: ${3:string};",
+      "  createdAt: Date;",
+      "  updatedAt: Date;",
+      "}",
+      "",
+      "const ${1:ModelName}Schema = new Schema<I${1:ModelName}>({",
+      "  ${2:field}: {",
+      "    type: ${4:String},",
+      "    required: true",
+      "  }",
+      "}, {",
+      "  timestamps: true",
+      "});",
+      "",
+      "export const ${1:ModelName} = model<I${1:ModelName}>('${1:ModelName}', ${1:ModelName}Schema);"
+    ],
+    "description": "MongoDB model with TypeScript interface"
+  },
+  "Jest Test Suite": {
+    "scope": "typescript",
+    "prefix": "test",
+    "body": [
+      "import { ${1:functionToTest} } from '${2:../path/to/module}';",
+      "",
+      "describe('${3:Test Suite Name}', () => {",
+      "  beforeEach(() => {",
+      "    ${4:// Setup}",
+      "  });",
+      "",
+      "  afterEach(() => {",
+      "    ${5:// Cleanup}",
+      "  });",
+      "",
+      "  it('should ${6:test description}', async () => {",
+      "    // Arrange",
+      "    ${7:// Setup test data}",
+      "",
+      "    // Act",
+      "    ${8:// Execute function}",
+      "",
+      "    // Assert",
+      "    ${9:// Verify results}",
+      "  });",
+      "});"
+    ],
+    "description": "Jest test suite template"
+  },
+  "Express Middleware": {
+    "scope": "typescript",
+    "prefix": "middleware",
+    "body": [
+      "export const ${1:middlewareName} = (req: Request, res: Response, next: NextFunction): void => {",
+      "  try {",
+      "    ${2:// Middleware logic}",
+      "    next();",
+      "  } catch (error) {",
+      "    console.error('Error in ${1:middlewareName}:', error);",
+      "    res.status(500).json({ success: false, error: 'Internal server error' });",
+      "  }",
+      "};"
+    ],
+    "description": "Express middleware function"
+  },
+  "Zod Schema": {
+    "scope": "typescript",
+    "prefix": "zod",
+    "body": [
+      "import { z } from 'zod';",
+      "",
+      "export const ${1:schemaName}Schema = z.object({",
+      "  ${2:field}: z.string()${3:.min(1)},",
+      "});",
+      "",
+      "export type ${1:schemaName} = z.infer<typeof ${1:schemaName}Schema>;"
+    ],
+    "description": "Zod validation schema"
+  },
+  "Logger": {
+    "scope": "typescript",
+    "prefix": "log",
+    "body": [
+      "import { logger } from '${1:../utils/logger}';",
+      "",
+      "logger.${2|info,error,warn,debug|}('${3:message}', { ${4:context} });"
+    ],
+    "description": "Logger with context"
+  },
+  "API Response": {
+    "scope": "typescript",
+    "prefix": "apiresponse",
+    "body": [
+      "res.status(${1:200}).json({",
+      "  success: ${2:true},",
+      "  ${3:data: result,}",
+      "  ${4:message: '${5:Operation successful}'}",
+      "});"
+    ],
+    "description": "Standardized API response"
+  }
+}
