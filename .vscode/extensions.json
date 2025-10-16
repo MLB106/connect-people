@@ -1,0 +1,55 @@
+{
+  "recommendations": [
+    // TypeScript et JavaScript
+    "ms-vscode.vscode-typescript-next",
+    
+    // Formatage et linting
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    
+    // Node.js
+    "ms-vscode.vscode-json",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    
+    // Git
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    
+    // Productivité
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "ms-vscode.vscode-json",
+    
+    // Testing
+    "orta.vscode-jest",
+    
+    // Handlebars (pour vos templates)
+    "andrejunges.handlebars",
+    
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    
+    // Thème et icônes
+    "pkief.material-icon-theme",
+    "github.github-vscode-theme",
+    
+    // Utilitaires
+    "streetsidesoftware.code-spell-checker",
+    "gruntfuggly.todo-tree",
+    "aaron-bond.better-comments",
+    "usernamehw.errorlens",
+    
+    // REST API (pour tester vos APIs)
+    "humao.rest-client",
+    
+    // Docker (si vous utilisez Docker)
+    "ms-azuretools.vscode-docker",
+    
+    // MongoDB (pour votre base de données)
+    "mongodb.mongodb-vscode"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}

@@ -1,0 +1,125 @@
+[
+  // Formatage rapide
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly"
+  },
+  
+  // Organiser les imports
+  {
+    "key": "ctrl+shift+o",
+    "command": "editor.action.organizeImports",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Correction ESLint
+  {
+    "key": "ctrl+shift+x",
+    "command": "eslint.executeAutofix",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Navigation rapide dans les fichiers
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen"
+  },
+  
+  // Recherche globale
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.findInFiles",
+    "when": "!editorFocus"
+  },
+  
+  // Terminal intégré
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  
+  // Nouveau terminal
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.terminal.new"
+  },
+  
+  // Panneau de problèmes
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.actions.view.problems"
+  },
+  
+  // Explorateur de fichiers
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer"
+  },
+  
+  // Git
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm"
+  },
+  
+  // Debug
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.start",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "shift+f5",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode"
+  },
+  
+  // Tests
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "npm: test"
+  },
+  
+  // Build
+  {
+    "key": "ctrl+shift+b",
+    "command": "workbench.action.tasks.build"
+  },
+  
+  // Commenter/décommenter
+  {
+    "key": "ctrl+/",
+    "command": "editor.action.commentLine",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Dupliquer ligne
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Supprimer ligne
+  {
+    "key": "ctrl+shift+k",
+    "command": "editor.action.deleteLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Déplacer ligne vers le haut
+  {
+    "key": "alt+up",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  
+  // Déplacer ligne vers le bas
+  {
+    "key": "alt+down",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  }
+]
