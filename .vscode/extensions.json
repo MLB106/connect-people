@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+    "eamodio.gitlens",
+    "redhat.vscode-yaml",
+    "editorconfig.editorconfig",
+    "bungcip.better-toml",
+    "orta.vscode-jest",
+    "ms-azuretools.vscode-docker",
+    "streetsidesoftware.code-spell-checker",
+    "mrmlnc.vscode-less",
+    "sibiraj-s.vscode-scss-formatter",
+    "davidanson.vscode-markdownlint",
+    "ms-vscode.hexeditor",
+    "github.vscode-github-actions"
+  ]
+}
