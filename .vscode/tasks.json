@@ -1,0 +1,101 @@
+{
+  // VS Code tasks: npm scripts + utilitaires ciblés
+  "$schema": "https://json.schemastore.org/tasks.json",
+  "version": "2.0.0",
+  "options": {
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
+  "tasks": [
+    {
+      "label": "dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "problemMatcher": ["$tsc-watch"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "start",
+      "type": "shell",
+      "command": "npm start"
+    },
+    {
+      "label": "type-check",
+      "type": "shell",
+      "command": "npm run type-check",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "lint",
+      "type": "shell",
+      "command": "npm run lint",
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "lint:fix (fichier courant)",
+      "type": "shell",
+      "command": "npx eslint --fix ${file}"
+    },
+    {
+      "label": "format (fichier courant)",
+      "type": "shell",
+      "command": "npx prettier --write ${file}"
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "npm test",
+      "problemMatcher": []
+    },
+    {
+      "label": "test:watch",
+      "type": "shell",
+      "command": "npm run test:watch"
+    },
+    {
+      "label": "test:cov",
+      "type": "shell",
+      "command": "npm run test:cov"
+    },
+    {
+      "label": "test:ci",
+      "type": "shell",
+      "command": "npm run test:ci"
+    },
+    {
+      "label": "test:fichier courant",
+      "type": "shell",
+      "command": "npx jest --config jest.config.js --runTestsByPath ${file} --watch",
+      "problemMatcher": []
+    },
+    {
+      "label": "seed",
+      "type": "shell",
+      "command": "npm run seed"
+    },
+    {
+      "label": "port:check",
+      "type": "shell",
+      "command": "npm run port:check"
+    },
+    {
+      "label": "port:free",
+      "type": "shell",
+      "command": "npm run port:free"
+    },
+    {
+      "label": "port:find",
+      "type": "shell",
+      "command": "npm run port:find"
+    }
+  ]
+}

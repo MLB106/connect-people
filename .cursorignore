@@ -1,0 +1,38 @@
+# Ignorer les dossiers volumineux et artefacts de build
+node_modules/
+dist/
+coverage/
+logs/
+
+# Fichiers d’environnement et secrets
+.env
+.env.*
+!.env.example
+
+# Caches/outils
+.npm/
+.pnpm-store/
+.yarn/
+.yarn-cache/
+.eslintcache
+.jest-cache/
+.jest/
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Générés/temporaires
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Public assets lourds (pas de code)
+public/**/*.map
+public/**/*.min.*
+
+# Tests outputs
+**/__snapshots__/
