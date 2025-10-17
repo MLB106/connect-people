@@ -1,0 +1,40 @@
+{
+  "recommendations": [
+    // === ESSENTIELS TYPESCRIPT ===
+    "ms-vscode.vscode-typescript-next",
+    "bradlc.vscode-tailwindcss",
+    
+    // === FORMATAGE & LINTING ===
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    
+    // === TESTS ===
+    "orta.vscode-jest",
+    
+    // === GIT ===
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    
+    // === PRODUCTIVITÉ ===
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-json",
+    
+    // === DEBUGGING ===
+    "ms-vscode.js-debug",
+    
+    // === MARKDOWN ===
+    "yzhang.markdown-all-in-one",
+    
+    // === UTILS ===
+    "formulahendry.auto-rename-tag",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify"
+  ]
+}

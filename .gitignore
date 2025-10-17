@@ -1,2 +1,215 @@
+# === DEPENDENCIES ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
+# === BUILD OUTPUTS ===
+dist/
+build/
+*.tsbuildinfo
+
+# === ENVIRONMENT ===
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# === LOGS ===
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# === RUNTIME DATA ===
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# === COVERAGE DIRECTORY ===
+coverage/
+*.lcov
+.nyc_output
+
+# === DEPENDENCY DIRECTORIES ===
+node_modules/
+jspm_packages/
+
+# === TYPESCRIPT ===
+*.tsbuildinfo
+.tsbuildinfo
+
+# === OPTIONAL NPM CACHE ===
+.npm
+
+# === OPTIONAL ESLINT CACHE ===
+.eslintcache
+
+# === MICROBUNDLE CACHE ===
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# === OPTIONAL REPL HISTORY ===
+.node_repl_history
+
+# === OUTPUT OF 'NPM PACK' ===
+*.tgz
+
+# === YARN INTEGRITY FILE ===
+.yarn-integrity
+
+# === PARCEL-BUNDLER CACHE ===
+.cache
+.parcel-cache
+
+# === NEXT.JS BUILD OUTPUT ===
+.next
+out
+
+# === NUXT.JS BUILD / GENERATE OUTPUT ===
+.nuxt
+dist
+
+# === GATSBY FILES ===
+.cache/
+public
+
+# === VUEPRESS BUILD OUTPUT ===
+.vuepress/dist
+
+# === SERVERLESS DIRECTORIES ===
+.serverless/
+
+# === FUSEBOX CACHE ===
+.fusebox/
+
+# === DYNAMODB LOCAL FILES ===
+.dynamodb/
+
+# === TERNJS PORT FILE ===
+.tern-port
+
+# === STORES VSCode VERSIONS ===
+.vscode-test
+
+# === YARN V2 ===
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# === MACOS ===
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# === WINDOWS ===
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# === LINUX ===
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# === JETBRAINS ===
+.idea/
+*.swp
+*.swo
+*~
+
+# === SUBLIME TEXT ===
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
+# === SFTP CONFIG FILE ===
+sftp-config.json
+
+# === PACKAGE DIRECTORIES ===
+node_modules/
+jspm_packages/
+
+# === SERVERLESS ===
+.serverless
+
+# === TEMPORARY FILES ===
+tmp/
+temp/
+
+# === PROJECT SPECIFIC ===
+# Logs spécifiques au projet
+logs/*.log
+
+# Fichiers de sauvegarde
+*.backup
+*.bak
+*.tmp
+
+# Fichiers de test temporaires
+test-*.html
+test-*.js
+!test-*.config.js
+
+# Base de données locale
+*.db
+*.sqlite
+*.sqlite3
+
+# Certificats et clés
+*.pem
+*.key
+*.crt
+*.cert
+
+# Fichiers de configuration sensibles
+config/local.json
+config/production.json
+
+# Uploads temporaires
+uploads/temp/
+
+# Cache Redis
+dump.rdb
+
+# Anciens README (garde le principal)
 README
