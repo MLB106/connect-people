@@ -1,0 +1,169 @@
+# 🎯 CURSOR RULES - Connect People Project
+
+## 📋 CONTEXTE DU PROJET
+- **Projet**: Backend Node.js moderne en ES2023
+- **Stack**: TypeScript + Express + MongoDB + Redis + Socket.io
+- **Architecture**: ESM uniquement (pas de CommonJS)
+- **Style**: Code en français (commentaires, variables, fonctions)
+- **Version Node**: 20+ avec support ES2023
+
+## 🏗️ ARCHITECTURE & STRUCTURE
+
+### Structure des dossiers
+```
+src/
+├── config/          # Configuration (DB, Redis, etc.)
+├── controllers/     # Contrôleurs Express
+├── middlewares/     # Middlewares personnalisés
+├── models/          # Modèles Mongoose
+├── routes/          # Routes Express
+├── services/        # Logique métier
+├── types/           # Types TypeScript
+├── utils/           # Utilitaires
+└── index.ts         # Point d'entrée
+```
+
+### Conventions de nommage
+- **Fichiers**: kebab-case (`user-controller.ts`)
+- **Classes**: PascalCase (`UserController`)
+- **Fonctions/Variables**: camelCase (`getUserById`)
+- **Constants**: UPPER_SNAKE_CASE (`MAX_RETRY_COUNT`)
+- **Types/Interfaces**: PascalCase avec préfixe (`IUser`, `TUserRole`)
+
+## 🎨 STYLE DE CODE
+
+### TypeScript
+- **TOUJOURS** utiliser les imports ESM (`import/export`)
+- **JAMAIS** de `require()` ou `module.exports`
+- Types stricts obligatoires
+- Préférer les interfaces aux types pour les objets
+- Utiliser les types utilitaires TypeScript
+
+### Exemples de bonnes pratiques
+```typescript
+// ✅ BON - Import ESM
+import { Router } from 'express';
+import type { Request, Response } from 'express';
+
+// ✅ BON - Interface avec types stricts
+interface IUtilisateur {
+  readonly id: string;
+  nom: string;
+  email: string;
+  dateCreation: Date;
+}
+
+// ✅ BON - Fonction avec types explicites
+export const obtenirUtilisateur = async (id: string): Promise<IUtilisateur | null> => {
+  // Implementation
+};
+
+// ❌ MAUVAIS - CommonJS
+const express = require('express');
+
+// ❌ MAUVAIS - Types implicites
+const getUser = (id) => {
+  // Implementation
+};
+```
+
+### Gestion d'erreurs
+- Utiliser des classes d'erreur personnalisées
+- Toujours typer les erreurs
+- Logging structuré avec Winston
+
+```typescript
+// ✅ BON
+export class ErreurUtilisateurIntrouvable extends Error {
+  constructor(id: string) {
+    super(`Utilisateur avec l'ID ${id} introuvable`);
+    this.name = 'ErreurUtilisateurIntrouvable';
+  }
+}
+```
+
+## 🔧 OUTILS & CONFIGURATION
+
+### Scripts NPM disponibles
+- `npm run dev` - Développement avec watch
+- `npm run build` - Build TypeScript
+- `npm run test` - Tests Jest
+- `npm run lint` - ESLint
+- `npm run type-check` - Vérification TypeScript
+
+### Base de données
+- **MongoDB** avec Mongoose
+- **Redis** pour les sessions/cache
+- Schémas Mongoose avec validation Zod
+
+### Tests
+- **Jest** avec TypeScript
+- Tests unitaires dans `__tests__/unit/`
+- Tests d'intégration dans `__tests__/integration/`
+- Mocking avec `jest-mock-extended`
+
+## 🚀 DIRECTIVES POUR L'IA
+
+### Lors de l'écriture de code
+1. **TOUJOURS** écrire en français (commentaires, noms de variables)
+2. **TOUJOURS** utiliser ESM (import/export)
+3. **TOUJOURS** typer strictement avec TypeScript
+4. **TOUJOURS** valider les données avec Zod
+5. **TOUJOURS** gérer les erreurs proprement
+6. **TOUJOURS** ajouter des logs appropriés
+
+### Lors de modifications
+- Respecter l'architecture existante
+- Maintenir la cohérence du style
+- Ajouter des tests pour le nouveau code
+- Mettre à jour la documentation si nécessaire
+
+### Patterns à éviter
+- ❌ CommonJS (`require`, `module.exports`)
+- ❌ `any` type (utiliser `unknown` si nécessaire)
+- ❌ Mutations directes (préférer l'immutabilité)
+- ❌ Callbacks (utiliser async/await)
+- ❌ Code en anglais (sauf APIs externes)
+
+### Patterns à favoriser
+- ✅ Composition over inheritance
+- ✅ Dependency injection
+- ✅ Pure functions quand possible
+- ✅ Error boundaries
+- ✅ Validation stricte des inputs
+
+## 🔒 SÉCURITÉ
+
+### Obligatoire
+- Validation Zod sur tous les inputs
+- Sanitisation avec DOMPurify
+- Rate limiting
+- CORS configuré
+- Helmet pour les headers
+- Sessions sécurisées
+
+### Exemple de validation
+```typescript
+import { z } from 'zod';
+
+const schemaUtilisateur = z.object({
+  nom: z.string().min(2).max(50),
+  email: z.string().email(),
+  motDePasse: z.string().min(8)
+});
+
+export const validerUtilisateur = (donnees: unknown) => {
+  return schemaUtilisateur.parse(donnees);
+};
+```
+
+## 📝 DOCUMENTATION
+
+- Commentaires JSDoc pour les fonctions publiques
+- README à jour avec les instructions
+- Documentation API avec exemples
+- Changelog pour les versions
+
+---
+
+**Rappel**: Ce projet utilise ES2023 avec ESM uniquement. Aucun CommonJS n'est autorisé.

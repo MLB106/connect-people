@@ -1,32 +1,28 @@
-# Dependencies
-node_modules/
-
-# Build outputs
+# === BUILD OUTPUTS ===
 dist/
+build/
 coverage/
 
-# Logs
+# === DEPENDENCIES ===
+node_modules/
+
+# === LOGS ===
 logs/
 *.log
 
-# Environment files
-.env
-.env.local
-.env.production
+# === GENERATED FILES ===
+*.d.ts
+*.tsbuildinfo
 
-# IDE files
-.vscode/
-.idea/
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Package files
+# === PACKAGE FILES ===
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Generated files
-*.min.js
-*.min.css
+# === MISC ===
+.DS_Store
+Thumbs.db
+
+# === SPECIFIC FILES ===
+CHANGELOG.md
+LICENSE
