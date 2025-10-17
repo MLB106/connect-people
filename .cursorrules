@@ -1,0 +1,55 @@
+Projet: connect-people — Node.js (ESM) + TypeScript strict
+
+Contexte & stack
+- TypeScript: target ES2023, module ESNext, résolution bundler (voir tsconfig.json)
+- Build: tsc avec tsconfig.build.json (sortie dans dist/)
+- Tests: Jest + ts-jest en ESM (testEnvironment "node")
+- Lint/format: ESLint (flat config) + Prettier
+- Runtime: Express, Mongoose, Redis (connect-redis), Socket.io, Zod, Helmet, Rate limit
+
+Gestionnaire de paquets
+- Utiliser npm (présence de package-lock.json)
+
+Commandes utiles (à privilégier)
+- Développement: npm run dev
+- Type-check: npm run type-check (ou :strict / :watch selon besoin)
+- Lint: npm run lint (auto-fix: npm run lint:fix)
+- Format: npm run format
+- Tests: npm test | npm run test:watch | npm run test:cov | npm run test:ci
+- Build: npm run build (pré-nettoyage via prebuild)
+- Start (compilé): npm start | npm run start:prod
+- Validation locale avant commit: npm run check (hook precommit)
+
+Conventions de code
+- ESM uniquement: utiliser import/export; ne pas introduire require() ou module.exports
+- Garder la stricte TS activée; ne pas baisser les règles eslint sans justification
+- N’éditer jamais des fichiers générés (dist/**) — modifier uniquement src/**
+- Préférer des exports nommés; éviter les exports par défaut si non nécessaires
+- Journalisation via winston; éviter console.* en prod (règles eslint)
+- Validation d’entrées: privilégier zod; respecter les schémas existants
+
+Tests
+- Placer les tests sous src/__tests__ et nommer en *.test.ts
+- Utiliser supertest pour les routes HTTP
+- Respecter l’ESM dans les tests (import, pas require)
+
+Sécurité & secrets
+- Ne jamais commiter de secrets (.env, clés, tokens). Vérifier process.env.*
+- Durcir les routes (helmet, rate limiting, validation d’input)
+
+Organisation & structure
+- Code applicatif: src/**
+- Sortie build: dist/** (à ignorer)
+- Assets publics: public/** (ne pas y déposer de logique)
+- Logs: logs/**
+
+Heuristiques de contribution
+- Avant toute PR/commit: npm run check (type-check + lint:check + build:check)
+- Pour corriger le style: npm run lint:fix puis npm run format
+- Ajouter systématiquement des tests pour nouvelles routes/services
+- Si une dépendance runtime est ajoutée, mettre à jour les types/devDeps si utiles
+
+Notes Cursor
+- Quand tu montres du code existant, cite avec références de fichier et lignes
+- N’exécute pas de serveurs multiples; réutiliser les ports (scripts/port-manager.js)
+- Ne modifie pas la config Jest/TS sans raison. Si nécessaire, expliquer le pourquoi
