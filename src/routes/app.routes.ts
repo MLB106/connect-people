@@ -1,8 +1,9 @@
 // src/routes/app.routes.ts
 import { Router } from 'express';
 import { Request, Response } from 'express';
+import { ApiResponseUtil } from '../utils/apiResponse';
 
-const router = Router();
+const router: Router = Router();
 
 // Pages disponibles pour l'application côté client
 const availablePages = [
@@ -152,7 +153,7 @@ router.get('/:page', (req: Request, res: Response) => {
     const { page } = req.params;
     
     // Vérifier si la page est disponible
-    if (!availablePages.includes(page)) {
+    if (!page || !availablePages.includes(page)) {
       return res.status(404).render('layouts/main', {
         pageName: 'error',
         title: 'Page non trouvée - Connect People',
@@ -190,7 +191,7 @@ router.get('/api/pages/page/:pageName', (req: Request, res: Response) => {
     const { pageName } = req.params;
     
     // Vérifier si la page est disponible
-    if (!availablePages.includes(pageName)) {
+    if (!pageName || !availablePages.includes(pageName)) {
       return res.status(404).json({
         success: false,
         data: null,
@@ -202,6 +203,7 @@ router.get('/api/pages/page/:pageName', (req: Request, res: Response) => {
       });
     }
 
+    if (!pageName) return ApiResponseUtil.error(res, 400, 'Paramètre pageName manquant');
     // Récupérer les données de la page
     const pageData = getPageData(pageName);
     

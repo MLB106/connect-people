@@ -7,7 +7,7 @@ import { turnstileGuard } from '../../middlewares/turnstile.middleware.js';
 import { adminLoginSchema } from '../../schemas/adminUser.schema.js';
 import { adminLogin } from '../../controllers/admin/auth.controller.js';
 
-const router = Router();  
+const router: Router = Router();  
 
 router.post(
   '/login',

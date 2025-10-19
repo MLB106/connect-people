@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
 
-const router = Router();
+const router: Router = Router();
 
 // Données JSON pour les pages
 const pagesData = {

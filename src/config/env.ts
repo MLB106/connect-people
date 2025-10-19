@@ -14,7 +14,7 @@ dotenv.config();
  * Environment variable types
  */
 type NodeEnv = 'development' | 'production' | 'test';
-type DatabaseType = 'mongodb' | 'postgresql' | 'mysql';
+export type DatabaseType = 'mongodb' | 'postgresql' | 'mysql';
 
 /**
  * Utility function to require an environment variable

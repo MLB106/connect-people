@@ -3,7 +3,7 @@ import { Router } from 'express';
 import viewParserService from '../../services/viewParser.service.js';
 import { getFooterLinks } from '../../controllers/footer.controller.js';
 
-export const footerCompleteApiRouter = Router();
+export const footerCompleteApiRouter: Router = Router();
 
 // Configuration des pages footer
 const footerPages = {

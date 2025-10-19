@@ -1,12 +1,12 @@
 // src/routes/api/users.routes.ts
-import { Router, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import { User, IUser } from '../../models/user.model.js';
 import { z } from 'zod';
 import { ApiResponseUtil, asyncHandler } from '../../utils/apiResponse.js';
 import { validateRequest, validateParams, commonSchemas } from '../../utils/validation.js';
 import { Logger } from '../../utils/logger.js';
 
-export const usersApiRouter = Router();
+export const usersApiRouter: express.Router = express.Router();
 
 // Schémas de validation Zod
 const createUserSchema = z.object({
@@ -63,7 +63,7 @@ usersApiRouter.get('/:id',
       return ApiResponseUtil.notFound(res, 'Utilisateur non trouvé');
     }
 
-    Logger.info('Utilisateur récupéré avec succès', { userId: id });
+    Logger.info('Utilisateur récupéré avec succès', { userId: id! });
     ApiResponseUtil.success(res, 200, sanitizeUser(user));
   })
 );
@@ -131,7 +131,7 @@ usersApiRouter.patch('/:id',
       return ApiResponseUtil.notFound(res, 'Utilisateur non trouvé');
     }
 
-    Logger.info('Utilisateur mis à jour avec succès', { userId: id });
+    Logger.info('Utilisateur mis à jour avec succès', { userId: id! });
     ApiResponseUtil.success(res, 200, sanitizeUser(updatedUser));
   })
 );
@@ -159,7 +159,7 @@ usersApiRouter.delete('/:id',
       return ApiResponseUtil.notFound(res, 'Utilisateur non trouvé');
     }
 
-    Logger.info('Utilisateur supprimé avec succès', { userId: id });
+    Logger.info('Utilisateur supprimé avec succès', { userId: id! });
     ApiResponseUtil.success(res, 200, { message: 'Utilisateur supprimé avec succès' });
   })
 );

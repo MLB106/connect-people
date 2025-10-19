@@ -8,7 +8,7 @@ import fs from 'fs/promises';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const router = Router();
+const router: Router = Router();
 
 // Route pour obtenir les traductions d'une langue spécifique
 router.get('/translations', async (req, res) => {

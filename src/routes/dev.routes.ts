@@ -4,7 +4,7 @@ import { getEntreprendreOptions } from '../controllers/nav-entreprendre.controll
 import { getFooterLinks } from '../controllers/footer.controller.js';
 import { getSearchCategories } from '../controllers/header.controller.js';
 
-export const devRouter = Router();
+export const devRouter: Router = Router();
 
 // Fonction utilitaire pour créer une route miroir avec données dynamiques
 const createDevRoute = (path: string, viewName: string, dataFunction: (req: Request, res: Response, next?: any) => Promise<any>) => {

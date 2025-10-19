@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import viewParserService from '../../services/viewParser.service.js';
 
-export const immobilierCompleteApiRouter = Router();
+export const immobilierCompleteApiRouter: Router = Router();
 
 // Configuration des pages immobilier
 const immobilierPages = {

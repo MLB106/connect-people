@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { SocialLink } from '../../models/socialLink.model.js';
 import { AppStoreLink } from '../../models/appStoreLink.model.js';
 
-const router = Router();
+const router: Router = Router();
 
 router.get('/footer', async (req, res) => {
   try {

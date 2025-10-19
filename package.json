@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "node --watch --loader tsx/esm src/index.ts",
+    "dev": "node --watch --import tsx/esm src/index.ts",
     "dev:api": "node --watch --loader tsx/esm src/index.ts",
     "dev:debug": "node --inspect --watch --loader tsx/esm src/index.ts",
     "dev:check": "node --check --loader tsx/esm src/index.ts",

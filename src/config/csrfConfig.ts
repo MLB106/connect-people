@@ -6,7 +6,7 @@ export const configureCsrf = () =>
   csrf({
     cookie: true,
     ignoreMethods: ['GET', 'HEAD', 'OPTIONS'],
-    value: (req: Request) =>
+    value: (req) =>
       req.body._csrf || req.query._csrf || req.headers['x-csrf-token'],
   });
 

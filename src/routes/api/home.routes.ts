@@ -1,7 +1,7 @@
 // src/routes/api/home.routes.ts
 import { Router } from 'express';
 
-export const homeApiRouter = Router();
+export const homeApiRouter: Router = Router();
 
 /**
  * GET /api/home

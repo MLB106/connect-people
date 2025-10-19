@@ -2,5 +2,5 @@
 import { Router } from 'express';
 import { getEntreprendreOptions } from '../../controllers/nav-entreprendre.controller.js';
 
-export const entreprendreApiRouter = Router();
+export const entreprendreApiRouter: Router = Router();
 entreprendreApiRouter.get('/nav/entreprendre', getEntreprendreOptions);

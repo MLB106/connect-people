@@ -53,7 +53,7 @@ const sectionHelper: HelperDelegate = function(
 const yieldHelper: HelperDelegate = function(
   this: HandlebarsContext, 
   name: string, 
-  options: HelperOptions
+  _options: HelperOptions
 ): string {
   if (typeof name !== 'string') {
     throw new Error('Section name must be a string');
@@ -108,7 +108,7 @@ const formatDateHelper: HelperDelegate = function(
 const jsonHelper: HelperDelegate = function(
   this: HandlebarsContext,
   obj: unknown,
-  options: HelperOptions
+  _options: HelperOptions
 ): string {
   try {
     return JSON.stringify(obj, null, 2);

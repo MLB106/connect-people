@@ -1,9 +1,9 @@
 // src/routes/admin/sensitive.routes.ts
-import express from 'express';
+import { Router } from 'express';
 import { sensitiveAction } from '../../middlewares/admin/sensitiveAction.middleware';
 import { turnstileGuard } from '../../middlewares/turnstile.middleware';
 
-const router = express.Router();
+const router: Router = Router();
 
 router.post(
   '/suppression-utilisateur',

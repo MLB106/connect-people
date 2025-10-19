@@ -16,7 +16,7 @@ export const hit = async (
     .incr(key)
     .expire(key, windowSeconds)
     .exec();
-  const current = Number((res as [string, number][])[0][1]);
+    const current = Number((res as [string, number][])[0]?.[1] ?? 0);
   return current > maxHits ? 'BLOCKED' : 'OK';
 };
 

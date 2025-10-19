@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import viewParserService from '../../services/viewParser.service.js';
 
-export const traductionCompleteApiRouter = Router();
+export const traductionCompleteApiRouter: Router = Router();
 
 // Configuration des pages traduction
 const traductionPages = {

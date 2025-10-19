@@ -126,6 +126,7 @@ class ViewParserService {
       const className = match[1];
       const sectionContent = match[2];
       
+      if (!className || !sectionContent) continue;
       const section = this.parseSectionContent(className, sectionContent);
       if (section) {
         sections.push(section);
@@ -137,7 +138,8 @@ class ViewParserService {
     let partialMatch;
     
     while ((partialMatch = partialRegex.exec(content)) !== null) {
-      const partialName = partialMatch[1].trim();
+      const partialName = partialMatch[1]?.trim();
+      if (!partialName) continue; // ← ajoute cette ligne
       const partialSection = this.parsePartial(partialName);
       if (partialSection) {
         sections.push(partialSection);
@@ -159,13 +161,15 @@ class ViewParserService {
     // Extraire le titre principal (nettoyer le HTML)
     const titleMatch = content.match(/<h[1-6][^>]*>([^<]+)<\/h[1-6]>/);
     if (titleMatch) {
-      section.heading = this.cleanHtmlContent(titleMatch[1].trim());
+      if (!titleMatch?.[1]) return null;
+    section.heading = this.cleanHtmlContent(titleMatch[1].trim());;
     }
     
     // Extraire le texte/paragraphe principal (nettoyer le HTML)
     const textMatch = content.match(/<p[^>]*>([^<]+)<\/p>/);
     if (textMatch) {
-      section.text = this.cleanHtmlContent(textMatch[1].trim());
+      if (!textMatch?.[1]) return null;
+      section.text = this.cleanHtmlContent(textMatch[1]?.trim() ?? '');
     }
     
     // Extraire les listes d'items
@@ -215,6 +219,7 @@ class ViewParserService {
       if (match) {
         const className = match[1];
         const sectionContent = match[2];
+        if (!className || !sectionContent) return null;
         return this.parseSectionContent(className, sectionContent);
       }
       
@@ -267,15 +272,14 @@ class ViewParserService {
     
     // Parser les divs avec des items (comme les features)
     const itemMatches = content.match(/<div[^>]*class="[^"]*item[^"]*"[^>]*>([\s\S]*?)<\/div>/g);
-    if (itemMatches) {
-      itemMatches.forEach(item => {
-        const textMatch = item.match(/<h[3-6][^>]*>([\s\S]*?)<\/h[3-6]>/);
-        if (textMatch) {
-          const cleanText = this.cleanHtmlContent(textMatch[1]);
-          if (cleanText) items.push(cleanText);
-        }
-      });
-    }
+if (itemMatches) {
+  itemMatches.forEach(item => {
+    const textMatch = item.match(/<h[3-6][^>]*>([\s\S]*?)<\/h[3-6]>/);
+    if (!textMatch?.[1]) return;
+    const cleanText = this.cleanHtmlContent(textMatch[1]);
+    if (cleanText) items.push(cleanText);
+  });
+}
     
     return items;
   }

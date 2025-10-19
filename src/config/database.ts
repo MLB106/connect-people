@@ -5,7 +5,7 @@
  * @author MLB <connect_project_dz@yahoo.com>
  */
 
-import mongoose, { type Connection, type ConnectOptions } from 'mongoose';
+import mongoose, { type ConnectOptions } from 'mongoose';
 import dotenv from 'dotenv';
 import { env } from './env.js';
 

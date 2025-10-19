@@ -4,13 +4,13 @@ import { csrfProtection, addCsrfToken } from '../../middlewares/csrf.js';
 import { viewModeMiddleware, debugInfoMiddleware } from '../../middlewares/viewMode.middleware.js';
 import i18n from '../../config/i18n.js';
 
-const router = Router();
+const router: Router = Router();
 
 /* ------------------------------------------------------------------ */
 /* 1) Middlewares globaux appliqués à TOUTES les routes de ce router  */
 /* ------------------------------------------------------------------ */
 router.use(i18n.init);           // rend req.__ disponible
-router.use(csrfProtection);      // sécurise les requêtes
+router.use(csrfProtection as any);      // sécurise les requêtes
 router.use(addCsrfToken);        // injecte le token dans les vues
 router.use(viewModeMiddleware);  // détecte le mode (HTML/JSON)
 router.use(debugInfoMiddleware); // ajoute des infos de debug

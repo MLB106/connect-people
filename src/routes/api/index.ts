@@ -21,7 +21,7 @@ import i18nApiRouter from './i18n.routes.js';
  * Main API router instance
  * @type {Router}
  */
-const apiRouter = Router();
+const apiRouter: Router = Router();
 
 /**
  * API route configuration

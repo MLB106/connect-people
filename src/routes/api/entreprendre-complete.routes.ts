@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import viewParserService from '../../services/viewParser.service.js';
 
-export const entreprendreCompleteApiRouter = Router();
+export const entreprendreCompleteApiRouter: Router = Router();
 
 // Configuration des pages entreprendre
 const entreprendrePages = {
