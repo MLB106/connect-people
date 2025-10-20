@@ -31,8 +31,13 @@ function showLogin() {
 }
 
 function showRegister(type = null) {
-  const message = type ? `Inscription ${type} en développement` : 'Inscription en développement';
-  showNotification(message, 'info');
+  // Utiliser la modal d'inscription si elle est disponible
+  if (typeof showSignupModal !== 'undefined') {
+    showSignupModal(type);
+  } else {
+    const message = type ? `Inscription ${type} en développement` : 'Inscription en développement';
+    showNotification(message, 'info');
+  }
 }
 
 function showProfile() {
