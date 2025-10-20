@@ -46,6 +46,12 @@ body {
   padding-top: 60px;
 }
 
+/* Prévenir le scroll sur les pages d'auth */
+body.auth-page {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* =====  UTILITAIRES  ===== */
 .visually-hidden {
   position: absolute !important;

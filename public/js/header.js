@@ -10,6 +10,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     b.addEventListener('click', () => showRegister())
   );
 
+  /* ----------- signup modal triggers ----------- */
+  // Devenir helper buttons
+  const helperButtons = document.querySelectorAll('[data-action="become-helper"], [data-action="register-helper"]');
+  console.log('Found helper buttons:', helperButtons.length);
+  helperButtons.forEach(b =>
+    b.addEventListener('click', e => { e.preventDefault(); showSignupModal('helper'); })
+  );
+  // Demander de l'aide / chercher de l'aide buttons
+  const seekerButtons = document.querySelectorAll('[data-action="register-seeker"]');
+  console.log('Found seeker buttons:', seekerButtons.length);
+  seekerButtons.forEach(b =>
+    b.addEventListener('click', e => { e.preventDefault(); showSignupModal('seeker'); })
+  );
+  // Footer or nav links explicitly pointing to Demander de l'aide page
+  document.querySelectorAll('a[href="/demander-aide"]').forEach(a =>
+    a.addEventListener('click', e => { e.preventDefault(); showSignupModal('seeker', '/demander-aide'); })
+  );
+
   /* ----------- language ----------- */
   setupLanguageSelector();
 
@@ -151,7 +169,7 @@ async function handleLanguageChange(event) {
 }
 
 /* -------------------------------------------------- */
-/*  VERSION DEFINITIVE : affiche la modal             */
+/*  VERSION DEFINITIVE : affiche la modal d'inscription              */
 /* -------------------------------------------------- */
 function showLanguageConfirmationModal(languageCode, languageText) {
   // 1. Créer la modal si elle manque
@@ -240,4 +258,144 @@ function getLanguageData(languageCode) {
 
 function updatePageLanguage(languageCode) {
   console.log(`Language changed to: ${languageCode}`);
+}
+
+/* ===========================  SIGNUP MODAL  =========================== */
+function showSignupModal(preferredRole, continueUrl) {
+  console.log('showSignupModal called with:', preferredRole, continueUrl);
+  // Create modal if missing
+  let modal = document.getElementById('signup-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'signup-modal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bienvenue !</h3>
+          <span class="close" id="signup-modal-close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="signup-oauth">
+            <button class="btn btn-google" id="oauth-google"><span class="google-logo" aria-hidden="true"></span> Continuer avec Google</button>
+            <button class="btn btn-apple" id="oauth-apple"><i class="fab fa-apple" aria-hidden="true"></i> Continuer avec Apple</button>
+            <button class="btn btn-facebook" id="oauth-facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Continuer avec Facebook</button>
+          </div>
+
+          <div class="signup-separator" aria-hidden="true">
+            Ou connecte-toi avec ton <a href="#" id="email-login-link">e-mail</a>
+          </div>
+
+          <div class="signup-footer" style="margin-top:1rem; text-align:center;">
+            <p style="margin: 0; color: #9cafbd; font-size: 0.9rem;">
+              Tu n'as pas de compte Connect People ?
+              <a href="#" id="email-register-link">S'inscrire</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  // Wire buttons freshly each time
+  const googleBtn = modal.querySelector('#oauth-google');
+  const appleBtn = modal.querySelector('#oauth-apple');
+  const facebookBtn = modal.querySelector('#oauth-facebook');
+  const emailLoginLink = modal.querySelector('#email-login-link');
+  const emailRegisterLink = modal.querySelector('#email-register-link');
+
+  if (googleBtn) {
+    const n = googleBtn.cloneNode(true);
+    googleBtn.parentNode.replaceChild(n, googleBtn);
+    n.addEventListener('click', () => { window.location.href = '/auth/google'; });
+  }
+  if (appleBtn) {
+    const n = appleBtn.cloneNode(true);
+    appleBtn.parentNode.replaceChild(n, appleBtn);
+    n.addEventListener('click', () => { window.location.href = '/auth/apple'; });
+  }
+  if (facebookBtn) {
+    const n = facebookBtn.cloneNode(true);
+    facebookBtn.parentNode.replaceChild(n, facebookBtn);
+    n.addEventListener('click', () => { window.location.href = '/auth/facebook'; });
+  }
+  if (emailLoginLink) {
+    const n = emailLoginLink.cloneNode(true);
+    emailLoginLink.parentNode.replaceChild(n, emailLoginLink);
+    n.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '/auth/login';
+    });
+  }
+  if (emailRegisterLink) {
+    const n = emailRegisterLink.cloneNode(true);
+    emailRegisterLink.parentNode.replaceChild(n, emailRegisterLink);
+    n.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '/auth/register';
+    });
+  }
+
+  // Add close functionality
+  const closeBtn = modal.querySelector('#signup-modal-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+  }
+
+  // Close on backdrop click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Show the modal directly
+  console.log('Showing modal:', modal);
+  modal.style.display = 'flex';
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  
+  // Force a reflow to ensure the modal is visible
+  modal.offsetHeight;
+}
+
+/* ===========================  LOGIN/REGISTER FUNCTIONS  =========================== */
+function showLogin() {
+  window.location.href = '/auth/login';
+}
+
+function showRegister() {
+  window.location.href = '/auth/register';
+}
+
+function showProfile() {
+  window.location.href = '/profile';
+}
+
+function showWallet() {
+  window.location.href = '/wallet';
+}
+
+function logout() {
+  if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+    window.location.href = '/auth/logout';
+  }
+}
+
+function openChat(userId) {
+  window.location.href = `/chat/${userId}`;
+}
+
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenu) {
+    mobileMenu.classList.toggle('active');
+  }
 }

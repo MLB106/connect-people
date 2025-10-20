@@ -104,6 +104,9 @@ app.use('/admin', adminAuthRouter);
 // User authentication routes
 app.use('/user', userAuthRouter);
 
+// Auth routes (alias for user auth routes)
+app.use('/auth', userAuthRouter);
+
 /**
  * Development-only routes
  * @description Routes available only in development environment

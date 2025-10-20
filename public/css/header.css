@@ -179,6 +179,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: center;
   background: var(--white);
   border: 2px solid var(--primary);
   border-radius: 8px;
@@ -186,16 +187,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   height: 34px;
-}
-.auth-buttons::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 15%;
-  bottom: 15%;
-  width: 4px;
-  background: var(--primary);
-  transform: translateX(-50%);
 }
 .auth-buttons .nav-btn {
   border-radius: 6px;
@@ -210,6 +201,10 @@
   font-weight: 500;
   transition: var(--transition);
   cursor: pointer;
+  position: relative;
+}
+.auth-buttons .nav-btn:first-child {
+  border-right: 4px solid var(--primary);
 }
 .auth-buttons .nav-btn:hover {
   background: var(--gray-lighter);

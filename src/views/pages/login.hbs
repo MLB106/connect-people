@@ -1,0 +1,45 @@
+{{!-- src/views/pages/login.hbs --}}
+
+{{#section 'head'}}
+<meta name="page-type" content="login">
+{{/section}}
+
+<section class="login-page">
+    <div class="login-modal-container">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+            </div>
+            <div class="login-modal-body">
+                <div class="login-logo">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="login-subtitle">Connecte-toi avec ton e-mail</h2>
+                
+                <form class="login-form" action="/auth/login" method="POST">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" id="password" name="password" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary login-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Se connecter
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="login-footer">
+                    <p><a href="/auth/forgot-password" class="forgot-password-link">Mot de passe oublié ?</a></p>
+                    <p>Pas encore de compte ? <a href="/auth/register" class="register-link">S'inscrire</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

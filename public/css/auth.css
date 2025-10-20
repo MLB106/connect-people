@@ -4,18 +4,219 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1rem;
     background: var(--gradient-primary);
+    margin-top: -80px;
+    padding-top: 100px;
 }
 .auth-card {
     position: relative;
     background: var(--white);
-    padding: 3rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
-    width: 100%;
-    max-width: 400px;
+    width: 95%;
+    max-width: 937.8px;
 }
+
+/* ==========  LOGIN PAGE  ========== */
+.login-page {
+    min-height: calc(100vh - 80px); /* Augmenté pour plus d'espace */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem; /* Augmenté pour plus d'espace */
+    background: var(--gradient-primary);
+    margin: 0;
+    padding-top: 80px; /* Espace pour la navigation */
+    padding-bottom: 80px; /* Espace pour le footer */
+}
+
+.login-modal-container {
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.login-modal-content {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
+    animation: slideUp 0.3s ease-out;
+    position: relative;
+    margin: 0;
+    max-height: 60vh; /* Augmenté pour plus d'espace */
+    overflow: hidden; /* Retire la barre de scroll */
+}
+
+.login-modal-header {
+    padding: 1rem 1.5rem 0.75rem 1.5rem; /* Augmenté pour plus d'espace */
+    text-align: center;
+    position: relative;
+}
+
+.login-modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.login-modal-body {
+    padding: 1rem 1.5rem; /* Augmenté pour plus d'espace */
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 1rem; /* Augmenté pour plus d'espace */
+}
+
+.login-logo i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.login-subtitle {
+    font-size: 0.8rem; /* Encore plus petit */
+    margin-bottom: 0.8rem; /* Encore plus resserré */
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.login-form {
+    text-align: left;
+    margin: 0.5rem 0; /* Encore plus resserré */
+}
+
+.login-form .form-group {
+    margin-bottom: 0.5rem; /* Encore plus resserré */
+    text-align: left;
+}
+
+.login-form .form-group input {
+    width: 100%;
+    padding: 0.5rem; /* Encore plus resserré */
+    border: 2px solid var(--border);
+    border-radius: var(--border-radius);
+    font-size: 0.85rem; /* Encore plus petit */
+    transition: var(--transition);
+    box-sizing: border-box;
+}
+
+.login-form .form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(210, 193, 182, 0.1);
+}
+
+.login-form .form-label {
+    display: block;
+    margin-bottom: 0.3rem; /* Encore plus resserré */
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.8rem; /* Encore plus petit */
+}
+
+.login-form .form-actions {
+    text-align: center;
+    margin-top: 0.8rem; /* Encore plus resserré */
+}
+
+.login-form .login-btn {
+    width: calc(100% - 200px); /* Réduit de 100px de chaque côté (70px en plus) */
+    margin: 0 100px; /* Ajoute 100px de marge de chaque côté (70px en plus) */
+    padding: 0.6rem 1rem; /* Encore plus resserré */
+    font-size: 0.85rem; /* Encore plus petit */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem; /* Réduit l'espace entre l'icône et le texte */
+}
+
+.login-footer {
+    margin-top: 0.8rem; /* Encore plus resserré */
+    padding-top: 0.6rem; /* Encore plus resserré */
+    border-top: 1px solid #e5e7eb;
+}
+
+.login-footer p {
+    color: #4b5563;
+    margin: 0 0 0.3rem 0; /* Encore plus resserré */
+    font-size: 0.8rem; /* Encore plus petit */
+}
+
+.forgot-password-link, .register-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem; /* Encore plus petit */
+    transition: var(--transition);
+    display: inline-block;
+    margin-bottom: 0.3rem; /* Encore plus resserré */
+}
+
+.forgot-password-link:hover, .register-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.login-content .error-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-content .error-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-content .form-group {
+    margin-bottom: 0.75rem;
+}
+
+.login-content .form-input {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.login-content .login-btn {
+    width: 80%;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+.login-content .login-footer {
+    margin-top: 1rem;
+}
+
+.login-content .login-footer p {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.login-content .login-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.login-content .login-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 .back-btn {
     position: absolute;
     top: 1.5rem;
@@ -32,58 +233,538 @@
     padding: 0.75rem 1rem;
     border-radius: var(--border-radius);
 }
+
 .back-btn:hover {
     background: var(--gray-lighter);
     color: var(--primary);
     transform: translateX(-3px);
 }
+
 .back-btn i {
     font-size: 1.1rem;
 }
+
 .auth-header {
     text-align: center;
-    margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
 .auth-header h2 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 0.5rem;
 }
+
 .auth-header p {
     color: var(--gray);
+    font-size: 1rem;
 }
+
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
 }
+
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 1rem;
+    padding: 0.875rem;
     border: 2px solid var(--border);
     border-radius: var(--border-radius);
     font-size: 1rem;
     transition: var(--transition);
+    box-sizing: border-box;
 }
+
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(210, 193, 182, 0.1);
 }
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
 .full-width {
     width: 100%;
 }
+
 .auth-footer {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
+
 .auth-footer a {
     color: var(--primary);
     text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.auth-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* ==========  PAGES DE CONNEXION/INSCRIPTION - STYLES SPÉCIFIQUES  ========== */
+/* Styles pour les pages de connexion et d'inscription */
+.register-page {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 1rem;
+    background: var(--gradient-primary);
+}
+
+.error-content, .register-content {
+    position: relative;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 1037.8px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.error-content h1, .register-content h1 {
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.error-content h2, .register-content h2 {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: var(--dark);
     font-weight: 500;
 }
-.auth-footer a:hover {
+
+.error-icon {
+    margin-bottom: 1.5rem;
+}
+
+.error-icon i {
+    font-size: 4rem;
+    color: var(--primary);
+}
+
+.login-form, .register-form {
+    text-align: left;
+    margin: 1.5rem 0;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-btn, .register-btn {
+    width: 80%;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.login-footer, .register-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.login-footer p, .register-footer p {
+    color: var(--gray);
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.forgot-password-link, .login-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.forgot-password-link:hover, .login-link:hover {
+    color: var(--primary-dark);
     text-decoration: underline;
+}
+
+.register-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.register-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Responsive pour les pages d'auth */
+@media (max-width: 480px) {
+    .error-content, .register-content, .login-content {
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    
+    .error-content h1, .register-content h1, .login-content .error-title {
+        font-size: 1.5rem;
+    }
+    
+    .error-content h2, .register-content h2, .login-content .error-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    /* Responsive pour la page de connexion */
+    .login-page {
+        height: calc(100vh - 60px);
+        padding: 1rem 0.5rem;
+    }
+    
+    .login-modal-container {
+        width: 95%;
+        margin: 0 auto;
+    }
+    
+    .login-modal-content {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .login-modal-header,
+    .login-modal-body {
+        padding: 1.5rem;
+    }
+    
+    .login-modal-header h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* ==========  MODAL D'INSCRIPTION - STYLES SPÉCIFIQUES  ========== */
+/* 
+ * Cette section contient TOUS les styles spécifiques à la modal d'inscription
+ * Utilise des classes et IDs spécifiques pour éviter les conflits avec d'autres modals
+ * Maintenance : Modifier uniquement les classes préfixées par "signup-modal-"
+ */
+
+/* Container principal de la modal d'inscription */
+#signup-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+#signup-modal.show {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 25vh;
+}
+
+/* Contenu de la modal d'inscription */
+#signup-modal .modal-content {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease-out;
+    position: relative;
+}
+
+#signup-modal .modal-header {
+    padding: 1.5rem 2rem 0.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+}
+
+#signup-modal .modal-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+#signup-modal .modal-header h3::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+/* Corps de la modal d'inscription */
+#signup-modal .modal-body {
+    padding: 1.5rem 2rem;
+    text-align: center;
+}
+
+/* Bouton de fermeture de la modal d'inscription */
+#signup-modal .close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gray);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+#signup-modal .close:hover {
+    background: var(--gray-lighter);
+    color: var(--dark);
+    transform: rotate(90deg);
+}
+
+/* Section des boutons OAuth pour l'inscription */
+#signup-modal .signup-oauth {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+#signup-modal .signup-oauth .btn {
+    width: 100%;
+    max-width: 280px;
+}
+
+/* Bouton Google pour l'inscription */
+#signup-modal .btn-google {
+    background: #fff;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+}
+
+#signup-modal .btn-google:hover {
+    background: #f8f9fa;
+    border-color: #dadce0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Google officiel */
+.google-logo {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z' fill='%234285f4'/%3E%3Cpath d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z' fill='%2334a853'/%3E%3Cpath d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z' fill='%23fbbc05'/%3E%3Cpath d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z' fill='%23ea4335'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+/* Bouton Apple pour l'inscription */
+#signup-modal .btn-apple {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+}
+
+#signup-modal .btn-apple:hover {
+    background: #333;
+    border-color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#signup-modal .btn-apple i {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* Bouton Facebook pour l'inscription */
+#signup-modal .btn-facebook {
+    background: #1877f2;
+    color: #fff;
+    border: 2px solid #1877f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+}
+
+#signup-modal .btn-facebook:hover {
+    background: #166fe5;
+    border-color: #166fe5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+#signup-modal .btn-facebook i {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* Séparateur pour la modal d'inscription */
+#signup-modal .signup-separator {
+    position: relative;
+    text-align: center;
+    color: #9cafbd;
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+    margin-top: calc(1.5rem + 4mm);
+}
+
+/* Traits de décoration supprimés */
+
+#signup-modal .signup-separator a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#signup-modal .signup-separator a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Pied de page de la modal d'inscription */
+#signup-modal .signup-footer {
+    text-align: center;
+    color: #9cafbd;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+#signup-modal .signup-footer a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#signup-modal .signup-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Harmoniser les couleurs des liens e-mail et S'inscrire */
+#email-login-link,
+#email-register-link {
+    color: var(--primary) !important;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#email-login-link:hover,
+#email-register-link:hover {
+    color: var(--primary-dark) !important;
+    text-decoration: underline;
+}
+
+/* Animations spécifiques à la modal d'inscription */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive pour la modal d'inscription */
+@media (max-width: 480px) {
+    #signup-modal .modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    #signup-modal .modal-header,
+    #signup-modal .modal-body {
+        padding: 1.5rem;
+    }
+    
+    #signup-modal .modal-header h3 {
+        font-size: 1.5rem;
+    }
 }
