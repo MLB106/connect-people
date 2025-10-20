@@ -31,8 +31,32 @@ function showLogin() {
 }
 
 function showRegister(type = null) {
-  const message = type ? `Inscription ${type} en développement` : 'Inscription en développement';
-  showNotification(message, 'info');
+  ensureRegisterModalExists();
+
+  const modal = document.getElementById('register-modal');
+  if (!modal) {
+    showNotification('Impossible d\'ouvrir la fenêtre d\'inscription', 'error');
+    return;
+  }
+
+  const helperCard = modal.querySelector('[data-role-select="helper"]');
+  const seekerCard = modal.querySelector('[data-role-select="seeker"]');
+  const continueBtn = modal.querySelector('#register-continue-btn');
+
+  const selectRole = (role) => {
+    helperCard.classList.toggle('selected', role === 'helper');
+    seekerCard.classList.toggle('selected', role === 'seeker');
+    continueBtn.dataset.selectedRole = role;
+  };
+
+  if (type === 'helper' || type === 'seeker') {
+    selectRole(type);
+  } else {
+    // Default to seeker for generic register actions
+    selectRole('seeker');
+  }
+
+  showModal('register-modal');
 }
 
 function showProfile() {
@@ -94,6 +118,21 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-action="view-details"]').forEach(btn =>
     btn.addEventListener('click', () => showNotification('Voir détails en développement', 'info'))
   );
+
+  // Intercept generic register links to open the modal instead of navigating
+  document.querySelectorAll('a[href^="/auth/register"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      try {
+        const url = new URL(link.href, window.location.origin);
+        const typeParam = url.searchParams.get('type');
+        const role = typeParam === 'helper' ? 'helper' : (typeParam === 'seeker' ? 'seeker' : null);
+        showRegister(role);
+      } catch (_err) {
+        showRegister(null);
+      }
+    });
+  });
 });
 
 /* ========== Styles pour les notifications ========== */
@@ -165,6 +204,66 @@ window.showProfile  = showProfile;
 window.showWallet   = showWallet;
 window.logout       = logout;
 window.openChat     = openChat;
+
+/* ========== Inscription Modal ========== */
+function ensureRegisterModalExists() {
+  if (document.getElementById('register-modal')) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'register-modal';
+  modal.className = 'modal';
+  modal.innerHTML = `
+    <div class="modal-content" role="dialog" aria-labelledby="register-modal-title" aria-modal="true">
+      <div class="modal-header">
+        <h3 id="register-modal-title">Créer un compte</h3>
+        <span class="close" aria-label="Fermer">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="register-roles">
+          <button type="button" class="role-card" data-role-select="helper">
+            <div class="role-icon">🤝</div>
+            <div class="role-title">Devenir Helper</div>
+            <div class="role-desc">Proposez vos services et aidez la communauté</div>
+          </button>
+          <button type="button" class="role-card" data-role-select="seeker">
+            <div class="role-icon">🔎</div>
+            <div class="role-title">Demander de l'aide</div>
+            <div class="role-desc">Trouvez rapidement un helper vérifié</div>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="register-cancel-btn">Annuler</button>
+        <button class="btn btn-primary" id="register-continue-btn" data-selected-role="seeker">Continuer</button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(modal);
+
+  // Wiring internal interactions
+  const helperCard = modal.querySelector('[data-role-select="helper"]');
+  const seekerCard = modal.querySelector('[data-role-select="seeker"]');
+  const continueBtn = modal.querySelector('#register-continue-btn');
+  const cancelBtn = modal.querySelector('#register-cancel-btn');
+
+  const selectRole = (role) => {
+    helperCard.classList.toggle('selected', role === 'helper');
+    seekerCard.classList.toggle('selected', role === 'seeker');
+    continueBtn.dataset.selectedRole = role;
+  };
+
+  helperCard.addEventListener('click', () => selectRole('helper'));
+  seekerCard.addEventListener('click', () => selectRole('seeker'));
+  cancelBtn.addEventListener('click', () => closeModal());
+  continueBtn.addEventListener('click', () => {
+    const role = continueBtn.dataset.selectedRole || 'seeker';
+    // For now keep consistent with backend route in README: /user/auth/register (POST)
+    // But since registration is not fully implemented, fall back to GET page hints
+    const target = role === 'helper' ? '/proposer-aide' : '/demander-aide';
+    closeModal();
+    window.location.href = target;
+  });
+}
 
 
 
