@@ -319,6 +319,10 @@ class SignupModal {
             return;
         }
         
+        // Convertir les checkboxes en booléens
+        data.terms = data.terms === 'on';
+        data.newsletter = data.newsletter === 'on';
+        
         try {
             // Afficher un indicateur de chargement
             this.showLoading(true);
@@ -333,15 +337,15 @@ class SignupModal {
             
             const result = await response.json();
             
-            if (response.ok) {
-                this.showSuccess(result.message || 'Inscription réussie !');
+            if (response.ok && result.success) {
+                this.showSuccess('Inscription réussie ! Bienvenue sur Connect People.');
                 setTimeout(() => {
                     modalManager.closeModal();
-                    // Rediriger vers la page de connexion ou le dashboard
-                    window.location.href = result.redirectUrl || '/auth/login';
+                    // Rediriger vers le dashboard ou la page d'accueil
+                    window.location.href = '/dashboard';
                 }, 2000);
             } else {
-                this.showError(result.message || 'Une erreur est survenue lors de l\'inscription');
+                this.showError(result.error || 'Une erreur est survenue lors de l\'inscription');
             }
         } catch (error) {
             console.error('Erreur lors de l\'inscription:', error);

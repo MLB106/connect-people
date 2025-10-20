@@ -28,9 +28,17 @@ interface RegisterRequest extends Request {
   body: {
     email: string;
     password: string;
+    confirmPassword: string;
     firstName: string;
     lastName: string;
-    role: string;
+    phone?: string;
+    city: string;
+    skills?: string;
+    experience?: string;
+    type?: 'helper' | 'seeker';
+    role?: string;
+    terms: boolean;
+    newsletter?: boolean;
     turnstileToken?: string;
   };
 }
@@ -161,15 +169,28 @@ export const userLogin = async (req: LoginRequest, res: Response): Promise<void>
  */
 export const userRegister = async (req: RegisterRequest, res: Response): Promise<void> => {
   try {
-    const { email, password, firstName, lastName, role } = req.body;
+    const { 
+      email, 
+      password, 
+      firstName, 
+      lastName, 
+      phone, 
+      city, 
+      skills, 
+      experience, 
+      type, 
+      role,
+      terms,
+      newsletter 
+    } = req.body;
     const ip = req.ip ?? req.socket.remoteAddress ?? 'unknown';
 
     // Validate input
-    if (!email || !password || !firstName || !lastName) {
+    if (!email || !password || !firstName || !lastName || !city || !terms) {
       const response: ApiResponse = {
         success: false,
         data: null,
-        error: 'Tous les champs sont requis'
+        error: 'Tous les champs obligatoires doivent être remplis'
       };
       res.status(400).json(response);
       return;
@@ -188,14 +209,27 @@ export const userRegister = async (req: RegisterRequest, res: Response): Promise
       return;
     }
 
+    // Determine user role based on type
+    let userRole = role ?? 'user';
+    if (type === 'helper') {
+      userRole = 'professional';
+    } else if (type === 'seeker') {
+      userRole = 'user';
+    }
+
     // Create new user
     const newUser = new User({
       name: `${firstName} ${lastName}`,
       email: email.toLowerCase(),
       passwordHash: password, // The pre('save') middleware will hash automatically
-      role: role ?? 'user',
+      role: userRole,
+      phone: phone || undefined,
+      city: city,
+      skills: skills || undefined,
+      experience: experience || undefined,
       isActive: true,
-      emailVerified: false
+      emailVerified: false,
+      newsletter: newsletter || false
     });
 
     await newUser.save();
