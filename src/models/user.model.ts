@@ -8,8 +8,13 @@ export interface IUser extends Document {
   email: string;
   passwordHash: string;
   role: string;
+  phone?: string;
+  city?: string;
+  skills?: string;
+  experience?: string;
   isActive: boolean;
   emailVerified: boolean;
+  newsletter?: boolean;
   lastLogin?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -47,6 +52,30 @@ const userSchema = new Schema<IUser>({
     default: true,
   },
   emailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  phone: {
+    type: String,
+    trim: true,
+    maxlength: 20,
+  },
+  city: {
+    type: String,
+    trim: true,
+    maxlength: 100,
+  },
+  skills: {
+    type: String,
+    trim: true,
+    maxlength: 1000,
+  },
+  experience: {
+    type: String,
+    trim: true,
+    maxlength: 50,
+  },
+  newsletter: {
     type: Boolean,
     default: false,
   },
