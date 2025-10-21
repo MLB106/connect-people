@@ -79,9 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => showNotification('Création d\'annonce en développement', 'info'))
   );
   
-  document.querySelectorAll('[data-action="become-helper"]').forEach(btn =>
-    btn.addEventListener('click', () => showRegister('helper'))
-  );
+  // Removed conflicting event handler - handled by header.js
   
   document.querySelectorAll('[data-action="view-profile"]').forEach(btn =>
     btn.addEventListener('click', () => showNotification('Voir profil en développement', 'info'))

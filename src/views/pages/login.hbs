@@ -5,7 +5,8 @@
 {{/section}}
 
 <section class="login-page">
-    <div class="login-modal-container">
+    {{!-- PREMIÈRE MODAL - CONNEXION (ORIGINALE) --}}
+    <div class="login-modal-container" id="loginModal">
         <div class="login-modal-content">
             <div class="login-modal-header">
             </div>
@@ -36,10 +37,97 @@
                 
                 <div class="login-footer">
                     <p><a href="/auth/forgot-password" class="forgot-password-link">Mot de passe oublié ?</a></p>
-                    <p>Pas encore de compte ? <a href="/auth/register" class="register-link">S'inscrire</a></p>
+                    <p>Pas encore de compte ? <a href="#" class="register-link" onclick="showRegisterModal()">S'inscrire</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- DEUXIÈME MODAL - INSCRIPTION (NOUVELLE) - AVEC BOUTONS OAUTH --}}
+    <div class="login-modal-container" id="registerModal" style="display: none;">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+            </div>
+            <div class="login-modal-body">
+                <div class="login-logo">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 class="login-subtitle">Rejoins-nous !</h2>
+                
+                {{!-- Boutons OAuth pour l'inscription --}}
+                <div class="signup-oauth">
+                    <button class="btn btn-google" id="register-oauth-google">
+                        <span class="google-logo" aria-hidden="true"></span> 
+                        Continuer avec Google
+                    </button>
+                    <button class="btn btn-apple" id="register-oauth-apple">
+                        <i class="fab fa-apple" aria-hidden="true"></i> 
+                        Continuer avec Apple
+                    </button>
+                    <button class="btn btn-facebook" id="register-oauth-facebook">
+                        <i class="fab fa-facebook" aria-hidden="true"></i> 
+                        Continuer avec Facebook
+                    </button>
+                </div>
+
+                {{!-- Séparateur --}}
+                <div class="signup-separator" aria-hidden="true">
+                    Ou inscris-toi avec <a href="/auth/register" id="register-email-link">ton adresse e-mail</a>
+                </div>
+
+                {{!-- Pied de page --}}
+                <div class="signup-footer" style="margin-top:1rem; text-align:center;">
+                    <p style="margin: 0; color: #9cafbd; font-size: 0.9rem;">
+                        Tu as déjà un compte ? 
+                        <a href="#" id="register-login-link" onclick="showLoginModal()">Se connecter</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+// Script pour gérer l'affichage des modals
+function showRegisterModal() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('registerModal').style.display = 'block';
+}
+
+function showLoginModal() {
+    document.getElementById('registerModal').style.display = 'none';
+    document.getElementById('loginModal').style.display = 'block';
+}
+
+// Gestion des boutons OAuth pour la modal d'inscription
+document.addEventListener('DOMContentLoaded', function() {
+    // Boutons OAuth de la modal d'inscription
+    const registerGoogleBtn = document.getElementById('register-oauth-google');
+    const registerAppleBtn = document.getElementById('register-oauth-apple');
+    const registerFacebookBtn = document.getElementById('register-oauth-facebook');
+    const registerEmailLink = document.getElementById('register-email-link');
+
+    if (registerGoogleBtn) {
+        registerGoogleBtn.addEventListener('click', () => { 
+            window.location.href = '/auth/google'; 
+        });
+    }
+    if (registerAppleBtn) {
+        registerAppleBtn.addEventListener('click', () => { 
+            window.location.href = '/auth/apple'; 
+        });
+    }
+    if (registerFacebookBtn) {
+        registerFacebookBtn.addEventListener('click', () => { 
+            window.location.href = '/auth/facebook'; 
+        });
+    }
+    if (registerEmailLink) {
+        registerEmailLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = '/auth/register';
+        });
+    }
+});
+</script>
 

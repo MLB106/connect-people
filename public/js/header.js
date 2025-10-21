@@ -296,65 +296,55 @@ function showSignupModal(preferredRole, continueUrl) {
       </div>
     `;
     document.body.appendChild(modal);
-  }
 
-  // Wire buttons freshly each time
-  const googleBtn = modal.querySelector('#oauth-google');
-  const appleBtn = modal.querySelector('#oauth-apple');
-  const facebookBtn = modal.querySelector('#oauth-facebook');
-  const emailLoginLink = modal.querySelector('#email-login-link');
-  const emailRegisterLink = modal.querySelector('#email-register-link');
+    // Wire buttons only once when modal is created
+    const googleBtn = modal.querySelector('#oauth-google');
+    const appleBtn = modal.querySelector('#oauth-apple');
+    const facebookBtn = modal.querySelector('#oauth-facebook');
+    const emailLoginLink = modal.querySelector('#email-login-link');
+    const emailRegisterLink = modal.querySelector('#email-register-link');
 
-  if (googleBtn) {
-    const n = googleBtn.cloneNode(true);
-    googleBtn.parentNode.replaceChild(n, googleBtn);
-    n.addEventListener('click', () => { window.location.href = '/auth/google'; });
-  }
-  if (appleBtn) {
-    const n = appleBtn.cloneNode(true);
-    appleBtn.parentNode.replaceChild(n, appleBtn);
-    n.addEventListener('click', () => { window.location.href = '/auth/apple'; });
-  }
-  if (facebookBtn) {
-    const n = facebookBtn.cloneNode(true);
-    facebookBtn.parentNode.replaceChild(n, facebookBtn);
-    n.addEventListener('click', () => { window.location.href = '/auth/facebook'; });
-  }
-  if (emailLoginLink) {
-    const n = emailLoginLink.cloneNode(true);
-    emailLoginLink.parentNode.replaceChild(n, emailLoginLink);
-    n.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '/auth/login';
-    });
-  }
-  if (emailRegisterLink) {
-    const n = emailRegisterLink.cloneNode(true);
-    emailRegisterLink.parentNode.replaceChild(n, emailRegisterLink);
-    n.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '/auth/register';
-    });
-  }
-
-  // Add close functionality
-  const closeBtn = modal.querySelector('#signup-modal-close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-  }
-
-  // Close on backdrop click
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
+    if (googleBtn) {
+      googleBtn.addEventListener('click', () => { window.location.href = '/auth/google'; });
     }
-  });
+    if (appleBtn) {
+      appleBtn.addEventListener('click', () => { window.location.href = '/auth/apple'; });
+    }
+    if (facebookBtn) {
+      facebookBtn.addEventListener('click', () => { window.location.href = '/auth/facebook'; });
+    }
+    if (emailLoginLink) {
+      emailLoginLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/auth/login';
+      });
+    }
+    if (emailRegisterLink) {
+      emailRegisterLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/auth/register';
+      });
+    }
+
+    // Add close functionality only once
+    const closeBtn = modal.querySelector('#signup-modal-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close on backdrop click only once
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  }
 
   // Show the modal directly
   console.log('Showing modal:', modal);

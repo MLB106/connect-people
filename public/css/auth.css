@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 0 100px;
 }
 
 .login-modal-content {
@@ -494,8 +494,8 @@
     background: var(--white);
     border-radius: var(--border-radius-lg);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    width: 90%;
-    max-width: 800px;
+    width: calc(90% - 200px);
+    max-width: 500px;
     max-height: 90vh;
     overflow-y: auto;
     animation: slideUp 0.3s ease-out;
@@ -755,7 +755,7 @@
 /* Responsive pour la modal d'inscription */
 @media (max-width: 480px) {
     #signup-modal .modal-content {
-        width: 95%;
+        width: calc(95% - 200px);
         margin: 1rem;
     }
     
@@ -767,4 +767,149 @@
     #signup-modal .modal-header h3 {
         font-size: 1.5rem;
     }
+}
+
+/* ===========================  STYLES POUR LA MODAL D'INSCRIPTION DANS LOGIN.HBS  =========================== */
+
+/* Boutons OAuth pour la modal d'inscription (registerModal) */
+#registerModal .btn-google {
+    background: #fff;
+    color: #333;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+#registerModal .btn-google:hover {
+    background: #f8f9fa;
+    border-color: #dadce0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#registerModal .btn-apple {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+#registerModal .btn-apple:hover {
+    background: #333;
+    border-color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#registerModal .btn-apple i {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+#registerModal .btn-facebook {
+    background: #1877f2;
+    color: #fff;
+    border: 2px solid #1877f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+#registerModal .btn-facebook:hover {
+    background: #166fe5;
+    border-color: #166fe5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+#registerModal .btn-facebook i {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* Séparateur pour la modal d'inscription */
+#registerModal .signup-separator {
+    position: relative;
+    text-align: center;
+    color: #9cafbd;
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+    margin-top: calc(1.5rem + 4mm);
+}
+
+#registerModal .signup-separator a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#registerModal .signup-separator a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Pied de page de la modal d'inscription */
+#registerModal .signup-footer {
+    text-align: center;
+    color: #9cafbd;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+#registerModal .signup-footer a {
+    color: var(--primary);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#registerModal .signup-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Harmoniser les couleurs des liens */
+#register-email-link,
+#register-login-link {
+    color: var(--primary) !important;
+    text-decoration: underline;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+#register-email-link:hover,
+#register-login-link:hover {
+    color: var(--primary-dark) !important;
+    text-decoration: underline;
 }
