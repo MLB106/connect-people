@@ -5,7 +5,7 @@
         <span class="chat-status online">En ligne</span>
     </div>
     
-    <div class="chat-messages">
+    <div class="chat-messages" id="chat-messages">
         <div class="message received">
             <div class="message-avatar">
                 <img src="https://via.placeholder.com/40" alt="Avatar">
@@ -35,8 +35,8 @@
     </div>
     
     <div class="chat-input">
-        <input type="text" placeholder="Tapez votre message...">
-        <button class="send-btn">
+        <input type="text" id="message-input" placeholder="Tapez votre message...">
+        <button class="send-btn" data-action="send-message">
             <i class="fas fa-paper-plane"></i>
         </button>
     </div>

@@ -22,6 +22,7 @@
 @import url('./partials/about-page.css');
 @import url('./partials/recent-activity.css');
 @import url('./partials/nav-entreprendre.css');
+@import url('./partials/chat-widget.css');
 
 /* Styles par catégorie de pages */
 @import url('./partials/entreprendre-business-plan.css');
