@@ -329,6 +329,13 @@ router.get('/conditions-pro', createDualRoute('conditions-pro.hbs', {
   locale: 'fr'
 }));
 
+// Dashboard utilisateur avec chat
+router.get('/dashboard', createDualRoute('dashboardUser.hbs', {
+  title: 'Dashboard - Connect People',
+  description: 'Votre espace personnel avec chat intégré',
+  locale: 'fr'
+}));
+
 /* ------------------------------------------------------------------ */
 /* 3) Augmentation du type Express.Request (TS uniquement)            */
 /* ------------------------------------------------------------------ */
