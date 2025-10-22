@@ -37,7 +37,7 @@
                 
                 <div class="login-footer">
                     <p><a href="/auth/forgot-password" class="forgot-password-link">Mot de passe oublié ?</a></p>
-                    <p>Pas encore de compte ? <a href="#" class="register-link" onclick="showRegisterModal()">S'inscrire</a></p>
+                    <p>Pas encore de compte ? <a href="#" class="register-link" id="login-register-link">S'inscrire</a></p>
                 </div>
             </div>
         </div>
@@ -72,14 +72,14 @@
 
                 {{!-- Séparateur --}}
                 <div class="signup-separator" aria-hidden="true">
-                    Ou inscris-toi avec <a href="/auth/register" id="register-email-link">ton adresse e-mail</a>
+                    Ou inscris-toi avec <a href="#" id="register-email-link">ton adresse e-mail</a>
                 </div>
 
                 {{!-- Pied de page --}}
                 <div class="signup-footer" style="margin-top:1rem; text-align:center;">
                     <p style="margin: 0; color: #9cafbd; font-size: 0.9rem;">
                         Tu as déjà un compte ? 
-                        <a href="#" id="register-login-link" onclick="showLoginModal()">Se connecter</a>
+                        <a href="#" id="register-login-link">Se connecter</a>
                     </p>
                 </div>
             </div>
@@ -101,6 +101,30 @@ function showLoginModal() {
 
 // Gestion des boutons OAuth pour la modal d'inscription
 document.addEventListener('DOMContentLoaded', function() {
+    // Afficher la modal d'inscription si le paramètre show=register est présent
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('show') === 'register') {
+        showRegisterModal();
+    }
+    
+    // Event listeners pour les liens de navigation entre modals
+    const loginRegisterLink = document.getElementById('login-register-link');
+    const registerLoginLink = document.getElementById('register-login-link');
+    
+    if (loginRegisterLink) {
+        loginRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterModal();
+        });
+    }
+    
+    if (registerLoginLink) {
+        registerLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+    }
+    
     // Boutons OAuth de la modal d'inscription
     const registerGoogleBtn = document.getElementById('register-oauth-google');
     const registerAppleBtn = document.getElementById('register-oauth-apple');
@@ -108,24 +132,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerEmailLink = document.getElementById('register-email-link');
 
     if (registerGoogleBtn) {
-        registerGoogleBtn.addEventListener('click', () => { 
+        registerGoogleBtn.addEventListener('click', (e) => { 
+            e.preventDefault();
             window.location.href = '/auth/google'; 
         });
     }
     if (registerAppleBtn) {
-        registerAppleBtn.addEventListener('click', () => { 
+        registerAppleBtn.addEventListener('click', (e) => { 
+            e.preventDefault();
             window.location.href = '/auth/apple'; 
         });
     }
     if (registerFacebookBtn) {
-        registerFacebookBtn.addEventListener('click', () => { 
+        registerFacebookBtn.addEventListener('click', (e) => { 
+            e.preventDefault();
             window.location.href = '/auth/facebook'; 
         });
     }
     if (registerEmailLink) {
         registerEmailLink.addEventListener('click', (e) => {
             e.preventDefault();
-            window.location.href = '/auth/register';
+            // Reste dans la modal "Rejoins-nous !"
         });
     }
 });

@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   // Initialiser le système i18n
   await window.i18n.loadTranslations();
+  
   /* ----------- auth ----------- */
   document.querySelectorAll('[data-action="login"]').forEach(b =>
     b.addEventListener('click', showLogin)
@@ -316,13 +317,23 @@ function showSignupModal(preferredRole, continueUrl) {
     if (emailLoginLink) {
       emailLoginLink.addEventListener('click', (e) => {
         e.preventDefault();
+        // Fermer la modal actuelle
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        // Rediriger vers la page login
         window.location.href = '/auth/login';
       });
     }
     if (emailRegisterLink) {
       emailRegisterLink.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = '/auth/register';
+        // Fermer la modal actuelle
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        // Rediriger vers la page login avec modal register
+        window.location.href = '/auth/login?show=register';
       });
     }
 
@@ -357,12 +368,13 @@ function showSignupModal(preferredRole, continueUrl) {
 }
 
 /* ===========================  LOGIN/REGISTER FUNCTIONS  =========================== */
+
 function showLogin() {
   window.location.href = '/auth/login';
 }
 
 function showRegister() {
-  window.location.href = '/auth/register';
+  window.location.href = '/auth/login?show=register';
 }
 
 function showProfile() {

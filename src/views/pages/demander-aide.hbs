@@ -24,9 +24,9 @@
             <div class="search-section">
                 <h2>Que cherchez-vous ?</h2>
                 <div class="search-form">
-                    <div class="search-input-group">
-                        <input type="text" placeholder="Décrivez ce dont vous avez besoin..." class="search-input">
-                        <select class="search-category">
+                    <form action="/search" method="GET" class="search-input-group">
+                        <input type="text" name="q" placeholder="Décrivez ce dont vous avez besoin..." class="search-input">
+                        <select name="category" class="search-category">
                             <option value="">Toutes les catégories</option>
                             <option value="immobilier">Immobilier</option>
                             <option value="entrepreneuriat">Entrepreneuriat</option>
@@ -35,9 +35,9 @@
                             <option value="formation">Formation & Coaching</option>
                             <option value="technologie">Technologie</option>
                         </select>
-                        <input type="text" placeholder="Ville ou code postal" class="search-location">
-                        <button class="search-btn">Rechercher</button>
-                    </div>
+                        <input type="text" name="location" placeholder="Ville ou code postal" class="search-location">
+                        <button type="submit" class="search-btn">Rechercher</button>
+                    </form>
                 </div>
             </div>
 
@@ -304,36 +304,6 @@
     </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchBtn = document.querySelector('.search-btn');
-    const searchInput = document.querySelector('.search-input');
-    const searchCategory = document.querySelector('.search-category');
-    const searchLocation = document.querySelector('.search-location');
-
-    searchBtn.addEventListener('click', function() {
-        const query = searchInput.value.trim();
-        const category = searchCategory.value;
-        const location = searchLocation.value.trim();
-        
-        if (query) {
-            // Construire l'URL de recherche
-            let searchUrl = '/search?q=' + encodeURIComponent(query);
-            if (category) searchUrl += '&category=' + category;
-            if (location) searchUrl += '&location=' + encodeURIComponent(location);
-            
-            window.location.href = searchUrl;
-        }
-    });
-
-    // Recherche avec la touche Entrée
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchBtn.click();
-        }
-    });
-});
-</script>
 
 
 
