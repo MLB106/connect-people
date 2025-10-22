@@ -461,13 +461,14 @@
     }
 }
 
-/* ==========  MODAL D'INSCRIPTION - STYLES SPÉCIFIQUES  ========== */
+/* ========== MODAL D'INSCRIPTION - STYLES SPÉCIFIQUES - CONFLIT AVEC MODAL.CSS ========== */
 /* 
- * Cette section contient TOUS les styles spécifiques à la modal d'inscription
- * Utilise des classes et IDs spécifiques pour éviter les conflits avec d'autres modals
- * Maintenance : Modifier uniquement les classes préfixées par "signup-modal-"
+ * FICHIER : auth.css - Styles spécifiques pour la modal d'inscription créée par header.js
+ * RELATION : Utilisé par la fonction showSignupModal() dans header.js (lignes 270-381)
+ * CONFLIT MAJEUR : Ces styles redéfinissent les classes .modal, .modal-content qui sont déjà définies dans modal.css
+ * PROBLÈME : Z-index 1000 vs 10000 dans modal.css, styles contradictoires
+ * DANGER : Ces styles peuvent interférer avec les modales de login.hbs
  */
-
 /* Container principal de la modal d'inscription */
 #signup-modal {
     display: none;

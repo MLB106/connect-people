@@ -5,7 +5,14 @@
 {{/section}}
 
 <section class="login-page">
-    {{!-- PREMIÈRE MODAL - CONNEXION (ORIGINALE) --}}
+    {{!-- ========== MODAL DE CONNEXION - PREMIÈRE MODAL ========== --}}
+    {{!-- 
+     * ID : loginModal - Modal de connexion principale
+     * RELATION : Utilise les fonctions showLoginModal() et showRegisterModal() définies lignes 92-100
+     * CSS UTILISÉ : Classes .login-modal-container, .login-modal-content, .login-modal-body (définies dans auth.css)
+     * CONFLIT : Cette modal entre en conflit avec la modal bienvenue créée dynamiquement dans header.js
+     * PROBLÈME : Navigation vers modal d'inscription via le lien "S'inscrire" ligne 40
+     --}}
     <div class="login-modal-container" id="loginModal">
         <div class="login-modal-content">
             <div class="login-modal-header">
@@ -43,7 +50,15 @@
         </div>
     </div>
 
-    {{!-- DEUXIÈME MODAL - INSCRIPTION (NOUVELLE) - AVEC BOUTONS OAUTH --}}
+    {{!-- ========== MODAL D'INSCRIPTION - DEUXIÈME MODAL ========== --}}
+    {{!-- 
+     * ID : registerModal - Modal d'inscription avec boutons OAuth
+     * RELATION : Utilise les fonctions showLoginModal() et showRegisterModal() définies lignes 92-100
+     * CSS UTILISÉ : Classes .signup-oauth, .signup-separator, .signup-footer (définies dans auth.css)
+     * CONFLIT : Cette modal entre en conflit avec la modal bienvenue créée dynamiquement dans header.js
+     * PROBLÈME : Navigation vers modal de connexion via le lien "Se connecter" ligne 82
+     * DÉCLENCHEUR : Affichée automatiquement si paramètre URL ?show=register (ligne 106-108)
+     --}}
     <div class="login-modal-container" id="registerModal" style="display: none;">
         <div class="login-modal-content">
             <div class="login-modal-header">
@@ -88,6 +103,14 @@
 </section>
 
 <script>
+/* ========== FONCTIONS DE NAVIGATION ENTRE MODALES - CONFLIT AVEC HEADER.JS ========== */
+/* 
+ * FONCTIONS : showRegisterModal() et showLoginModal() - Navigation entre les 2 modales de la page
+ * RELATION : Ces fonctions sont appelées par les liens de navigation lignes 40 et 82
+ * CONFLIT MAJEUR : Ces fonctions ont les mêmes noms que celles dans header.js mais font des choses différentes
+ * PROBLÈME : showRegisterModal() dans header.js redirige, ici elle affiche une modal
+ * DANGER : Confusion entre redirection (header.js) et affichage de modal (login.hbs)
+ */
 // Script pour gérer l'affichage des modals
 function showRegisterModal() {
     document.getElementById('loginModal').style.display = 'none';
@@ -99,6 +122,13 @@ function showLoginModal() {
     document.getElementById('loginModal').style.display = 'block';
 }
 
+/* ========== GESTION DES ÉVÉNEMENTS ET PARAMÈTRES URL ========== */
+/* 
+ * FONCTION : Event listeners pour la gestion des modales et des boutons OAuth
+ * RELATION : Utilise les fonctions showRegisterModal() et showLoginModal() définies lignes 115-123
+ * PROBLÈME : Gestion du paramètre URL ?show=register qui peut créer des boucles infinies
+ * CONFLIT : Les boutons OAuth redirigent vers /auth/{provider} comme dans header.js
+ */
 // Gestion des boutons OAuth pour la modal d'inscription
 document.addEventListener('DOMContentLoaded', function() {
     // Afficher la modal d'inscription si le paramètre show=register est présent

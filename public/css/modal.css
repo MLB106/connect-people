@@ -1,5 +1,11 @@
-/* ===========================  MODAL STYLES  =========================== */
-
+/* ========== STYLES PRINCIPAUX DES MODALES - BASE COMMUNE ========== */
+/* 
+ * FICHIER : modal.css - Styles de base pour toutes les modales
+ * RELATION : Utilisé par header.js (modal bienvenue), login.hbs (modales intégrées), modal.js (système centralisé)
+ * CONFLIT : Ces styles entrent en conflit avec auth.css qui redéfinit les mêmes classes
+ * PROBLÈME : Duplication de styles entre modal.css, auth.css et style.css
+ * Z-INDEX : 10000 - Peut entrer en conflit avec d'autres modales
+ */
 /* Modal Overlay */
 .modal {
     display: none;

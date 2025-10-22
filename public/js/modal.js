@@ -1,5 +1,11 @@
-/* ===========================  MODAL SYSTEM  =========================== */
-
+/* ========== SYSTÈME DE MODALES CENTRALISÉ - NON UTILISÉ ========== */
+/* 
+ * CLASSE : ModalManager - Système centralisé pour gérer toutes les modales
+ * RELATION : Ce système n'est PAS utilisé dans l'application, remplacé par header.js et login.hbs
+ * PROBLÈME : Code mort qui entre en conflit avec les systèmes existants
+ * CSS UTILISÉ : Classes .modal, .modal-content, .modal-header, .modal-body, .modal-footer (définies dans modal.css)
+ * DANGER : Peut entrer en conflit avec les modales créées dynamiquement dans header.js
+ */
 class ModalManager {
     constructor() {
         this.activeModal = null;
@@ -180,6 +186,14 @@ class ModalManager {
     }
 }
 
+/* ========== FONCTIONS GLOBALES - CONFLIT AVEC HEADER.JS ========== */
+/* 
+ * FONCTIONS : showModal(), closeModal(), showConfirm(), showAlert() - Fonctions globales pour les modales
+ * RELATION : Ces fonctions ne sont PAS utilisées dans l'application
+ * CONFLIT : showModal() entre en conflit avec showSignupModal() de header.js
+ * PROBLÈME : Code mort qui peut créer des conflits de noms de fonctions
+ * DANGER : Si ces fonctions sont appelées, elles peuvent interférer avec les modales existantes
+ */
 // Initialize modal manager
 const modalManager = new ModalManager();
 

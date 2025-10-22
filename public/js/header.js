@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     b.addEventListener('click', () => showRegister())
   );
 
-  /* ----------- signup modal triggers ----------- */
+  /* ========== MODAL TRIGGERS - DÉCLENCHEURS DE MODALES ========== */
+  /* 
+   * Ce morceau gère les boutons qui déclenchent la modal bienvenue (signup-modal)
+   * RELATION : Utilise la fonction showSignupModal() définie lignes 265-368
+   * CONFLIT POTENTIEL : Ces boutons peuvent entrer en conflit avec les modales de login.hbs
+   * PROBLÈME : Mélange redirections (showLogin/showRegister) et affichage de modales (showSignupModal)
+   */
   // Devenir helper buttons
   const helperButtons = document.querySelectorAll('[data-action="become-helper"], [data-action="register-helper"]');
   console.log('Found helper buttons:', helperButtons.length);
@@ -169,9 +175,13 @@ async function handleLanguageChange(event) {
   }, 1000);
 }
 
-/* -------------------------------------------------- */
-/*  VERSION DEFINITIVE : affiche la modal d'inscription              */
-/* -------------------------------------------------- */
+/* ========== MODAL DE CONFIRMATION DE LANGUE ========== */
+/* 
+ * FONCTION : showLanguageConfirmationModal() - Affiche une modal de confirmation lors du changement de langue
+ * RELATION : Appelée par handleLanguageChange() ligne 162
+ * CSS UTILISÉ : Classes .modal, .modal-content, .language-confirmation (définies dans modal.css)
+ * PROBLÈME : Crée une modal dynamiquement qui peut entrer en conflit avec les autres modales
+ */
 function showLanguageConfirmationModal(languageCode, languageText) {
   // 1. Créer la modal si elle manque
   let modal = document.getElementById('language-modal');
@@ -261,7 +271,14 @@ function updatePageLanguage(languageCode) {
   console.log(`Language changed to: ${languageCode}`);
 }
 
-/* ===========================  SIGNUP MODAL  =========================== */
+/* ========== MODAL BIENVENUE - FONCTION PRINCIPALE ========== */
+/* 
+ * FONCTION : showSignupModal() - Crée et affiche la modal bienvenue
+ * RELATION : Appelée par les boutons lignes 25, 31, 35 (data-action="become-helper", "register-seeker")
+ * CONFLIT MAJEUR : Cette fonction crée une modal dynamiquement qui entre en conflit avec les modales de login.hbs
+ * PROBLÈME : Redirections vers /auth/login et /auth/login?show=register qui peuvent créer des boucles infinies
+ * CSS UTILISÉ : Classes .modal, .modal-content, .signup-oauth, .signup-separator (définies dans modal.css et auth.css)
+ */
 function showSignupModal(preferredRole, continueUrl) {
   console.log('showSignupModal called with:', preferredRole, continueUrl);
   // Create modal if missing
@@ -367,8 +384,14 @@ function showSignupModal(preferredRole, continueUrl) {
   modal.offsetHeight;
 }
 
-/* ===========================  LOGIN/REGISTER FUNCTIONS  =========================== */
-
+/* ========== FONCTIONS DE REDIRECTION - CONFLIT AVEC LOGIN.HBS ========== */
+/* 
+ * FONCTIONS : showLogin() et showRegister() - Redirections vers les pages d'authentification
+ * RELATION : Ces fonctions sont appelées par les boutons data-action="login" et data-action="register"
+ * CONFLIT MAJEUR : Ces fonctions redirigent vers /auth/login et /auth/login?show=register
+ * PROBLÈME : Ces redirections peuvent créer des boucles infinies avec les modales de login.hbs
+ * DANGER : showRegister() redirige vers /auth/login?show=register qui peut déclencher showRegisterModal() dans login.hbs
+ */
 function showLogin() {
   window.location.href = '/auth/login';
 }
