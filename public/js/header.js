@@ -1,3 +1,4 @@
+// FIchier : public/js/header.js
 /* ===========================  HEADER  =========================== */
 document.addEventListener('DOMContentLoaded', async () => {
   // Initialiser le système i18n
@@ -18,23 +19,84 @@ document.addEventListener('DOMContentLoaded', async () => {
    * CONFLIT POTENTIEL : Ces boutons peuvent entrer en conflit avec les modales de login.hbs
    * PROBLÈME : Mélange redirections (showLogin/showRegister) et affichage de modales (showSignupModal)
    */
-  // Devenir helper buttons
-  const helperButtons = document.querySelectorAll('[data-action="become-helper"], [data-action="register-helper"]');
-  console.log('Found helper buttons:', helperButtons.length);
-  helperButtons.forEach(b =>
-    b.addEventListener('click', e => { e.preventDefault(); showSignupModal('helper'); })
-  );
-  // Demander de l'aide / chercher de l'aide buttons
-  const seekerButtons = document.querySelectorAll('[data-action="register-seeker"]');
-  console.log('Found seeker buttons:', seekerButtons.length);
-  seekerButtons.forEach(b =>
-    b.addEventListener('click', e => { e.preventDefault(); showSignupModal('seeker'); })
-  );
-  // Footer or nav links explicitly pointing to Demander de l'aide page
-  document.querySelectorAll('a[href="/demander-aide"]').forEach(a =>
-    a.addEventListener('click', e => { e.preventDefault(); showSignupModal('seeker', '/demander-aide'); })
+
+  // Bouton unique home.hbs → modal Bienvenue !
+  document.querySelectorAll('[data-action="commencer-hero"]').forEach(b =>
+    b.addEventListener('click', e => { e.preventDefault(); showSignupModal(); })
   );
 
+   /* ========== MODAL BIENVENUE - FONCTION UNIQUE ========== */
+function showSignupModal(preferredRole = '', continueUrl = '') {
+  // 1. Créer la modal si elle manque
+  let modal = document.getElementById('signup-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'signup-modal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bienvenue !</h3>
+          <span class="close" id="signup-modal-close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="signup-oauth">
+            <button class="btn btn-google" id="oauth-google"><span class="google-logo"></span> Continuer avec Google</button>
+            <button class="btn btn-apple" id="oauth-apple"><i class="fab fa-apple"></i> Continuer avec Apple</button>
+            <button class="btn btn-facebook" id="oauth-facebook"><i class="fab fa-facebook"></i> Continuer avec Facebook</button>
+          </div>
+          <div class="signup-separator">Ou connecte-toi avec ton <a href="#" id="email-login-link">e-mail</a></div>
+          <div class="signup-footer">
+            <p>Tu n'as pas de compte Connect People ? <a href="#" id="email-register-link">S'inscrire</a></p>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Fermeture
+    modal.querySelector('#signup-modal-close').addEventListener('click', () => {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+
+    // OAuth
+    modal.querySelector('#oauth-google').onclick = () => window.location.href = '/auth/google';
+    modal.querySelector('#oauth-apple').onclick = () => window.location.href = '/auth/apple';
+    modal.querySelector('#oauth-facebook').onclick = () => window.location.href = '/auth/facebook';
+
+    // Liens email → redirection
+    modal.querySelector('#email-register-link').onclick = (e) => {
+      e.preventDefault();
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      window.location.href = '/auth/login?show=register';
+    };
+    modal.querySelector('#email-login-link').onclick = (e) => {
+      e.preventDefault();
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      window.location.href = '/auth/login';
+    };
+  }
+
+  // Affichage
+  modal.style.display = 'flex';
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+  
+    
   /* ----------- language ----------- */
   setupLanguageSelector();
 
@@ -271,118 +333,6 @@ function updatePageLanguage(languageCode) {
   console.log(`Language changed to: ${languageCode}`);
 }
 
-/* ========== MODAL BIENVENUE - FONCTION PRINCIPALE ========== */
-/* 
- * FONCTION : showSignupModal() - Crée et affiche la modal bienvenue
- * RELATION : Appelée par les boutons lignes 25, 31, 35 (data-action="become-helper", "register-seeker")
- * CONFLIT MAJEUR : Cette fonction crée une modal dynamiquement qui entre en conflit avec les modales de login.hbs
- * PROBLÈME : Redirections vers /auth/login et /auth/login?show=register qui peuvent créer des boucles infinies
- * CSS UTILISÉ : Classes .modal, .modal-content, .signup-oauth, .signup-separator (définies dans modal.css et auth.css)
- */
-function showSignupModal(preferredRole, continueUrl) {
-  console.log('showSignupModal called with:', preferredRole, continueUrl);
-  // Create modal if missing
-  let modal = document.getElementById('signup-modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'signup-modal';
-    modal.className = 'modal';
-    modal.innerHTML = `
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Bienvenue !</h3>
-          <span class="close" id="signup-modal-close">&times;</span>
-        </div>
-        <div class="modal-body">
-          <div class="signup-oauth">
-            <button class="btn btn-google" id="oauth-google"><span class="google-logo" aria-hidden="true"></span> Continuer avec Google</button>
-            <button class="btn btn-apple" id="oauth-apple"><i class="fab fa-apple" aria-hidden="true"></i> Continuer avec Apple</button>
-            <button class="btn btn-facebook" id="oauth-facebook"><i class="fab fa-facebook" aria-hidden="true"></i> Continuer avec Facebook</button>
-          </div>
-
-          <div class="signup-separator" aria-hidden="true">
-            Ou connecte-toi avec ton <a href="#" id="email-login-link">e-mail</a>
-          </div>
-
-          <div class="signup-footer" style="margin-top:1rem; text-align:center;">
-            <p style="margin: 0; color: #9cafbd; font-size: 0.9rem;">
-              Tu n'as pas de compte Connect People ?
-              <a href="#" id="email-register-link">S'inscrire</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    // Wire buttons only once when modal is created
-    const googleBtn = modal.querySelector('#oauth-google');
-    const appleBtn = modal.querySelector('#oauth-apple');
-    const facebookBtn = modal.querySelector('#oauth-facebook');
-    const emailLoginLink = modal.querySelector('#email-login-link');
-    const emailRegisterLink = modal.querySelector('#email-register-link');
-
-    if (googleBtn) {
-      googleBtn.addEventListener('click', () => { window.location.href = '/auth/google'; });
-    }
-    if (appleBtn) {
-      appleBtn.addEventListener('click', () => { window.location.href = '/auth/apple'; });
-    }
-    if (facebookBtn) {
-      facebookBtn.addEventListener('click', () => { window.location.href = '/auth/facebook'; });
-    }
-    if (emailLoginLink) {
-      emailLoginLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Fermer la modal actuelle
-        modal.classList.remove('show');
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        // Rediriger vers la page login
-        window.location.href = '/auth/login';
-      });
-    }
-    if (emailRegisterLink) {
-      emailRegisterLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        // Fermer la modal actuelle
-        modal.classList.remove('show');
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-        // Rediriger vers la page login avec modal register
-        window.location.href = '/auth/login?show=register';
-      });
-    }
-
-    // Add close functionality only once
-    const closeBtn = modal.querySelector('#signup-modal-close');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      });
-    }
-
-    // Close on backdrop click only once
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('show');
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
-  // Show the modal directly
-  console.log('Showing modal:', modal);
-  modal.style.display = 'flex';
-  modal.classList.add('show');
-  document.body.style.overflow = 'hidden';
-  
-  // Force a reflow to ensure the modal is visible
-  modal.offsetHeight;
-}
 
 /* ========== FONCTIONS DE REDIRECTION - CONFLIT AVEC LOGIN.HBS ========== */
 /* 

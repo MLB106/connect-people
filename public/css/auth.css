@@ -1,3 +1,4 @@
+/* Fichier : public/css/auth.css */
 /* ==========  AUTHENTIFICATION  ========== */
 .auth-container {
     min-height: 100vh;
@@ -470,18 +471,7 @@
  * DANGER : Ces styles peuvent interférer avec les modales de login.hbs
  */
 /* Container principal de la modal d'inscription */
-#signup-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.3s ease-out;
-}
+
 
 #signup-modal.show {
     display: flex;

@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (registerEmailLink) {
         registerEmailLink.addEventListener('click', (e) => {
             e.preventDefault();
+            window.location.href = '/auth/register';   // ou '/auth/login?mode=email'
             // Reste dans la modal "Rejoins-nous !"
         });
     }

@@ -43,7 +43,7 @@ connect-people/
 - **Handlebars** - Templates côté serveur
 - **CSS3** - Styles modernes
 - **JavaScript ES6+** - Interactivité côté client
-- **i18n** - Internationalisation (8 langues)
+- **i18n** - Internationalisation (7 langues)
 
 ### Outils de développement
 - **Jest** - Tests unitaires
@@ -83,7 +83,7 @@ connect-people/
 ### 1. **Couche Présentation (Views)**
 - **Templates Handlebars** dans `src/views/`
 - **Assets statiques** dans `public/`
-- **Internationalisation** avec 8 langues supportées
+- **Internationalisation** avec 7 langues supportées
 
 ### 2. **Couche Contrôleur (Controllers)**
 - **Contrôleurs métier** dans `src/controllers/`

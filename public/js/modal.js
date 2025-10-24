@@ -1,3 +1,5 @@
+// Fichier : public/js/modal.js
+
 /* ========== SYSTÈME DE MODALES CENTRALISÉ - NON UTILISÉ ========== */
 /* 
  * CLASSE : ModalManager - Système centralisé pour gérer toutes les modales
